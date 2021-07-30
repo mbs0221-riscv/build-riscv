@@ -1,0 +1,220 @@
+[    0.000000] Linux version 5.14.0-rc3-dirty (ubuntu@optiplex-5060) (riscv64-unknown-linux-gnu-gcc (GCC) 9.2.0, GNU ld (GNU Binutils) 2.32) #766 SMP Fri Jul 30 11:07:36 CST 2021
+[    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80200000
+[    0.000000] Machine model: freechips,rocketchip-unknown
+[    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+[    0.000000] printk: bootconsole [sbi0] enabled
+[    0.000000] Zone ranges:
+[    0.000000]   DMA32    [mem 0x0000000080200000-0x00000000ffffffff]
+[    0.000000]   Normal   [mem 0x0000000100000000-0x000000017fffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080200000-0x000000017fffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080200000-0x000000017fffffff]
+[    0.000000] SBI specification v0.2 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x9
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI v0.2 HSM extension detected
+[    0.000000] riscv: ISA extensions acdfim
+[    0.000000] riscv: ELF capabilities acdfim
+[    0.000000] percpu: Embedded 19 pages/cpu s38952 r8192 d30680 u77824
+[    0.000000] pcpu-alloc: s38952 r8192 d30680 u77824 alloc=19*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 1033735
+[    0.000000] Kernel command line: earlycon=sbi console=tty0 rw rootwait init=/linuxrc
+[    0.000000] Dentry cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.000000] Sorting __ex_table...
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] software IO TLB: mapped [mem 0x00000000fbfff000-0x00000000fffff000] (64MB)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]       fixmap : 0xffffffcefee00000 - 0xffffffceff000000   (2048 kB)
+[    0.000000]       pci io : 0xffffffceff000000 - 0xffffffcf00000000   (  16 MB)
+[    0.000000]      vmemmap : 0xffffffcf00000000 - 0xffffffcfffffffff   (4095 MB)
+[    0.000000]      vmalloc : 0xffffffd000000000 - 0xffffffdfffffffff   (65535 MB)
+[    0.000000]       lowmem : 0xffffffe000000000 - 0xffffffe0ffe00000   (4094 MB)
+[    0.000000]       kernel : 0xffffffff80000000 - 0xffffffffffffffff   (2047 MB)
+[    0.000000] Memory: 4029324K/4192256K available (5239K kernel code, 4602K rwdata, 2048K rodata, 18750K init, 289K bss, 162932K reserved, 0K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=8 to nr_cpu_ids=4.
+[    0.000000] rcu: 	RCU debug extended QS entry/exit.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=4
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 64 local interrupts mapped
+[    0.000000] plic: interrupt-controller@c000000: mapped 24 interrupts with 4 handlers for 8 contexts.
+[    0.000000] random: get_random_bytes called from start_kernel+0x456/0x618 with crng_init=0
+[    0.000000] riscv_timer_init_dt: Registering clocksource cpuid [0] hartid [1]
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x1d854df40, max_idle_ns: 3526361616960 ns
+[    0.000035] sched_clock: 64 bits at 1000kHz, resolution 1000ns, wraps every 2199023255500ns
+[    0.004061] Console: colour dummy device 80x25
+[    0.005182] printk: console [tty0] enabled
+[    0.006607] printk: bootconsole [sbi0] disabled
+[    0.008694] Calibrating delay loop (skipped), value calculated using timer frequency.. 2.00 BogoMIPS (lpj=4000)
+[    0.010258] pid_max: default: 32768 minimum: 301
+[    0.015870] Mount-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.018521] Mountpoint-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.061411] ASID allocator disabled
+[    0.065191] rcu: Hierarchical SRCU implementation.
+[    0.083379] smp: Bringing up secondary CPUs ...
+[    0.138122] smp: Brought up 1 node, 4 CPUs
+[    0.157053] devtmpfs: initialized
+[    0.204848] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.206469] futex hash table entries: 1024 (order: 4, 65536 bytes, linear)
+[    0.219773] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.511224] SCSI subsystem initialized
+[    0.534088] clocksource: Switched to clocksource riscv_clocksource
+[    0.759288] NET: Registered PF_INET protocol family
+[    0.776685] IP idents hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.908795] tcp_listen_portaddr_hash hash table entries: 2048 (order: 4, 81920 bytes, linear)
+[    0.915048] TCP established hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.931805] TCP bind hash table entries: 32768 (order: 8, 1048576 bytes, linear)
+[    0.983785] TCP: Hash tables configured (established 32768 bind 32768)
+[    0.991546] UDP hash table entries: 2048 (order: 5, 196608 bytes, linear)
+[    1.002458] UDP-Lite hash table entries: 2048 (order: 5, 196608 bytes, linear)
+[    1.017060] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    1.039534] RPC: Registered named UNIX socket transport module.
+[    1.040698] RPC: Registered udp transport module.
+[    1.041429] RPC: Registered tcp transport module.
+[    1.042841] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    1.064910] workingset: timestamp_bits=62 max_order=20 bucket_order=0
+[    1.275794] NFS: Registering the id_resolver key type
+[    1.277246] Key type id_resolver registered
+[    1.278391] Key type id_legacy registered
+[    1.281083] nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+[    1.282648] nfs4flexfilelayout_init: NFSv4 Flexfile Layout Driver Registering...
+[    1.296069] NET: Registered PF_ALG protocol family
+[    1.298199] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
+[    1.299438] io scheduler mq-deadline registered
+[    1.300248] io scheduler kyber registered
+[    1.317091] start plist test
+[    1.465191] end plist test
+[    2.843473] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+[    2.870350] 64000000.serial: ttySIF0 at MMIO 0x64000000 (irq = 26, base_baud = 921600) is a SiFive UART v0
+[    3.321258] loop: module loaded
+[    3.339291] libphy: Fixed MDIO Bus: probed
+[    3.367697] mousedev: PS/2 mouse device common for all mice
+[    3.395092] NET: Registered PF_INET6 protocol family
+[    3.422790] Segment Routing with IPv6
+[    3.425025] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    3.439999] NET: Registered PF_PACKET protocol family
+[    3.445450] 9pnet: Installing 9P2000 support
+[    3.447837] Key type dns_resolver registered
+[    3.464695] debug_vm_pgtable: [debug_vm_pgtable         ]: Validating architecture page table helpers
+[  242.698880] INFO: task swapper/0:1 blocked for more than 120 seconds.
+[  242.700104]       Not tainted 5.14.0-rc3-dirty #766
+[  242.700955] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[  242.702635] task:swapper/0       state:D stack:    0 pid:    1 ppid:     0 flags:0x00000000
+[  242.704293] Call Trace:
+[  242.704820] [<ffffffff80517922>] __schedule+0x212/0x4f2
+[  242.706330] [<ffffffff80517c5a>] schedule+0x58/0xcc
+[  242.707420] [<ffffffff800271b8>] async_synchronize_cookie_domain+0x7c/0xac
+[  242.708807] [<ffffffff8000167e>] wait_for_initramfs+0x36/0x56
+[  242.710183] [<ffffffff80600e76>] kernel_init_freeable+0x1aa/0x1e4
+[  242.711337] [<ffffffff80516e22>] kernel_init+0x1e/0x128
+[  242.712449] [<ffffffff8000205c>] ret_from_exception+0x0/0xc
+[  256.594726] Freeing unused kernel image (initmem) memory: 18748K
+[  256.607283] Run /init as init process
+[  256.608011]   with arguments:
+[  256.608192]     /init
+[  256.608348]   with environment:
+[  256.608504]     HOME=/
+[  256.608652]     TERM=linux
+[  258.204603] l2tp_core: L2TP core driver, V2.0
+[  258.229414] l2tp_netlink: L2TP netlink interface
+[  258.316152] l2tp_ip: L2TP IP encapsulation support (L2TPv3)
+[  258.346931] l2tp_ip6: L2TP IP encapsulation support for IPv6 (L2TPv3)
+[  258.478447] l2tp_eth: L2TP ethernet pseudowire support (L2TPv3)
+[  258.557190] l2tp_debugfs: L2TP debugfs support
+[  280.481791] rcu: INFO: rcu_sched self-detected stall on CPU
+[  280.483055] rcu: 	3-....: (5249 ticks this GP) idle=102/1/0x4000000000000002 softirq=2829/2829 fqs=2625 
+[  280.484613] 	(t=5250 jiffies g=11961 q=2)
+[  280.485337] Task dump for CPU 3:
+[  280.485927] task:modprobe        state:R  running task     stack:    0 pid:   92 ppid:    63 flags:0x00000008
+[  280.487547] Call Trace:
+[  280.488053] [<ffffffff80003712>] dump_backtrace+0x1c/0x24
+[  280.489084] [<ffffffff80029898>] sched_show_task+0x15c/0x178
+[  280.490078] [<ffffffff805129ce>] dump_cpu_task+0x42/0x4c
+[  280.491064] [<ffffffff80513602>] rcu_dump_cpu_stacks+0xc6/0x100
+[  280.492192] [<ffffffff800608da>] rcu_sched_clock_irq+0x52a/0x6dc
+[  280.493278] [<ffffffff8006704e>] update_process_times+0xa2/0xcc
+[  280.494434] [<ffffffff8007446a>] tick_sched_handle.isra.0+0x26/0x4c
+[  280.495697] [<ffffffff800744de>] tick_sched_timer+0x4e/0x92
+[  280.496813] [<ffffffff80067bb8>] __hrtimer_run_queues+0xc0/0x130
+[  280.497843] [<ffffffff800680a6>] hrtimer_interrupt+0xcc/0x1d8
+[  280.498833] [<ffffffff803be786>] riscv_timer_interrupt+0x32/0x3c
+[  280.499902] [<ffffffff80055eae>] handle_percpu_devid_irq+0x80/0x124
+[  280.501128] [<ffffffff80051412>] handle_domain_irq+0x58/0x88
+[  280.502084] [<ffffffff802c8296>] riscv_intc_irq+0x36/0x5e
+[  280.503074] [<ffffffff8000205c>] ret_from_exception+0x0/0xc
+[  282.765011] Key type cifs.spnego registered
+[  282.767487] Key type cifs.idmap registered
+[  282.878088] SLIP: version 0.8.4-NET3.019-NEWTTY (dynamic channels, max=256).
+[  282.879305] CSLIP: code copyright 1989 Regents of the University of California.
+[  283.102799] PPP generic driver version 2.4.2
+[  283.121496] NET: Registered PF_PPPOX protocol family
+[  283.513594] PPP MPPE Compression module registered
+[  283.659781] PPP Deflate Compression module registered
+[  283.835026] PPP BSD Compression module registered
+[  287.535027] random: fast init done
+[  287.997045] CIFS: No dialect specified on mount. Default has changed to a more secure dialect, SMB2.1 or later (e.g. SMB3.1.1), from CIFS (SMB1). To use the less secure SMB1 dialect to access old servers which do not support SMB3.1.1 (or even SMB3 or SMB2.1) specify vers=1.0 on mount.
+[  288.000613] CIFS: Attempting to mount \\10.0.5.1\homes
+[  288.571610] CIFS: VFS: generate_smb3signingkey: dumping generated AES session keys
+[  288.573184] CIFS: VFS: Session Id    bd 69 76 ae 00 00 00 00
+[  288.574388] CIFS: VFS: Cipher type   1
+[  288.575132] CIFS: VFS: Session Key   b8 22 bc 3e 03 82 92 83 1c b8 fc f0 61 2e 08 cf
+[  288.576286] CIFS: VFS: Signing Key   93 e4 3f 8f 79 72 35 6e 0e 1b da 55 92 32 9f f2
+[  288.577417] CIFS: VFS: ServerIn Key  02 52 5c 7b 18 66 5a 49 7a f9 2b 7a 83 50 fb 21
+[  288.578913] CIFS: VFS: ServerOut Key ca 76 9f 02 13 d8 0b 48 dd e8 c3 03 f9 11 1f 17
+[  288.779308] CIFS: Attempting to mount \\10.0.5.1\share
+[  289.032831] CIFS: Attempting to mount \\10.0.5.1\ubuntu
+[  293.674002] random: crng init done
+[  397.198349] CIFS: Attempting to mount \\10.0.5.1\homes
+[  397.408865] CIFS: VFS: generate_smb3signingkey: dumping generated AES session keys
+[  397.410843] CIFS: VFS: Session Id    a2 c3 c3 47 00 00 00 00
+[  397.411730] CIFS: VFS: Cipher type   1
+[  397.412430] CIFS: VFS: Session Key   e0 c0 f2 f0 ba 5c 9b 15 7c 11 a4 51 8b 9b 6a 56
+[  397.413562] CIFS: VFS: Signing Key   af a2 03 12 5d 49 84 f7 7c 56 7b 8c 57 c2 0a db
+[  397.415218] CIFS: VFS: ServerIn Key  c3 cf 15 8b 88 58 86 98 1c 88 66 d0 8d 57 f9 1e
+[  397.416369] CIFS: VFS: ServerOut Key 80 57 4d 3f 1d e1 a5 76 4d 1a 46 ac e8 49 f6 78
+[  397.616857] CIFS: Attempting to mount \\10.0.5.1\share
+[  397.863238] CIFS: Attempting to mount \\10.0.5.1\ubuntu
+[  485.767407] CIFS: Attempting to mount \\10.0.5.1\homes
+[  485.982886] CIFS: VFS: generate_smb3signingkey: dumping generated AES session keys
+[  485.984463] CIFS: VFS: Session Id    1e 7f 88 bf 00 00 00 00
+[  485.985298] CIFS: VFS: Cipher type   1
+[  485.986387] CIFS: VFS: Session Key   b4 94 65 ab dd 60 d6 9c ce 40 cf a2 70 e3 46 cb
+[  485.987583] CIFS: VFS: Signing Key   a1 a1 fa af d6 b3 f9 b8 29 10 a5 51 98 18 d8 75
+[  485.988736] CIFS: VFS: ServerIn Key  a8 b4 9c 47 ae b1 f8 95 99 22 0a 71 98 f7 c9 0b
+[  485.990430] CIFS: VFS: ServerOut Key 61 ad 90 63 c5 a0 aa 16 6d 52 0f d2 b9 37 1f 6b
+[  486.192242] CIFS: Attempting to mount \\10.0.5.1\share
+[  486.444040] CIFS: Attempting to mount \\10.0.5.1\ubuntu
+[  637.513112] CIFS: Attempting to mount \\10.0.5.1\homes
+[  637.712724] CIFS: VFS: generate_smb3signingkey: dumping generated AES session keys
+[  637.714841] CIFS: VFS: Session Id    75 14 2d 6d 00 00 00 00
+[  637.715725] CIFS: VFS: Cipher type   1
+[  637.716424] CIFS: VFS: Session Key   f3 b7 22 75 9c a6 19 c7 26 b8 fe c5 1f 8c 14 c1
+[  637.717570] CIFS: VFS: Signing Key   41 69 f3 c3 33 17 4f fc ad 92 75 16 34 61 90 d2
+[  637.719126] CIFS: VFS: ServerIn Key  0e f9 19 ae eb d2 d2 29 a2 8b 9d 71 14 98 95 be
+[  637.720275] CIFS: VFS: ServerOut Key 1b bc 02 44 5d ee dd ae d3 f7 13 3d ca 07 76 43
+[  637.916903] CIFS: Attempting to mount \\10.0.5.1\share
+[  638.167986] CIFS: Attempting to mount \\10.0.5.1\ubuntu
+
+    This message comes from vc709!
+          Welcome to vc709!
+
+            TIME: 1970/01/01 00:10:38
+          DEVICE: /dev/ttySIF0
+          IFNAME: ppp0
+         IPLOCAL: 10.0.5.2
+        IPREMOTE: 10.0.5.1
+        PEERNAME: optiplex-5060
+           SPEED: 921600
+        ORIG_UID: 0
+      PPPLOGNAME: root
+  
+PPP Network is running!
+Boot time: 1970/01/01 00:04:46
