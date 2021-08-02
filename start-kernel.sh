@@ -3,9 +3,10 @@
 source stop-pppd.sh
 source get-device.sh
 
-GEN_PATH=/home/ubuntu/chipyard/fpga/generated-src
+#GEN_PATH=/home/ubuntu/chipyard/fpga/generated-src
 CONFIG=$1
-dts=$GEN_PATH/$CONFIG/$CONFIG.dts
+#dts=$GEN_PATH/$CONFIG/$CONFIG.dts
+dts=/nfsroot/build/$CONFIG.dts
 echo =====================================
 echo $dts
 

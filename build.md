@@ -34,6 +34,8 @@ make && make install
 
 ## zlib
 ```
+wget --no-check-certificate http://www.zlib.net/zlib-1.2.11.tar.gz
+cd zlib-1.2.11/
 cd zlib-1.2.8/
 
 ./configure --prefix=$SYSROOT/usr
@@ -71,7 +73,7 @@ make && make install
 
 ## mbedtls
 ```
-wgetnc https://github.com/ARMmbed/mbedtls/archive/refs/tags/v3.0.0.tar.gz
+wget --no-check-certificate https://github.com/ARMmbed/mbedtls/archive/refs/tags/v3.0.0.tar.gz
 tar -xvf v3.0.0.tar.gz
 cd mbedtls-3.0.0/
 CC=riscv64-unknown-linux-gnu-gcc cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr/local -DUSE_SHARED_MBEDTLS_LIBRARY=On ../
@@ -179,7 +181,8 @@ make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" strip
 make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
 
 # host
-./configure --prefix=/usr --with-zlib=/home/ubuntu/riscv-linux/library/zlib-1.2.8/build
+./configure --prefix=/usr --with-zlib=/home/ubuntu/riscv-linux/software/zlib-1.2.8/build
+./configure --prefix=/usr --with-zlib=/home/kiki212/software/zlib-1.2.11/build
 sudo make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
 ```
 

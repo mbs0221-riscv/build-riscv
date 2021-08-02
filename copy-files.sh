@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo copy mibench
+echo copy files
 echo TIME: $(date "+%Y/%m/%d %H:%M:%S")
-cp $BENCHMARK/mibench/mibench.tar.gz /nfsroot/
+cp $1 $2 
 echo TIME: $(date "+%Y/%m/%d %H:%M:%S")

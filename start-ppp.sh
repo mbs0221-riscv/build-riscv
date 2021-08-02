@@ -19,5 +19,9 @@ if [ $? -eq 0 ]; then
   echo =========/nfsroot/vc709.log==========
   if [ $? -eq 0 ]; then
     tail -n 16 /nfsroot/vc709.log
+    # ports
+    nc -zv 10.0.5.2 2222
+    nc -zv 10.0.5.2 22
+    nc -zv 10.0.5.2 21
   fi
 fi
