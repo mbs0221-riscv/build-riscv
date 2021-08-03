@@ -86,17 +86,16 @@ killall dropbear
 # ====================================================
 # OpenSSH
     
-test -d /chroot || mkdir /chroot \
-	chmod g-w /chroot \
+test -d /chroot || mkdir /chroot && \
+	chmod g-w /chroot && \
 	chmod -R 755 /chroot
 
-test $(id -u kiki) || \
-    addgroup sftp \
-    echo -e "helloworld\nhelloworld" | adduser -h /chroot/kiki -g 'sftp kiki' -s /bin/false -G sftp kiki \
-    chown root:root /chroot/kiki \
-    chmod 755 /chroot/kiki \
-    mkdir -p /chroot/kiki/upload \
-    chown sftp_kiki:sftp /chroot/kiki/upload
+#test $(id -u sftp_user) || addgroup sftp && \
+#    echo -e "helloworld\nhelloworld" | adduser -h /chroot/kiki -g 'sftp kiki' -s /bin/false -G sftp kiki && \
+#    chown root:root /chroot/kiki && \
+#    chmod 755 /chroot/kiki && \
+#    mkdir -p /chroot/kiki/upload && \
+#    chown kiki_sftp:sftp /chroot/kiki/upload
 
 killall sshd
 /usr/local/sbin/sshd & 1>$STDOUT 2>$STDERR
