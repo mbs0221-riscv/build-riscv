@@ -8,6 +8,7 @@ export RESOURCES=$FPGA/src/main/resources
 export GEN_PATH=$FPGA/generated-src
 export OBJ_PATH=$GEN_PATH/$LONG_NAME/obj
 export TCL_DIR=$FPGA/fpga-shells/xilinx/common/tcl
+export BUILD=/nfsroot/build
 
 BOARD=xc7vx690t_0
 MCS=$OBJ_PATH/VC709FPGATestHarness.mcs
@@ -34,7 +35,7 @@ vivado -nojournal -mode batch \
         -tclargs $BOARD
 
 ##################### SOFTWARE FLOW #####################
-cd ~/riscv-linux
+cd $BUILD
 
 cp -p $RESOURCES/vc709/uartsend/upload ./
 dtc -I dts -O dtb -o $LONG_NAME.dtb $GEN_PATH/$LONG_NAME/$LONG_NAME.dts
