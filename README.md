@@ -1,4 +1,66 @@
-# build
+# Connect the Rocketchip to the Network Using UART
+
+## Step 1: pppd
+```
+wget --no-check-certificate https://download.samba.org/pub/ppp/ppp-2.4.9.tar.gz
+tar -xvf ppp-2.4.9.tar.gz
+cd ppp-2.4.9/
+
+# board side
+./configure --prefix=$ROOTFS/usr/local --sysconfdir=$ROOTFS/etc --cc=riscv64-unknown-linux-gnu-gcc --cross-compile=riscv64-unknown-linux-gnu  --sysconf=$ROOTFS/etc
+CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar STRIP=riscv64-unknown-linux-gnu-strip make -j12
+make install
+
+# host side
+./configure
+make -j12 && make install
+
+# route
+sysctl -w net.ipv4.ip_forward=1
+iptables -t nat -A POSTROUTING -o eno0 -j MASQUERADE
+```
+
+## Step 2: dropbear
+### Step 2.1: zlib
+```
+wget --no-check-certificate http://www.zlib.net/zlib-1.2.11.tar.gz
+cd zlib-1.2.11/
+
+# board side
+./configure --prefix=$SYSROOT/usr
+sed -i '19,31s/gcc/$(TARGET)gcc/g' Makefile
+sed -i '39s/ar/$(TARGET)ar/g' Makefile
+sed -i '41s/ranlib/$(TARGET)ranlib/g' Makefile
+sed -i '42s/ldconfig/$(TARGET)ldconfig/g' Makefile
+sed -i '18a TARGET?=riscv64-unknown-linux-gnu-' Makefile
+make && make install
+
+# host side
+./configure --prefix=build/
+make
+```
+
+### Step 2.2: dropbear
+```
+cd dropbear-2020.81/
+
+# board side
+./configure --prefix=$ROOTFS/usr/local --host=riscv64-unknown-linux --with-zlib=$SYSROOT/usr CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar RANLIB=riscv64-unknown-linux-gnu-ranlib STRIP=riscv64-unknown-linux-gnu-strip
+make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" strip
+make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
+
+# host side
+./configure --prefix=/usr --with-zlib=/home/ubuntu/riscv-linux/software/zlib-1.2.8/build
+./configure --prefix=/usr --with-zlib=/home/kiki212/software/zlib-1.2.11/build
+sudo make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
+```
+
+## Reference
+[Connecting to your Raspberry Pi Console via the Serial Cable](https://medium.com/@sarala.saraswati/connecting-to-your-raspberry-pi-console-via-the-serial-cable-44d7df95f03e)
+[Connect the Raspberry Pi to Network Using UART](https://www.instructables.com/Connect-the-Raspberry-Pi-to-network-using-UART/)
+[Establish PPP Network Connection on Raspberry Pi via Serial Console](https://docs.j7k6.org/raspberry-pi-ppp-network-serial-console/)
+
+
 # riscv-library
 ## openssl
 ```
@@ -155,37 +217,6 @@ ls -lh
 make install
 ```
 
-## ppp
-```
-wget --no-check-certificate https://download.samba.org/pub/ppp/ppp-2.4.9.tar.gz
-tar -xvf ppp-2.4.9.tar.gz
-
-cd ppp-2.4.9/
-./configure --prefix=$ROOTFS/usr/local --sysconfdir=$ROOTFS/etc --cc=riscv64-unknown-linux-gnu-gcc --cross-compile=riscv64-unknown-linux-gnu  --sysconf=$ROOTFS/etc
-CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar STRIP=riscv64-unknown-linux-gnu-strip make -j12
-CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar STRIP=riscv64-unknown-linux-gnu-strip make
-make install
-
-# host
-./configure
-make && make install
-
-# route
-sysctl -w net.ipv4.ip_forward=1
-iptables -t nat -A POSTROUTING -o eno0 -j MASQUERADE
-```
-## dropbear
-```
-cd dropbear-2020.81/
-./configure --prefix=$ROOTFS/usr/local --host=riscv64-unknown-linux --with-zlib=$SYSROOT/usr CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar RANLIB=riscv64-unknown-linux-gnu-ranlib STRIP=riscv64-unknown-linux-gnu-strip
-make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" strip
-make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
-
-# host
-./configure --prefix=/usr --with-zlib=/home/ubuntu/riscv-linux/software/zlib-1.2.8/build
-./configure --prefix=/usr --with-zlib=/home/kiki212/software/zlib-1.2.11/build
-sudo make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
-```
 
 # vsftpd
 ```
