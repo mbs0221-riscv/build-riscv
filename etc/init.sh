@@ -9,6 +9,11 @@ export STDERR STDOUT
 
 touch $STDERR $STDOUT
  
+# ==================================================== 
+# Setup route
+
+route add -net 10.0.5.0/32 netmask 255.255.255.255 gw 10.0.5.1
+
 # ====================================================
 # Download files
 
@@ -121,7 +126,14 @@ killall vsftpd
 
 # ====================================================
 # Upload files
+
 cp -r -p /etc/* $ROOTFS/etc/
 cp -r -p /usr/local/etc/* $ROOTFS/usr/local/etc/
+
+# ====================================================
+# Scheduled backup
+
+#crontab -e
+#0 0 * * /bin/cp /home/kiki $NFS_ROOT/tmp
 
 exit 0
