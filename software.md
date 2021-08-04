@@ -19,3 +19,12 @@ cd vim81/
 ```
 cd samba-4.14.6
 ```
+
+## npt-4.2.8p15
+```
+wget http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p15.tar.gz
+tar -xvf ntp-4.2.8p15.tar.gz
+cd ntp-4.2.8p15/
+
+./configure --prefix=$ROOTFS --enable-ipv6 --enable-nist --enable-shared --enable-all-clocks --host=riscv64-unknown-linux-gnu
+```
