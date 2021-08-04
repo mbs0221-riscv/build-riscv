@@ -27,4 +27,16 @@ tar -xvf ntp-4.2.8p15.tar.gz
 cd ntp-4.2.8p15/
 
 ./configure --prefix=$ROOTFS --enable-ipv6 --enable-nist --enable-shared --enable-all-clocks --host=riscv64-unknown-linux-gnu
+
+
+# host side
+./configure --prefix=$PWD/build
+make && make install
+```
+
+## htop
+```
+wget http://hisham.hm/htop/releases/2.2.0/htop-2.2.0.tar.gz
+tar -xvf htop-2.2.0.tar.gz
+cd htop-2.2.0/
 ```
