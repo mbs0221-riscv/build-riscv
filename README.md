@@ -1,4 +1,10 @@
 # Connect the Rocketchip to the Network Using UART
+## Step 0: setup environment variables
+```
+export RISCV=/path/to/riscv-toolchain
+export SYSROOT=$RISCV/sysroot
+export ROOTFS=/path/to/rootfs
+```
 ## Step 1: pppd
 ```
 wget --no-check-certificate https://download.samba.org/pub/ppp/ppp-2.4.9.tar.gz
@@ -48,7 +54,8 @@ tar -xvf dropbear-2020.81.tar.bz2
 cd dropbear-2020.81/
 
 # board side
-./configure --prefix=$ROOTFS/usr/local --host=riscv64-unknown-linux --with-zlib=$SYSROOT/usr CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar RANLIB=riscv64-unknown-linux-gnu-ranlib STRIP=riscv64-unknown-linux-gnu-strip
+./configure --prefix=$ROOTFS/usr/local --host=riscv64-unknown-linux --with-zlib=$SYSROOT/usr
+CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar RANLIB=riscv64-unknown-linux-gnu-ranlib STRIP=riscv64-unknown-linux-gnu-strip
 make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" strip
 make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
 
@@ -57,6 +64,8 @@ make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
 ./configure --prefix=/usr --with-zlib=/home/kiki212/software/zlib-1.2.11/build
 sudo make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
 ```
+
+The `libnss` is also needed for dropbear to work, and can be found in the `SYSROOT`.
 
 ## Step 3: openssh
 ### Step 3.1: openssl
