@@ -20,9 +20,11 @@ iptables -t nat -A POSTROUTING -o eno0 -j MASQUERADE
 ```
 
 ## Step 2: dropbear
+[Dropbear SSH](https://matt.ucc.asn.au/dropbear/dropbear.html)
 ### Step 2.1: zlib
 ```
 wget --no-check-certificate http://www.zlib.net/zlib-1.2.11.tar.gz
+tar -xvf zlib-1.2.11.tar.gz
 cd zlib-1.2.11/
 
 # board side
@@ -41,6 +43,8 @@ make
 
 ### Step 2.2: dropbear
 ```
+wget --no-check-certificate https://matt.ucc.asn.au/dropbear/releases/dropbear-2020.81.tar.bz2
+tar -xvf dropbear-2020.81.tar.bz2
 cd dropbear-2020.81/
 
 # board side
@@ -155,6 +159,8 @@ cp vsftpd.8 $ROOTFS/usr/local/man/man8
 
 ## Step 5: lrzsz
 ```
+wget --no-check-certificate https://src.fedoraproject.org/repo/pkgs/lrzsz/lrzsz-0.12.20.tar.gz/b5ce6a74abc9b9eb2af94dffdfd372a4/lrzsz-0.12.20.tar.gz
+tar -xvf lrzsz-0.12.20.tar.gz
 cd lrzsz-0.12.20/
 
 ./configure --cache-file=./riscv-linux.cache --prefix=$ROOTFS/usr/local

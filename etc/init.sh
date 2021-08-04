@@ -11,12 +11,10 @@ touch $STDERR $STDOUT
  
 # ==================================================== 
 # Setup route
-
 route add -net 10.0.5.0/32 netmask 255.255.255.255 gw 10.0.5.1
 
 # ====================================================
 # Download files
-
 ROOTFS=$NFS_ROOT/rootfs
 export ROOTFS
 
@@ -24,7 +22,7 @@ cp -r -p $ROOTFS/etc/* /etc/
 cp -r -p $ROOTFS/usr/local/etc/* /usr/local/etc/
 
 # ====================================================
-# Libnss
+# Libnss [PASS]
 # https://www.programmersought.com/article/95981806345/
 #cd $NFS_ROOT
 #echo sysroot: $SYSROOT 1>$STDOUT 2>$STDERR
@@ -41,7 +39,6 @@ cp -r -p $ROOTFS/usr/local/etc/* /usr/local/etc/
 
 # ====================================================
 # Add Users [PASS]
-
 test -d /var/empty || mkdir -p /var/empty
 chown 0:0 /var/empty
 chmod 000 /var/empty
@@ -57,7 +54,6 @@ test $(id -u kimi) || \
 
 # ====================================================
 # authorized_keys
-
 test -d /home/ubuntu/.ssh || mkdir -p /home/ubuntu/.ssh
 test -d /home/kiki/.ssh || mkdir -p /home/kiki/.ssh
 test -d /root/.ssh || mkdir -p /root/.ssh
@@ -84,13 +80,11 @@ source $NFS_ROOT/etc/keygen.sh
 
 # ====================================================
 # Dropbear
-
 killall dropbear
 /usr/local/sbin/dropbear -E -R -p 2222 1>$STDOUT 2>$STDERR
 
 # ====================================================
 # OpenSSH
-    
 test -d /chroot || mkdir /chroot && \
 	chmod g-w /chroot && \
 	chmod -R 755 /chroot
@@ -107,7 +101,6 @@ killall sshd
 
 # ====================================================
 # FTP Server
-
 test -d /usr/share/empty || mkdir -p /usr/share/empty
 test -d /var/ftp || mkdir -p /var/ftp \
     chown root:root /var/ftp \
@@ -126,13 +119,11 @@ killall vsftpd
 
 # ====================================================
 # Upload files
-
-cp -r -p /etc/* $ROOTFS/etc/
-cp -r -p /usr/local/etc/* $ROOTFS/usr/local/etc/
+#cp -r -p /etc/* $ROOTFS/etc/
+#cp -r -p /usr/local/etc/* $ROOTFS/usr/local/etc/
 
 # ====================================================
-# Scheduled backup
-
+# Scheduled backup: https://www.runoob.com/linux/linux-comm-crontab.html
 #crontab -e
 #0 0 * * /bin/cp /home/kiki $NFS_ROOT/tmp
 
