@@ -126,11 +126,6 @@ killall vsftpd
 /usr/local/sbin/vsftpd & 1>$STDOUT 2>$STDERR
 
 # ====================================================
-# Upload files
-#cp -r -p /etc/* $ROOTFS/etc/
-#cp -r -p /usr/local/etc/* $ROOTFS/usr/local/etc/
-
-# ====================================================
 # Scheduled backup: https://www.runoob.com/linux/linux-comm-crontab.html
 #crontab -e
 #0 0 * * /bin/cp /home/kiki $NFS_ROOT/tmp
