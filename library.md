@@ -141,6 +141,20 @@ export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 
 ```
 
+## libnfsidmap-0.25 [OK]
+```
+wget http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap/libnfsidmap-0.25.tar.gz
+tar -xvf libnfsidmap-0.25.tar.gz
+cd libnfsidmap-0.25
+
+./configure --prefix=$SYSROOT/usr                          \
+            --host=riscv64-unknown-linux-gnu               \
+            --enable-shared &&
+make -j8 && make install
+
+export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+```
+
 ## sqlite3 [OK]
 ```
 wget https://www.sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
