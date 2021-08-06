@@ -21,6 +21,7 @@ cd samba-4.14.6
 ```
 
 ## ntp [OK]
+https://www.linuxfromscratch.org/blfs/view/svn/basicnet/ntp.html
 ```
 wget http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p15.tar.gz
 tar -xvf ntp-4.2.8p15.tar.gz
@@ -48,7 +49,6 @@ cd htop-2.2.0/
 make -j8 && make install
 ```
 
-```
 ## nfs-utils
 ```
 wget https://www.kernel.org/pub/linux/utils/nfs-utils/2.5.4/nfs-utils-2.5.4.tar.xz
