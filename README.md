@@ -1,4 +1,28 @@
 # Connect the Rocketchip to the Network Using UART
+## Step -2: modify uart parameters
+In `fpga/src/main/scala/vc709/Configs.scala`, we add following line
+```
+case PeripheryUARTKey => List(UARTParams(address = BigInt(0x64000000L), baudRate=921600, nTxEntries = 1024, nRxEntries = 1024))
+```
+
+## Step -1: modify sifive uart driver.
+```
+cd linux/
+vim drivers/tty/serial/sifive.c
+```
+Then we modify following lines
+```
+#define SIFIVE_DEFAULT_BAUD_RATE                115200
+#define SIFIVE_TX_FIFO_DEPTH                    8
+#define SIFIVE_RX_FIFO_DEPTH                    8
+```
+and change above lines at following
+```
+#define SIFIVE_DEFAULT_BAUD_RATE                921600
+#define SIFIVE_TX_FIFO_DEPTH                    1024
+#define SIFIVE_RX_FIFO_DEPTH                    1024
+```
+
 ## Step 0: setup environment variables
 ```
 export RISCV=/path/to/riscv-toolchain

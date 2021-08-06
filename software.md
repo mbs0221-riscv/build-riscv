@@ -26,12 +26,16 @@ wget http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p15.tar.gz
 tar -xvf ntp-4.2.8p15.tar.gz
 cd ntp-4.2.8p15/
 
-./configure --prefix=$ROOTFS --enable-ipv6 --enable-nist --enable-shared --enable-all-clocks --host=riscv64-unknown-linux-gnu
+#./configure --prefix=$ROOTFS --enable-ipv6 --enable-nist --enable-shared --enable-all-clocks --host=riscv64-unknown-linux-gnu
+./configure --prefix=$ROOTFS/usr/local --exec-prefix=$ROOTFS/usr/local --enable-shared --host=riscv64-unknown-linux-gnu --with-yielding-select=yes
 
+# local timezone
+cp /usr/share/zoneinfo/Asia/Shanghai $ROOTFS/etc/localtime
 
 # host side
-./configure --prefix=$PWD/build
-make && make install
+sudo apt –y install ntp
+service ntp-systemd-netif start
+service ntp-systemd-netif status
 ```
 
 ## htop
@@ -39,4 +43,7 @@ make && make install
 wget http://hisham.hm/htop/releases/2.2.0/htop-2.2.0.tar.gz
 tar -xvf htop-2.2.0.tar.gz
 cd htop-2.2.0/
+
+./configure --prefix=$ROOTFS/usr --disable-unicode --host=riscv64-unknown-linux-gnu CPPFLAGS=-I/home/kiki212/chipyard/riscv-tools-install/sysroot/include LDFLAGS=-L/home/kiki212/chipyard/riscv-tools-install/sysroot/lib
+make -j8 && make install
 ```

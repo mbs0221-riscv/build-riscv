@@ -10,12 +10,18 @@ make && make install
 
 ## ncurses
 ```
+wget http://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.2.tar.gz
+tar -xvf ncurses-6.2.tar.gz
 cd ncurses-6.2/
+
 ./configure --prefix=$SYSROOT/ --host=riscv64-unknown-linux-gnu --without-cxx --without-cxx-binding --without-ada --without-manpages --without-progs --without-tests --with-shared
-make && make install
-cd $SYSROOT/usr/lib
+make -j8 && make install
+cd $SYSROOT/lib
 ln -s libncurses.so.6 libtinfo.so.6
 ln -s libtinfo.so.6 libtinfo.so
+
+./configure --prefix=$(pwd)/build --host=riscv64-unknown-linux-gnu --without-cxx --without-cxx-binding --without-ada --without-manpages --without-progs --without-tests --with-shared
+make -j8 && make install
 ```
 
 ## TinyXML-2

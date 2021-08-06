@@ -15,7 +15,7 @@ chmod 600 /etc/ppp/chap-secrets
 chmod 600 /etc/ppp/pap-secrets
 
 # ==================================================== 
-# Setup route
+# Route
 route add -net 10.0.5.0/32 netmask 255.255.255.255 gw 10.0.5.1
 
 # ====================================================
@@ -25,6 +25,10 @@ export ROOTFS
 
 cp -r -p $ROOTFS/etc/* /etc/
 cp -r -p $ROOTFS/usr/local/etc/* /usr/local/etc/
+
+# ====================================================
+# NTP Service
+ntpdate 10.0.5.1 1>$STDOUT 2>$STDERR
 
 # ====================================================
 # Libnss [PASS]
@@ -91,15 +95,14 @@ killall dropbear
 # ====================================================
 # OpenSSH
 test -d /chroot || mkdir /chroot \
-	chmod g-w /chroot \
-	chmod -R 755 /chroot
+	chmod 755 /chroot
 
-test $(id -u sftp_user) || addgroup sftp && \
-    echo -e "helloworld\nhelloworld" | adduser -h /chroot/kiki -g 'sftp kiki' -s /bin/false -G sftp kiki && \
-    chown root:root /chroot/kiki && \
-    chmod 755 /chroot/kiki && \
-    mkdir -p /chroot/kiki/upload && \
-    chown kiki_sftp:sftp /chroot/kiki/upload
+#test $(id -u sftp_user) || addgroup sftp && \
+#    echo -e "helloworld\nhelloworld" | adduser -h /chroot/kiki -g 'sftp kiki' -s /bin/false -G sftp kiki && \
+#    chown root:root /chroot/kiki && \
+#    chmod 755 /chroot/kiki && \
+#    mkdir -p /chroot/kiki/upload && \
+#    chown kiki_sftp:sftp /chroot/kiki/upload
 
 killall sshd
 /usr/local/sbin/sshd & 1>$STDOUT 2>$STDERR
