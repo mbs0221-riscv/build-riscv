@@ -47,3 +47,19 @@ cd htop-2.2.0/
 ./configure --prefix=$ROOTFS/usr --disable-unicode --host=riscv64-unknown-linux-gnu CPPFLAGS=-I/home/kiki212/chipyard/riscv-tools-install/sysroot/include LDFLAGS=-L/home/kiki212/chipyard/riscv-tools-install/sysroot/lib
 make -j8 && make install
 ```
+
+```
+## nfs-utils
+```
+wget https://www.kernel.org/pub/linux/utils/nfs-utils/2.5.4/nfs-utils-2.5.4.tar.xz
+tar -xvf nfs-utils-2.5.4.tar.xz
+cd nfs-utils-2.5.4/
+
+export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=$SYSROOT/opt/sqlite3/lib/pkgconfig:$PKG_CONFIG_PATH
+
+./configure --prefix=$ROOTFS/usr --host=riscv64-unknown-linux-gnu --sysconfdir=$ROOTFS/etc --sbindir=$ROOTFS/usr/bin --disable-nfsv4 --disable-gss --disable-ipv6  --enable-shared --with-sysroot=$SYSROOT --with-systemd=no --disable-uuid
+
+make -j12 && make DESTDIR=$SYSROOT/usr install-strip
+```
