@@ -48,7 +48,6 @@ cd htop-2.2.0/
 make -j8 && make install
 ```
 
-```
 ## nfs-utils
 ```
 wget https://www.kernel.org/pub/linux/utils/nfs-utils/2.5.4/nfs-utils-2.5.4.tar.xz
