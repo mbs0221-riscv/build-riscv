@@ -1,22 +1,4 @@
 # riscv-software
-```
-# module-init-tools
-sudo apt install docbook-utils docbook-to-man
-
-# vim-64 [XX]
-# ./configure --host=riscv64-unknown-linux-gnu --with-features=tiny --disable-gui --without-x --disable-selinux --disable-acl --disable-gpm CPPFLAGS=-I$SYSROOT/usr/include/ncurses LDFLAGS=-L$SYSROOT/usr/lib
-
-# ntp [OK]
-
-# local timezone
-cp /usr/share/zoneinfo/Asia/Shanghai $ROOTFS/etc/localtime
-
-# host side
-sudo apt –y install ntp
-service ntp-systemd-netif start
-service ntp-systemd-netif status
-```
-
 ## nfs-utils
 ```
 wget https://www.kernel.org/pub/linux/utils/nfs-utils/2.5.4/nfs-utils-2.5.4.tar.xz

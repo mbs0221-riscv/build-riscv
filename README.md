@@ -51,6 +51,18 @@ sudo make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
 
 The `libnss` is also needed for dropbear to work, and can be found in the `SYSROOT`.
 
+## ntp-server
+```
+# local timezone
+cp /usr/share/zoneinfo/Asia/Shanghai $ROOTFS/etc/localtime
+
+# host side
+sudo apt –y install ntp 
+service ntp-systemd-netif start
+service ntp-systemd-netif status
+```
+
+
 ## Step 3: build library and software
 https://blog.packagecloud.io/rpm/rpmbuild/packaging/2015/06/29/building-rpm-packages-with-rpmbuild/
 
@@ -84,13 +96,18 @@ rpmbuild -ba zlib-1.2.11.spec
 rpmbuild -ba openssl-1.1.1k.spec
 rpmbuild -ba openssh-8.6p1.spec
 
-# core applications
+# module-init-tools
+sudo apt install docbook-utils docbook-to-man
 rpmbuild -ba module-init-tools-3.15.spec
 
 # network
 rpmbuild -ba dropbear-2020.81.spec
 rpmbuild -ba ppp-2.4.9.spec
 rpmbuild -ba vsftpd-3.0.4.spec
+
+# RPC
+rpmbuild -ba rpcbind-1.2.6.spec
+rpmbuild -ba libtirpc-1.3.2.spec
 
 # utils 
 rpmbuild -ba bash-5.1.8.spec
@@ -102,6 +119,7 @@ rpmbuild -ba mbedtls-3.0.0.spec
 
 # [failed]
 rpmbuild -ba libevent-2.1.12-stable.spec
+rpmbuild -ba rpcsvc-proto-1.4.2.spec
 
 # [problematic]
 rpmbuild -ba lrzsz-0.12.20.spec
