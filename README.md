@@ -58,6 +58,13 @@ https://blog.packagecloud.io/rpm/rpmbuild/packaging/2015/06/29/building-rpm-pack
 git clone https://github.com/leethomason/tinyxml2.git && tar -czvf tinyxml-2.tar.gz tinyxml2 [X]
 wget -N -i packages.txt -P ~/rpmbuild/SOURCES/
 
+# install rpmbuild
+sudo apt install rpm
+vim ~/.rpmmacros
+
+%_topdir    $HOME/rpmbuild
+
+mkdir -p ~/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
 cd ~/rpmbuild/SPECS
 
 # helloworld
@@ -106,4 +113,4 @@ rpmbuild -ba nfs-utils-2.5.3.spec
 * [Connect the Raspberry Pi to Network Using UART](https://www.instructables.com/Connect-the-Raspberry-Pi-to-network-using-UART/)
 * [Establish PPP Network Connection on Raspberry Pi via Serial Console](https://docs.j7k6.org/raspberry-pi-ppp-network-serial-console/)
 * http://statusorel.ru/technology/connect-the-raspberry-pi-to-network-using-uart.html
-
+* [Building RPM packages with rpmbuild](https://blog.packagecloud.io/rpm/rpmbuild/packaging/2015/06/29/building-rpm-packages-with-rpmbuild/)
