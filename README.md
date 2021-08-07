@@ -62,21 +62,25 @@ service ntp-systemd-netif start
 service ntp-systemd-netif status
 ```
 
-
 ## Step 3: build library and software
-https://blog.packagecloud.io/rpm/rpmbuild/packaging/2015/06/29/building-rpm-packages-with-rpmbuild/
-
 ```
-git clone https://github.com/leethomason/tinyxml2.git && tar -czvf tinyxml-2.tar.gz tinyxml2 [X]
+# download compressed packages
 wget -N -i packages.txt -P ~/rpmbuild/SOURCES/
 
-# install rpmbuild
+# install and configure rpmbuild
 sudo apt install rpm
 vim ~/.rpmmacros
 
 %_topdir    $HOME/rpmbuild
 
+# mkdirs
 mkdir -p ~/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
+
+# git clone
+cd ~/rpmbuild/SOURCES
+git clone https://github.com/leethomason/tinyxml2.git && tar -czvf tinyxml2.tar.gz tinyxml2
+
+# rpmbuild packages
 cd ~/rpmbuild/SPECS
 
 # helloworld
@@ -88,7 +92,8 @@ rpmbuild -ba libuuid-1.0.3.spec
 rpmbuild -ba ncurses-6.2.spec
 rpmbuild -ba libnfsidmap-0.25.spec
 rpmbuild -ba json-c-0.15.spec
-sudo apt install gperf [lcov]
+# sudo apt install gperf [lcov]
+rpmbuild -bc gperf-3.1.spec
 rpmbuild -ba libseccomp-2.5.1.spec
 
 # sqlite

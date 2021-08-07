@@ -135,7 +135,24 @@ killall vsftpd
 
 # ====================================================
 # Download files
-cd $ROOTFS/usr/local
-find . -type f -executable -mtime -1 | xargs -i cp {} /usr/local --parents
+#cd $ROOTFS/usr/local
+#find . -type f -executable -mtime -1 | xargs -i cp {} /usr/local --parents
+
+# ====================================================
+# Network File System
+# https://www.cnblogs.com/misfit/p/10552547.html
+mount -t nfsd /proc/fs/nfsd &
+exportfs -av ; rpc.mountd
+rpc.statd --no-notify
+rpc.nfsd &
+sm-notify
+
+# ====================================================
+# Download rpm packages
+cp -p $NFS_HOME/rpmbuild/RPMS/x86_64/*.rpm /nfsroot/
+cd /nfsroot/`date +"%Y%m%d"`
+find . -type f -mtime -1 | xargs -i rpm -qpi {} 1>$STDOUT 2>$STDERR
+#find . -type f -mtime -1 | xargs -i rpm -qpi {} | grep Size | awk '{print $3}' | paste -s -d '+' - | bc 1>$STDOUT 2>$STDERR
+#find . -type f -mtime -1 | xargs -i rpm -i {} 
 
 exit 0
