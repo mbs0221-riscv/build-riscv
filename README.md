@@ -9,15 +9,15 @@ case PeripheryUARTKey => List(UARTParams(address = BigInt(0x64000000L), baudRate
 ```
 cd linux/
 vim drivers/tty/serial/sifive.c
-```
-Then we modify following lines
-```
+
+# Then we modify following lines
+
 #define SIFIVE_DEFAULT_BAUD_RATE                115200
 #define SIFIVE_TX_FIFO_DEPTH                    8
 #define SIFIVE_RX_FIFO_DEPTH                    8
-```
-and change above lines at following
-```
+
+# and change above lines at following
+
 #define SIFIVE_DEFAULT_BAUD_RATE                921600
 #define SIFIVE_TX_FIFO_DEPTH                    1024
 #define SIFIVE_RX_FIFO_DEPTH                    1024
@@ -28,18 +28,10 @@ and change above lines at following
 export RISCV=/path/to/riscv-toolchain
 export SYSROOT=$RISCV/sysroot
 export ROOTFS=/path/to/rootfs
+
 ```
 ## Step 1: pppd
 ```
-wget --no-check-certificate https://download.samba.org/pub/ppp/ppp-2.4.9.tar.gz
-tar -xvf ppp-2.4.9.tar.gz
-cd ppp-2.4.9/
-
-# board side
-./configure --prefix=$ROOTFS/usr/local --sysconfdir=$ROOTFS/etc --cc=riscv64-unknown-linux-gnu-gcc --cross-compile=riscv64-unknown-linux-gnu  --sysconf=$ROOTFS/etc
-CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar STRIP=riscv64-unknown-linux-gnu-strip make -j12
-make install
-
 # host side
 ./configure
 make -j12 && make install
@@ -51,155 +43,62 @@ iptables -t nat -A POSTROUTING -o eno0 -j MASQUERADE
 
 ## Step 2: dropbear
 [Dropbear SSH](https://matt.ucc.asn.au/dropbear/dropbear.html)
-### Step 2.1: zlib
 ```
-wget --no-check-certificate http://www.zlib.net/zlib-1.2.11.tar.gz
-tar -xvf zlib-1.2.11.tar.gz
-cd zlib-1.2.11/
-
-# board side
-./configure --prefix=$SYSROOT/usr
-sed -i '19,31s/gcc/$(TARGET)gcc/g' Makefile
-sed -i '39s/ar/$(TARGET)ar/g' Makefile
-sed -i '41s/ranlib/$(TARGET)ranlib/g' Makefile
-sed -i '42s/ldconfig/$(TARGET)ldconfig/g' Makefile
-sed -i '18a TARGET?=riscv64-unknown-linux-gnu-' Makefile
-make && make install
-
 # host side
-./configure --prefix=build/
-make
-```
-
-### Step 2.2: dropbear
-```
-wget --no-check-certificate https://matt.ucc.asn.au/dropbear/releases/dropbear-2020.81.tar.bz2
-tar -xvf dropbear-2020.81.tar.bz2
-cd dropbear-2020.81/
-
-# board side
-./configure --prefix=$ROOTFS/usr/local --host=riscv64-unknown-linux --with-zlib=$SYSROOT/usr
-CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar RANLIB=riscv64-unknown-linux-gnu-ranlib STRIP=riscv64-unknown-linux-gnu-strip
-make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" strip
-make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
-
-# host side
-./configure --prefix=/usr --with-zlib=/home/ubuntu/riscv-linux/software/zlib-1.2.8/build
 ./configure --prefix=/usr --with-zlib=/home/kiki212/software/zlib-1.2.11/build
 sudo make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
 ```
 
 The `libnss` is also needed for dropbear to work, and can be found in the `SYSROOT`.
 
-## Step 3: openssh
-### Step 3.1: openssl
-```
-wget https://www.openssl.org/source/openssl-1.1.1k.tar.gz
-tar -xvf openssl-1.1.1k.tar.gz
-cd openssl-1.1.1k/
+## Step 3: build library and software
+https://blog.packagecloud.io/rpm/rpmbuild/packaging/2015/06/29/building-rpm-packages-with-rpmbuild/
 
-./config no-asm --shared --prefix=$SYSROOT/usr CC=riscv64-unknown-linux-gnu-gcc PLATFORM=riscv64gc
-./config no-asm --shared --prefix=$ROOTFS/usr CC=riscv64-unknown-linux-gnu-gcc PLATFORM=riscv64gc
-sed -i 's/-m64//g' Makefile 
-make && make install
 ```
-```
-[root@vc709 ]#openssl version -a
-OpenSSL 1.1.1k  25 Mar 2021
-built on: Fri Jul 23 03:22:49 2021 UTC
-platform: linux-x86_64
-options:  bn(64,64) rc4(int) des(int) idea(int) blowfish(ptr) 
-compiler: riscv64-unknown-linux-gnu-gcc -fPIC -pthread  -Wall -O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DNDEBUG
-OPENSSLDIR: "/home/ubuntu/riscv-linux/rootfs/usr/ssl"
-ENGINESDIR: "/home/ubuntu/riscv-linux/rootfs/usr/lib/engines-1.1"
-Seeding source: os-specific
-[root@vc709 ]#
-```
-### Step 3.2: openssh
-```
-wget --no-check-certificate https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.6p1.tar.gz
-tar -xvf openssh-8.6p1.tar.gz
-cd openssh-8.6p1
+git clone https://github.com/leethomason/tinyxml2.git && tar -czvf tinyxml-2.tar.gz tinyxml2 [X]
+wget -N -i packages.txt -P ~/rpmbuild/SOURCES/
 
-./configure --prefix=$ROOTFS/usr/local --host=riscv64-unknown-linux-gnu --with-libs --with-zlib=$SYSROOT/usr --with-ssl-dir=$SYSROOT/usr --with-privsep-path=/var/empty --with-privsep-user=sshd --with-ssl-engine --with-md5-passwords --disable-etc-default-login 
+cd ~/rpmbuild/SPECS
 
-OpenSSH has been configured with the following options:
-                     User binaries: /home/ubuntu/riscv-linux/rootfs/usr/local/bin
-                   System binaries: /home/ubuntu/riscv-linux/rootfs/usr/local/sbin
-               Configuration files: /home/ubuntu/riscv-linux/rootfs/usr/local/etc
-                   Askpass program: /home/ubuntu/riscv-linux/rootfs/usr/local/libexec/ssh-askpass
-                      Manual pages: /home/ubuntu/riscv-linux/rootfs/usr/local/share/man/manX
-                          PID file: /var/run
-  Privilege separation chroot path: /var/empty
-            sshd default user PATH: /usr/bin:/bin:/usr/sbin:/sbin:/home/ubuntu/riscv-linux/rootfs/usr/local/bin
-                    Manpage format: doc
-                       PAM support: no
-                   OSF SIA support: no
-                 KerberosV support: no
-                   SELinux support: no
-              MD5 password support: yes
-                   libedit support: no
-                   libldns support: no
-  Solaris process contract support: no
-           Solaris project support: no
-         Solaris privilege support: no
-       IP address in $DISPLAY hack: no
-           Translate v4 in v6 hack: yes
-                  BSD Auth support: no
-              Random number source: OpenSSL internal ONLY
-             Privsep sandbox style: seccomp_filter
-                   PKCS#11 support: yes
-                  U2F/FIDO support: yes
-                  
-CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar STRIP=riscv64-unknown-linux-gnu-strip make clean && make -j12 && make install 
-ls -lh scp sftp ssh ssh-add ssh-agent ssh-keygen ssh-keyscan sshd sftp-server ssh-keysign
-riscv64-unknown-linux-gnu-strip scp sftp ssh ssh-add ssh-agent ssh-keygen ssh-keyscan sshd sftp-server ssh-keysign
-ls -lh scp sftp ssh ssh-add ssh-agent ssh-keygen ssh-keyscan sshd sftp-server ssh-keysign
-cp scp sftp ssh ssh-add ssh-agent ssh-keygen ssh-keyscan $ROOTFS/usr/local/bin
-cp sshd $ROOTFS/usr/local/sbin
-cp sftp-server  ssh-keysign $ROOTFS/usr/local/libexec
-cp moduli ssh_config sshd_config $ROOTFS/usr/local/etc
+# helloworld
+rpmbuild -ba helloworld.spec
 
-vim etc/sshd_config
-PermitRootLogin yes
-```
+# library
+rpmbuild -ba libpcap-1.9.1.spec
+rpmbuild -ba libuuid-1.0.3.spec
+rpmbuild -ba ncurses-6.2.spec
+rpmbuild -ba libnfsidmap-0.25.spec
 
-## Step 3: bash
-```
-wget --no-check-certificate https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz
-tar -xvf bash-5.1.8.tar.gz
-cd bash-5.1.8/
+# sqlite
+rpmbuild -ba sqlite-autoconf-3360000.spec
 
-# board side
-./configure --prefix=$ROOTFS/ --target=riscv64-unknown-linux-gnu --host=riscv64-unknown-linux-gnu --build=x86_64-linux-gnu
-CC=riscv64-unknown-linux-gnu-gcc AR=riscv64-unknown-linux-gnu-ar RANLIB=riscv64-unknown-linux-gnu-ranlib STRIP=riscv64-unknown-linux-gnu-strip make -j12 strip
-make install
-```
+# openssh
+rpmbuild -ba zlib-1.2.11.spec
+rpmbuild -ba openssl-1.1.1k.spec
+rpmbuild -ba openssh-8.6p1.spec
 
-## Step 4: vsftpd
-```
-wget --no-check-certificate https://security.appspot.com/downloads/vsftpd-3.0.4.tar.gz
-tar -xvf vsftpd-3.0.4.tar.gz
-cd vsftpd-3.0.4
+# core applications
+rpmbuild -ba module-init-tools-3.15.spec
 
-# board side
-make && make install
-cp vsftpd.conf $ROOTFS/etc
-cp vsftpd $ROOTFS/usr/local/sbin/vsftpd
-cp vsftpd.conf.5 $ROOTFS/usr/local/man/man5
-cp vsftpd.8 $ROOTFS/usr/local/man/man8
-```
+# network
+rpmbuild -ba dropbear-2020.81.spec
+rpmbuild -ba ppp-2.4.9.spec
+rpmbuild -ba vsftpd-3.0.4.spec
 
-## Step 5: lrzsz
-```
-wget --no-check-certificate https://src.fedoraproject.org/repo/pkgs/lrzsz/lrzsz-0.12.20.tar.gz/b5ce6a74abc9b9eb2af94dffdfd372a4/lrzsz-0.12.20.tar.gz
-tar -xvf lrzsz-0.12.20.tar.gz
-cd lrzsz-0.12.20/
+# utils 
+rpmbuild -ba bash-5.1.8.spec
+rpmbuild -ba htop-2.2.0.spec
+rpmbuild -ba ntp-4.2.8p15.spec
 
-./configure --cache-file=./riscv-linux.cache --prefix=$ROOTFS/usr/local
-CC=riscv64-unknown-linux-gnu-gcc make -j12
-riscv64-unknown-linux-gnu-strip lr* ls*
-make install
+# benchmark
+rpmbuild -ba mbedtls-3.0.0.spec
+
+# [failed]
+rpmbuild -ba libevent-2.1.12-stable.spec
+
+# [problematic]
+rpmbuild -ba lrzsz-0.12.20.spec
+rpmbuild -ba nfs-utils-2.5.3.spec
 ```
 
 ## Reference
@@ -207,5 +106,4 @@ make install
 * [Connect the Raspberry Pi to Network Using UART](https://www.instructables.com/Connect-the-Raspberry-Pi-to-network-using-UART/)
 * [Establish PPP Network Connection on Raspberry Pi via Serial Console](https://docs.j7k6.org/raspberry-pi-ppp-network-serial-console/)
 * http://statusorel.ru/technology/connect-the-raspberry-pi-to-network-using-uart.html
-
 

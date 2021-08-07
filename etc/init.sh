@@ -3,10 +3,13 @@
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
 
+# ====================================================
+# Environment variables
+ROOTFS=$NFS_ROOT/rootfs
 STDOUT=$NFS_ROOT/log/stdout.log
 STDERR=$NFS_ROOT/log/stderr.log
-export STDERR STDOUT
 
+export ROOTFS STDOUT STDERR
 touch $STDERR $STDOUT
 
 # ====================================================
@@ -19,16 +22,16 @@ chmod 600 /etc/ppp/pap-secrets
 route add -net 10.0.5.0/32 netmask 255.255.255.255 gw 10.0.5.1
 
 # ====================================================
+# NTP Service
+cp -p $ROOTFS/usr/local/bin/ntpdate /usr/local/bin/
+ntpdate 10.0.5.1 1>$STDOUT 2>$STDERR
+
+# ====================================================
 # Download files
-ROOTFS=$NFS_ROOT/rootfs
-export ROOTFS
 
 cp -r -p $ROOTFS/etc/* /etc/
 cp -r -p $ROOTFS/usr/local/etc/* /usr/local/etc/
-
-# ====================================================
-# NTP Service
-ntpdate 10.0.5.1 1>$STDOUT 2>$STDERR
+cp -r -p $ROOTFS/usr/etc/* /usr/etc/
 
 # ====================================================
 # Libnss [PASS]
@@ -129,5 +132,10 @@ killall vsftpd
 # Scheduled backup: https://www.runoob.com/linux/linux-comm-crontab.html
 #crontab -e
 #0 0 * * /bin/cp /home/kiki $NFS_ROOT/tmp
+
+# ====================================================
+# Download files
+cd $ROOTFS/usr/local
+find . -type f -executable -mtime -1 | xargs -i cp {} /usr/local --parents
 
 exit 0

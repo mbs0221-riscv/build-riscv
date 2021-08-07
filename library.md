@@ -1,45 +1,14 @@
 # riscv-library
-## pcap [OK]
 http://www.us.tcpdump.org/release/
-```
-cd libpcap-1.9.1/
-./configure --prefix=$SYSROOT/usr/local --host=riscv64-unknown-linux-gnu --target=riscv64-unknown-linux-gnu --with-pcap=linux 
-./configure --prefix=$ROOTFS/usr/local --host=riscv64-unknown-linux-gnu --target=riscv64-unknown-linux-gnu --with-pcap=linux
-make && make install
-```
-
-## ncurses [OK]
-```
-wget http://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.2.tar.gz
-tar -xvf ncurses-6.2.tar.gz
-cd ncurses-6.2/
-
-./configure --prefix=$SYSROOT/ --host=riscv64-unknown-linux-gnu --without-cxx --without-cxx-binding --without-ada --without-manpages --without-progs --without-tests --with-shared
-make -j8 && make install
-cd $SYSROOT/lib
-ln -s libncurses.so.6 libtinfo.so.6
-ln -s libtinfo.so.6 libtinfo.so
-
-./configure --prefix=$(pwd)/build --host=riscv64-unknown-linux-gnu --without-cxx --without-cxx-binding --without-ada --without-manpages --without-progs --without-tests --with-shared
-make -j8 && make install
-```
 
 ## TinyXML-2 [OK]
 ```
 git clone https://github.com/leethomason/tinyxml2.git
 cd tinyxml2
+
 mkdir build && cd build
 CC=riscv64-unknown-linux-gnu-gcc CXX=riscv64-unknown-linux-gnu-g++ cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr/local ../
 CC=riscv64-unknown-linux-gnu-gcc CXX=riscv64-unknown-linux-gnu-g++ cmake -DCMAKE_INSTALL_PREFIX=$ROOTFS/usr/local ../
-make && make install
-```
-
-## mbedtls
-```
-wget --no-check-certificate https://github.com/ARMmbed/mbedtls/archive/refs/tags/v3.0.0.tar.gz
-tar -xvf v3.0.0.tar.gz
-cd mbedtls-3.0.0/
-CC=riscv64-unknown-linux-gnu-gcc cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr/local -DUSE_SHARED_MBEDTLS_LIBRARY=On ../
 make && make install
 ```
 
@@ -108,61 +77,4 @@ export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
             --enable-warmstarts                            \
             --with-systemdsystemunitdir=no                 &&
 make -j8 && make install
-```
-
-## libuuid-1.0.3 [OK]
-```
-wget https://sourceforge.net/projects/libuuid/files/libuuid-1.0.3.tar.gz
-tar -xvf libuuid-1.0.3.tar.gz
-cd libuuid-1.0.3
-
-./configure --prefix=$SYSROOT/usr/local                    \
-            --host=riscv64-unknown-linux-gnu               &&
-make -j8 && make install
-
-export PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
-```
-
-## libevent [OK]
-https://www.linuxfromscratch.org/blfs/view/svn/basicnet/libevent.html
-```
-wget https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
-tar -xvf libevent-2.1.12-stable.tar.gz
-cd libevent-2.1.12-stable
-
-sed -i 's/python/&3/' event_rpcgen.py
-
-./configure --prefix=$SYSROOT/usr                          \
-            --host=riscv64-unknown-linux-gnu               \
-            --enable-shared &&
-make -j8 && make install
-
-export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-
-```
-
-## libnfsidmap-0.25 [OK]
-```
-wget http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap/libnfsidmap-0.25.tar.gz
-tar -xvf libnfsidmap-0.25.tar.gz
-cd libnfsidmap-0.25
-
-./configure --prefix=$SYSROOT/usr                          \
-            --host=riscv64-unknown-linux-gnu               \
-            --enable-shared &&
-make -j8 && make install
-
-export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-```
-
-## sqlite3 [OK]
-```
-wget https://www.sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
-tar -xvf sqlite-autoconf-3360000.tar.gz
-cd sqlite-autoconf-3360000/
-
-./configure --host=riscv64-unknown-linux-gnu --prefix=$SYSROOT/opt/sqlite3
-make -j12 && make install
-
-export PKG_CONFIG_PATH=$SYSROOT/opt/sqlite3/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
