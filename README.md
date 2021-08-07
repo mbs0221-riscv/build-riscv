@@ -87,6 +87,9 @@ rpmbuild -ba libpcap-1.9.1.spec
 rpmbuild -ba libuuid-1.0.3.spec
 rpmbuild -ba ncurses-6.2.spec
 rpmbuild -ba libnfsidmap-0.25.spec
+rpmbuild -ba json-c-0.15.spec
+sudo apt install gperf [lcov]
+rpmbuild -ba libseccomp-2.5.1.spec
 
 # sqlite
 rpmbuild -ba sqlite-autoconf-3360000.spec
@@ -113,9 +116,11 @@ rpmbuild -ba libtirpc-1.3.2.spec
 rpmbuild -ba bash-5.1.8.spec
 rpmbuild -ba htop-2.2.0.spec
 rpmbuild -ba ntp-4.2.8p15.spec
+rpmbuild -ba gperf-3.1.spec
 
 # benchmark
 rpmbuild -ba mbedtls-3.0.0.spec
+rpmbuild -ba liblinear-243.spec
 
 # [failed]
 rpmbuild -ba libevent-2.1.12-stable.spec

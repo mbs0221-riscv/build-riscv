@@ -21,3 +21,9 @@ https://github.com/thkukuk/rpcsvc-proto/releases/download/v1.4.2/rpcsvc-proto-1.
 https://sourceforge.net/projects/libuuid/files/libuuid-1.0.3.tar.gz
 https://mirrors.edge.kernel.org/pub/linux/utils/kernel/module-init-tools/module-init-tools-3.15.tar.gz
 https://github.com/ARMmbed/mbedtls/archive/refs/tags/v3.0.0.tar.gz
+http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz
+https://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz
+https://github.com/cjlin1/liblinear/archive/v243/liblinear-243.tar.gz
+https://sourceforge.net/projects/ltp/files/Coverage%20Analysis/LCOV-1.15/lcov-1.15.tar.gz
+https://github.com/seccomp/libseccomp/releases/download/v2.5.1/libseccomp-2.5.1.tar.gz
+https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
