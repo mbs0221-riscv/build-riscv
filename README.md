@@ -99,10 +99,12 @@ rpmbuild -ba libuuid-1.0.3.spec
 rpmbuild -ba ncurses-6.2.spec
 rpmbuild -ba libnfsidmap-0.25.spec
 rpmbuild -ba json-c-0.15.spec
-# sudo apt install gperf [lcov]
 rpmbuild -bc gperf-3.1.spec
 rpmbuild -ba libseccomp-2.5.1.spec
+
+# Python-3.9
 rpmbuild -ba libffi-3.4.2.spec
+rpmbuild -ba Python-3.9.6.spec
 
 # sqlite
 rpmbuild -ba sqlite-autoconf-3360000.spec
