@@ -1,68 +1,41 @@
 #!/bin/sh
 
+# ====================================================
+# Environment variables
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
 
-# ====================================================
-# Environment variables
 ROOTFS=$NFS_ROOT/rootfs
 STDOUT=$NFS_ROOT/log/stdout.log
 STDERR=$NFS_ROOT/log/stderr.log
+RPMS=$NFS_HOME/rpmbuild/RPMS/x86_64
 
-export ROOTFS STDOUT STDERR
+export ROOTFS STDOUT STDERR RPMS
 touch $STDERR $STDOUT
 
 # ====================================================
-# PPP Protocol
-chmod 600 /etc/ppp/chap-secrets
-chmod 600 /etc/ppp/pap-secrets
-
-# ==================================================== 
 # Route
 route add -net 10.0.5.0/32 netmask 255.255.255.255 gw 10.0.5.1
 
 # ====================================================
-# NTP Service
-cp -p $ROOTFS/usr/local/bin/ntpdate /usr/local/bin/
-ntpdate 10.0.5.1 1>$STDOUT 2>$STDERR
-
-# ====================================================
-# Download files
-
-cp -r -p $ROOTFS/etc/* /etc/
-cp -r -p $ROOTFS/usr/local/etc/* /usr/local/etc/
-cp -r -p $ROOTFS/usr/etc/* /usr/etc/
-
-# ====================================================
-# Libnss [PASS]
-# https://www.programmersought.com/article/95981806345/
-#cd $NFS_ROOT
-#echo sysroot: $SYSROOT 1>$STDOUT 2>$STDERR
-#echo find libnss_files 1>$STDOUT 2>$STDERR
-#ls -lh $SYSROOT 1>$STDOUT 2>$STDERR
-#find ./ -name libnss_* 1>$STDOUT 2>$STDERR
-#files=$(find ./ -name libnss_*)
-#for file in $files; do
-#    echo file: $file 1>$STDOUT 2>$STDERR
-#    cp -d -p --parents $file /
-#done
-
-#$NFS_ROOT/build/src/getpwnamroot 1>$STDOUT 2>$STDERR
-
-# ====================================================
-# Add Users [PASS]
-test -d /var/empty || mkdir -p /var/empty
-chown 0:0 /var/empty
-chmod 000 /var/empty
-
-test $(id -u sshd) || addgroup sshd && \
-    adduser -h /var/empty -g 'sshd privsep' -s /usr/sbin/nologin -G sshd -D -H sshd
-
+# USER
 test $(id -u kiki) || \
-    echo -e "kimi950221\nkimi950221" | adduser -h /home/kiki -g 'kiki' -s /bin/sh kiki
+	echo -e "kimi950221\nkimi950221" | adduser -h /home/kiki -g 'kiki' -s /bin/sh kiki
 
 test $(id -u kimi) || \
-    echo -e "kiki950221\nkiki950221" | adduser -h /home/kimi -g 'kimi' -s /bin/sh kimi
+	echo -e "kiki950221\nkiki950221" | adduser -h /home/kimi -g 'kimi' -s /bin/sh kimi
+
+# FTP USER
+test -d /usr/share/empty || mkdir -p /usr/share/empty
+test -d /var/ftp || mkdir -p /var/ftp \
+    chown root:root /var/ftp \
+    chmod og-w /var/ftp
+
+test $(id -u nobody) || \
+    adduser -s /usr/sbin/nologin -D -H nobody
+
+test $(id -u ftp) || \
+    adduser -h /var/ftp -D -H ftp
 
 # ====================================================
 # authorized_keys
@@ -74,9 +47,9 @@ cp $NFS_ROOT/authorized_keys /home/ubuntu/.ssh
 cp $NFS_ROOT/authorized_keys /home/kiki/.ssh
 cp $NFS_ROOT/authorized_keys /root/.ssh
 
-chown ubuntu:ubuntu -R /home/ubuntu/.ssh/
-chown kiki:kiki -R /home/kiki/.ssh/
-chown root:root -R /root/.ssh/
+chown ubuntu:ubuntu -R /home/ubuntu
+chown kiki:kiki -R /home/kiki
+chown root:root -R /root
 
 chmod go-w /home/ubuntu/.ssh
 chmod go-w /home/kiki/.ssh
@@ -91,68 +64,28 @@ chmod 600 /home/kiki/.ssh/config
 source $NFS_ROOT/etc/keygen.sh
 
 # ====================================================
-# Dropbear
-killall dropbear
-/usr/local/sbin/dropbear -E -R -p 2222 1>$STDOUT 2>$STDERR
+# Hello, world!
+test $(which helloworld) || \
+	rpm -i $RPMS/helloworld-1.0-1.x86_64.rpm && \
+	/usr/bin/helloworld 1>>$STDOUT 2>>$STDERR
 
-# ====================================================
-# OpenSSH
-test -d /chroot || mkdir /chroot \
-	chmod 755 /chroot
+# Dropbear Service
+# https://www.programmersought.com/article/95981806345/
+test $(which dropbear) || \
+	rpm -i $RPMS/zlib-1.2.11-1.x86_64.rpm && \
+	rpm -i $RPMS/dropbear-2020.81-1.x86_64.rpm && \
+	/usr/local/sbin/dropbear -E -R -p 2222 1>>$STDOUT 2>>$STDERR
 
-#test $(id -u sftp_user) || addgroup sftp && \
-#    echo -e "helloworld\nhelloworld" | adduser -h /chroot/kiki -g 'sftp kiki' -s /bin/false -G sftp kiki && \
-#    chown root:root /chroot/kiki && \
-#    chmod 755 /chroot/kiki && \
-#    mkdir -p /chroot/kiki/upload && \
-#    chown kiki_sftp:sftp /chroot/kiki/upload
-
-killall sshd
-/usr/local/sbin/sshd & 1>$STDOUT 2>$STDERR
-
-# ====================================================
-# FTP Server
-test -d /usr/share/empty || mkdir -p /usr/share/empty
-test -d /var/ftp || mkdir -p /var/ftp \
-    chown root:root /var/ftp \
-    chmod og-w /var/ftp
-
-test $(id -u nobody) || \
-    adduser -s /usr/sbin/nologin -D -H nobody
-
-test $(id -u ftp) || \
-    adduser -h /var/ftp -D -H ftp
-
-chown root:root /etc/vsftpd.conf
-
-killall vsftpd
-/usr/local/sbin/vsftpd & 1>$STDOUT 2>$STDERR
+# FTP Service
+test $(which vsftpd) || \
+	cp /etc/vsftpd.conf /etc/vsftpd.conf.bck && \
+	rpm -i $RPMS/vsftpd-3.0.4-1.x86_64.rpm && \
+	cp /etc/vsftpd.conf.bck /etc/vsftpd.conf && \
+	/usr/local/sbin/vsftpd & 1>>$STDOUT 2>>$STDERR
 
 # ====================================================
 # Scheduled backup: https://www.runoob.com/linux/linux-comm-crontab.html
 #crontab -e
 #0 0 * * /bin/cp /home/kiki $NFS_ROOT/tmp
-
-# ====================================================
-# Download files
-#cd $ROOTFS/usr/local
-#find . -type f -executable -mtime -1 | xargs -i cp {} /usr/local --parents
-
-# ====================================================
-# Network File System
-# https://www.cnblogs.com/misfit/p/10552547.html
-mount -t nfsd /proc/fs/nfsd &
-exportfs -av ; rpc.mountd
-rpc.statd --no-notify
-rpc.nfsd &
-sm-notify
-
-# ====================================================
-# Download rpm packages
-cp -p $NFS_HOME/rpmbuild/RPMS/x86_64/*.rpm /nfsroot/
-cd /nfsroot/`date +"%Y%m%d"`
-find . -type f -mtime -1 | xargs -i rpm -qpi {} 1>$STDOUT 2>$STDERR
-#find . -type f -mtime -1 | xargs -i rpm -qpi {} | grep Size | awk '{print $3}' | paste -s -d '+' - | bc 1>$STDOUT 2>$STDERR
-#find . -type f -mtime -1 | xargs -i rpm -i {} 
 
 exit 0

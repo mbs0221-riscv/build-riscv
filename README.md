@@ -32,6 +32,13 @@ export ROOTFS=/path/to/rootfs
 ```
 ## Step 1: pppd
 ```
+# minimal dependency
+[ok] libpcap.so.1.9.1 required by ppp
+[ok] libssl.so.1.1 required by 
+[ok] libncurses.so.6.2 required by busybox
+[  ] libz.so.1.2.8
+[  ] libm-2.29.so
+
 # host side
 ./configure
 make -j12 && make install
@@ -95,6 +102,7 @@ rpmbuild -ba json-c-0.15.spec
 # sudo apt install gperf [lcov]
 rpmbuild -bc gperf-3.1.spec
 rpmbuild -ba libseccomp-2.5.1.spec
+rpmbuild -ba libffi-3.4.2.spec
 
 # sqlite
 rpmbuild -ba sqlite-autoconf-3360000.spec

@@ -30,3 +30,4 @@ https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
 http://neil.brown.name/portmap/portmap-6.0.tgz
 http://files.ichilton.co.uk/nfs/tcp_wrappers_7.6.tar.gz
 http://www.linuxfromscratch.org/patches/blfs/6.3/tcp_wrappers-7.6-shared_lib_plus_plus-1.patch
+https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz
