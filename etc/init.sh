@@ -15,7 +15,18 @@ touch $STDERR $STDOUT
 
 # ====================================================
 # Route
-route add -net 10.0.5.0/32 netmask 255.255.255.255 gw 10.0.5.1
+#route add -net 10.0.5.0/32 netmask 255.255.255.255 gw 10.0.5.1
+#route add default ppp0
+#route add default gw 10.0.5.1
+#route add default ppp0
+#route add default gw 10.0.5.3
+#route add default ppp0
+route -n 1>>$STDOUT 2>>$STDERR
+
+# ====================================================
+# Proxy
+#export http_proxy="10.0.5.1:8889"
+#export https_proxy="10.0.5.1:8889"
 
 # ====================================================
 # USER
@@ -83,9 +94,15 @@ test $(which vsftpd) || \
 	cp /etc/vsftpd.conf.bck /etc/vsftpd.conf && \
 	/usr/local/sbin/vsftpd & 1>>$STDOUT 2>>$STDERR
 
+test -d /home/kiki/RPMS/x86_64 || mkdir -p /home/kiki/RPMS/x86_64
+test -d /nfsroot || mkdir -p /nfsroot
+test -d /var/www || mkdir -p /var/www
+
 # ====================================================
 # Scheduled backup: https://www.runoob.com/linux/linux-comm-crontab.html
 #crontab -e
 #0 0 * * /bin/cp /home/kiki $NFS_ROOT/tmp
+
+source $NFS_ROOT/etc/backup.sh
 
 exit 0

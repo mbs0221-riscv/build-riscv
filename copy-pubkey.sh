@@ -17,4 +17,8 @@ dropbearkey -y -f $SSH_ROOT/dropbear_dss_host_key
 dropbearkey -y -f $SSH_ROOT/dropbear_ecdsa_host_key
 dropbearkey -y -f $SSH_ROOT/dropbear_ed25519_host_key
 
+# default privite key
+#cp ~/.ssh/dropbear_ecdsa_host_key ~/.ssh/id_dropbear
+
+# public key
 #./copy-pubkey.sh ~/.ssh/ | grep -E "ssh-rsa|ssh-dss|ecdsa-sha2-nistp256|ssh-ed25519" > /nfsroot/authorized_keys

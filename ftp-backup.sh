@@ -5,7 +5,7 @@ open vc709
 user ubuntu helloworld
 binary
 hash
-cd /nfsroot
+cd /var/www
 lcd /home/kiki212/rpmbuild/RPMS/x86_64
 prompt
 mkdir `date +"%Y%m%d"`

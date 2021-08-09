@@ -59,16 +59,23 @@ test $(which ntpdate) || \
 
 # NFS Service
 # https://www.cnblogs.com/misfit/p/10552547.html
+# https://blog.csdn.net/ken_yjj/article/details/6821372
+# https://www.linuxquestions.org/questions/linux-newbie-8/don%27t-have-nfsd-mount-point-in-proc-fs-nfsd-can%27t-start-nfs-as-a-result-684401/
+# https://groups.google.com/a/lbl.gov/g/warewulf/c/cxEFa3_MkXA
 test $(which exportfs) || \
         rpm -i $RPMS/libuuid-1.0.3-1.x86_64.rpm && \
         rpm -i $RPMS/libnfsidmap-0.25-1.x86_64.rpm && \
         rpm -i $RPMS/libtirpc-1.3.2-1.x86_64.rpm && \
         rpm -i $RPMS/rpcbind-1.2.6-1.x86_64.rpm && \
         rpm -i $RPMS/nfs-utils-2.5.3-1.x86_64.rpm
-#       mount -t nfsd /proc/fs/nfsd &
-#       exportfs -av ; rpc.mountd 
-#       rpc.statd --no-notify 
-#       rpc.nfsd & 
-#       sm-notify
+        mount -t nfsd nfsd /proc/fs/nfsd 
+# 	mount -t nfsd /proc/fs/nfsd &
+#	portmap
+	mkdir -p /var/lib/nfs/
+	mkdir -p /nfsroot
+	exportfs -av ; rpc.mountd 
+ 	rpc.statd --no-notify 
+ 	rpc.nfsd
+ 	sm-notify
 
 exit 0
