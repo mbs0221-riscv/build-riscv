@@ -1,11 +1,17 @@
 #!/bin/bash
 
-test -d ~/backup/etc/           || mkdir -p ~/backup/etc/
-test -d ~/backup/usr/etc/       || mkdir -p ~/backup/usr/etc/
-test -d ~/backup/usr/local/etc/ || mkdir -p ~/backup/usr/local/etc/
+# Usage:
+#	./etc/backup.sh $ROOTFS
+#	./etc/backup.sh ~/backup
 
-rsync -a -e dbclient root@10.0.5.2:/etc/           ~/backup/etc/
-rsync -a -e dbclient root@10.0.5.2:/usr/etc/       ~/backup/usr/etc/
-rsync -a -e dbclient root@10.0.5.2:/usr/local/etc/ ~/backup/usr/local/etc/
+BACKUP_DIR=$1
 
-#rsync -a -e dbclient kiki212@192.168.0.102,m2@host,martello:/home/matt/ ~/backup/
+test -d $BACKUP_DIR/etc/           || mkdir -p $BACKUP_DIR/etc/
+test -d $BACKUP_DIR/usr/etc/       || mkdir -p $BACKUP_DIR/usr/etc/
+test -d $BACKUP_DIR/usr/local/etc/ || mkdir -p $BACKUP_DIR/usr/local/etc/
+
+rsync -a -e dbclient root@10.0.5.2:/etc/           $BACKUP_DIR/etc/
+rsync -a -e dbclient root@10.0.5.2:/usr/etc/       $BACKUP_DIR/usr/etc/
+rsync -a -e dbclient root@10.0.5.2:/usr/local/etc/ $BACKUP_DIR/usr/local/etc/
+
+#rsync -a -e dbclient kiki212@192.168.0.102,m2@host,martello:/home/matt/ $BACKUP_DIR/

@@ -29,7 +29,13 @@ route -n 1>>$STDOUT 2>>$STDERR
 #export https_proxy="10.0.5.1:8889"
 
 # ====================================================
-# USER
+# mkdirs
+test -d /home/kiki/RPMS/x86_64 || mkdir -p /home/kiki/RPMS/x86_64
+test -d /nfsroot || mkdir -p /nfsroot
+test -d /var/www || mkdir -p /var/www
+
+# ====================================================
+# NORMAL USER
 test $(id -u kiki) || \
 	echo -e "kimi950221\nkimi950221" | adduser -h /home/kiki -g 'kiki' -s /bin/sh kiki
 
@@ -38,15 +44,20 @@ test $(id -u kimi) || \
 
 # FTP USER
 test -d /usr/share/empty || mkdir -p /usr/share/empty
-test -d /var/ftp || mkdir -p /var/ftp \
-    chown root:root /var/ftp \
-    chmod og-w /var/ftp
+test -d /var/ftp || mkdir -p /var/ftp && \
+	chown root:root /var/ftp &&\
+	chmod og-w /var/ftp
 
 test $(id -u nobody) || \
-    adduser -s /usr/sbin/nologin -D -H nobody
+	adduser -s /usr/sbin/nologin -D -H nobody
 
 test $(id -u ftp) || \
-    adduser -h /var/ftp -D -H ftp
+	adduser -h /var/ftp -D -H ftp
+
+# RSYNCD USER
+test $(id -u rsyncd) || \
+	addgroup -g 48 rsyncd && \
+	adduser -h /home/rsync -g "rsyncd Daemon" -s /bin/false -G rsyncd -D -u 48 rsyncd
 
 # ====================================================
 # authorized_keys
@@ -93,16 +104,5 @@ test $(which vsftpd) || \
 	rpm -i $RPMS/vsftpd-3.0.4-1.x86_64.rpm && \
 	cp /etc/vsftpd.conf.bck /etc/vsftpd.conf && \
 	/usr/local/sbin/vsftpd & 1>>$STDOUT 2>>$STDERR
-
-test -d /home/kiki/RPMS/x86_64 || mkdir -p /home/kiki/RPMS/x86_64
-test -d /nfsroot || mkdir -p /nfsroot
-test -d /var/www || mkdir -p /var/www
-
-# ====================================================
-# Scheduled backup: https://www.runoob.com/linux/linux-comm-crontab.html
-#crontab -e
-#0 0 * * /bin/cp /home/kiki $NFS_ROOT/tmp
-
-source $NFS_ROOT/etc/backup.sh
 
 exit 0
