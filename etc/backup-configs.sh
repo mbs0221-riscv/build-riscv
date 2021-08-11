@@ -2,7 +2,7 @@
 
 BACKUP_DIR=~/backup
 
-echo restore backup in $BACKUP_DIR
+echo backup in $BACKUP_DIR
 rsync -azvP -e 'dbclient -p 2222' root@vc709:/etc/           $BACKUP_DIR/etc/
 rsync -azvp -e 'dbclient -p 2222' root@vc709:/usr/etc/       $BACKUP_DIR/usr/etc/
 rsync -azvp -e 'dbclient -p 2222' root@vc709:/usr/local/etc/ $BACKUP_DIR/usr/local/etc/

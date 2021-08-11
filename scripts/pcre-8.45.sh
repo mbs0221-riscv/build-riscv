@@ -11,9 +11,8 @@ parse_url            https://ftp.pcre.org/pub/pcre/pcre-8.45.tar.bz2
             --enable-pcre16                   \
             --enable-pcre32                   \
             --enable-pcregrep-libz            \
-            --disable-static                 &&
-make
-make -j8
+            --disable-static
+make -j$(nproc)
 make install
 
 epilog
