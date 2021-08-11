@@ -1,5 +1,5 @@
 #!/bin/bash
-# AUTO GENERATED SCRIPTS BY convert.sh
+# AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
 source build-utils.sh
 
@@ -9,3 +9,6 @@ export PLATFORM=riscv64gc
 ./configure --prefix=$SYSROOT/usr
 make -j8
 make install
+
+epilog
+

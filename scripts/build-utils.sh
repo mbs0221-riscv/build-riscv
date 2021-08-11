@@ -2,37 +2,37 @@
 
 function parse_url(){
 
-        export url=$1
-        export filename=$(echo $url | sed 's/.*\///')
-        export package=$(echo $filename | sed 's/-.*//')
-        export dir=$(echo $filename | sed 's/.tar//;s/.gz//;s/.xz//;s/.bz2//')
+        export __url_=$1
+        export __filename_=$(echo $__url_ | sed 's/.*\///')
+        export __package_=$(echo $__filename_ | sed 's/-.*//')
+        export __build_dir_=$(echo $__filename_ | sed 's/.tar//;s/.gz//;s/.xz//;s/.bz2//')
 
         echo ===============================BUILD PACKAGE========================================
-        echo url: $url
-        echo filename: $filename
-        echo package: $package
-        echo dir: $dir
+        echo __url_: $__url_
+        echo __filename_: $__filename_
+        echo __package_: $__package_
+        echo __build_dir_: $__build_dir_
 
         cd ~/rpmbuild/SOURCES
 
-        test -e $filename || wget $url
-        test -d $dir || tar -xvf $filename && cd $dir
+        test -e $__filename_ || wget $__url_
+        test -d $__build_dir_ || tar -xvf $__filename_ && cd $__build_dir_
 
-        echo entering $dir :
+        echo entering $__build_dir_ :
 }
 
 function install_patch(){
 
-        export url=$1
-        export filename=$(echo $url | sed 's/.*\///')
-        export package=$(echo $filename | sed 's/-.*//')
+        export __url_=$1
+        export __filename_=$(echo $__url_ | sed 's/.*\///')
+        export __package_=$(echo $__filename_ | sed 's/-.*//')
 
-        echo package $package
-        echo install patch: $filename
+        echo __package_ $__package_
+        echo install patch: $__filename_
 
-        test -e $filename || wget $url
+        test -e $__filename_ || wget $__url_
 
-        patch -Np1 -i $filename
+        patch -Np1 -i $__filename_
 }
 
 function make_install(){
@@ -40,12 +40,14 @@ function make_install(){
 }
 
 function ninja_install(){
-        ninja -j $(nproc) && ninja install
+        ninja -j$(nproc) && ninja install
 }
 
 function epilog(){
+
         test $? -eq 0 || exit 0
+
         cd ~/rpmbuild/SOURCES
-#       rm -rf $dir
-        echo pass: $filename
+  	rm -rf $__build_dir_
+        echo pass: $__filename_
 }

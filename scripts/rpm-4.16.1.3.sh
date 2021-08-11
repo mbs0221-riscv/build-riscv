@@ -1,5 +1,5 @@
 #!/bin/bash
-# AUTO GENERATED SCRIPTS BY convert.sh
+# AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
 source build-utils.sh
 
@@ -9,11 +9,14 @@ export PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 export PKG_CONFIG_PATH=$SYSROOT/opt/sqlite3/lib/pkgconfig:$PKG_CONFIG_PATH
 export PYTHON_CFLAGS=-I$SYSROOT/usr/include/python3.9
 export PYTHON_LIBS=-L$SYSROOT/usr/lib/python3.9
-./configure --prefix=$SYSROOT/usr/ 
-            --host=riscv64-unknown-linux-gnu 
-            --enable-python 
-            --enable-sqlite=yes 
-            --enable-shared 
+./configure --prefix=$SYSROOT/usr/ \
+            --host=riscv64-unknown-linux-gnu \
+            --enable-python \
+            --enable-sqlite=yes \
+            --enable-shared \
             --without-lua
 make -j8
 make install
+
+epilog
+

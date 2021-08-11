@@ -1,5 +1,5 @@
 #!/bin/bash
-# AUTO GENERATED SCRIPTS BY convert.sh
+# AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
 source build-utils.sh
 
@@ -8,7 +8,11 @@ export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
 export STRIP=riscv64-unknown-linux-gnu-strip
-./configure --prefix=$SYSROOT/usr/local/   
+./configure --prefix=$SYSROOT/usr/local/   \
             --host=riscv64-unknown-linux-gnu    &&
 make -j8
+           
 make install
+
+epilog
+

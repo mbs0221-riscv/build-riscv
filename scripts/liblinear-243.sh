@@ -1,5 +1,5 @@
 #!/bin/bash
-# AUTO GENERATED SCRIPTS BY convert.sh
+# AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
 source build-utils.sh
 
@@ -12,3 +12,6 @@ mkdir -p $SYSROOT/usr/lib
 install -vm644 linear.h $SYSROOT/usr/include &&
 install -vm755 liblinear.so.4 $SYSROOT/usr/lib &&
 ln -sfv liblinear.so.4 $SYSROOT/usr/lib/liblinear.so
+
+epilog
+
