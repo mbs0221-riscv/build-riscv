@@ -75,7 +75,7 @@ test $(which exportfs) || \
 	mkdir -p /nfsroot
 	exportfs -av ; rpc.mountd 
  	rpc.statd --no-notify 
- 	rpc.nfsd
+ 	rpc.nfsd &
  	sm-notify
 
 exit 0
