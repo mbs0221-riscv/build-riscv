@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# MEMCACHED
+memcached -d -m 512 -l 127.0.0.1 -p 10000 -u root
+
 # OPENSSH
 test -d /var/empty || \
         mkdir -p /var/empty && \
