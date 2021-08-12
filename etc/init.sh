@@ -109,13 +109,13 @@ echo public key is sent 1>>$STDOUT
 test -d /var/www/rpms || mkdir -p /var/www/rpms
 rsync -avzP -e 'dbclient -p 2222' kiki212@inspiron-5488:~/rpmbuild/RPMS/x86_64 /var/www/rpms 1>>$STDOUT 2>>$STDERR
 
-test -e .install || \
-	grep -F -v -f $NFS_ROOT/etc/ignore-packages.txt $NFS_ROOT/etc/packages.txt | sort | uniq | xargs -i rpm -i /var/www/rpms/{} 1>>$STDOUT && \
-	touch .install
+#test -e .install || \
+#	grep -F -v -f $NFS_ROOT/etc/ignore-packages.txt $NFS_ROOT/etc/packages.txt | sort | uniq | xargs -i rpm -i /var/www/rpms/{} 1>>$STDOUT && \
+#	touch .install
 
-test -e .ntpdate || \
-	ntpdate $IPREMOTE 1>>$STDOUT && \
-	touch .ntpdate
+#test -e .ntpdate || \
+#	ntpdate $IPREMOTE 1>>$STDOUT && \
+#	touch .ntpdate
 
 #source $NFS_ROOT/etc/custom.sh
 
