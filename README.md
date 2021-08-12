@@ -95,7 +95,10 @@ cp -p build-rpm.sh ~/rpmbuild/SPECS
 cd ~/rpmbuild/SPECS
 ./build-rpm.sh
 ```
-
+## rsync rpm packages from the host
+```
+rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/rpmbuild/RPMS ~/rpmbuild/RPMS
+```
 ## Reference
 * [Connecting to your Raspberry Pi Console via the Serial Cable](https://medium.com/@sarala.saraswati/connecting-to-your-raspberry-pi-console-via-the-serial-cable-44d7df95f03e)
 * [Connect the Raspberry Pi to Network Using UART](https://www.instructables.com/Connect-the-Raspberry-Pi-to-network-using-UART/)
