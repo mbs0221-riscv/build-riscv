@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            https://download.samba.org/pub/ppp/ppp-2.4.9.tar.gz
 ./configure --prefix=$SYSROOT/usr/local \

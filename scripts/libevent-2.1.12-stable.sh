@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
 sed -i 's/python/&3/' event_rpcgen.py

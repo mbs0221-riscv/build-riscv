@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            https://github.com/seccomp/libseccomp/releases/download/v2.5.1/libseccomp-2.5.1.tar.gz
 ./configure --prefix=$SYSROOT/usr \

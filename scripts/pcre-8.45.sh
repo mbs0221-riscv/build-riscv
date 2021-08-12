@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            https://ftp.pcre.org/pub/pcre/pcre-8.45.tar.bz2
 ./configure --prefix=$SYSROOT/usr/ \

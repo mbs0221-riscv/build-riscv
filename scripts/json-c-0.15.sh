@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            https://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz
 mkdir build &&

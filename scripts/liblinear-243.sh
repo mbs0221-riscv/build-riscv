@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            https://github.com/cjlin1/liblinear/archive/v243/liblinear-243.tar.gz
 export CC=riscv64-unknown-linux-gnu-gcc

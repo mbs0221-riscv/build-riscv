@@ -4,7 +4,7 @@ function parse_url(){
 
         export __url_=$1
         export __tarfile_=$(echo $__url_ | sed 's/.*\///')
-        export __filename_=$(echo $__tarfile_ | sed 's/.tar//;s/.gz//;s/.xz//;s/.bz2//')
+        export __filename_=$(echo $__tarfile_ | sed 's/.tar//;s/.gz//;s/.xz//;s/.bz2//;s/.lz//;')
         export __package_=$(echo $__filename_ | sed 's/-.*//')
 	export __version_=$(echo $__filename_ | sed 's/.*-//')
 

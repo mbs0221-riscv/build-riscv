@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            http://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.2.tar.gz
 #./configure --prefix=$ROOTFS --host=riscv64-unknown-linux-gnu --without-cxx --without-cxx-binding --without-ada --without-progs --without-tests --with-shared

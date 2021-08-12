@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz
 sed -i '81c STRIP ?= strip' Makefile.in

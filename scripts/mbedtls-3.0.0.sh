@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            https://github.com/ARMmbed/mbedtls/archive/refs/tags/v3.0.0.tar.gz
 export CC=riscv64-unknown-linux-gnu-gcc

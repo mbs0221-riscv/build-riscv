@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.2.tar.bz2
 libtirpc.so

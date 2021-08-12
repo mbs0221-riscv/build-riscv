@@ -13,8 +13,13 @@ echo =========ping:vc709==================
 ping -c 5 vc709
 
 if [ $? -eq 0 ]; then
+	ifconfig -a ppp0 txqueuelen 1000
+
 #	source setup-ufw.sh
 	source setup-route.sh
+	
+	killall dropbear
+	dropbear -E -R -p 2222 &
 
   	echo =========/nfsroot/vc709.log==========
       	tail -n 16 /nfsroot/vc709.log

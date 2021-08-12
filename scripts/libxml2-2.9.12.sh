@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTO GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 
-source build-utils.sh
+source ../build-utils.sh
 
 parse_url            http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz
 export CFLAGS="$CFLAGS -I$SYSROOT/usr/include/python3.9"
