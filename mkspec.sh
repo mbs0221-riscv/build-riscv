@@ -21,11 +21,11 @@ function parse_url(){
 
 	cp ~/rpmbuild/SPECS/template.spec ~/rpmbuild/SPECS/$__filename_.spec
 	sed -i "s#\$prefix#$__prefix_#" ~/rpmbuild/SPECS/$__filename_.spec
-	sed -i "s/xxx/$__package_/" ~/rpmbuild/SPECS/$__filename_.spec
-	sed -i "s/1.0.0/$__version_/" ~/rpmbuild/SPECS/$__filename_.spec
-	sed -i "s#url#$__url_#" ~/rpmbuild/SPECS/$__filename_.spec
-	sed -i "s/source0/$__tarfile_/" ~/rpmbuild/SPECS/$__filename_.spec
-	sed -i "s/-j8/-j\$(nproc)/" ~/rpmbuild/SPECS/$__filename_.spec
+	sed -i "s#\$name#$__package_#" ~/rpmbuild/SPECS/$__filename_.spec
+	sed -i "s#\$version#$__version_#" ~/rpmbuild/SPECS/$__filename_.spec
+	sed -i "s#\$url#$__url_#" ~/rpmbuild/SPECS/$__filename_.spec
+	sed -i "s#\$source#$__tarfile_#" ~/rpmbuild/SPECS/$__filename_.spec
+	sed -i "s#-j8#-j\$(nproc)#" ~/rpmbuild/SPECS/$__filename_.spec
 
 	cat ~/rpmbuild/SPECS/$__filename_.spec
 }

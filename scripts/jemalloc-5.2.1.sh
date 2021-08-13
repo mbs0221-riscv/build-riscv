@@ -2,30 +2,27 @@
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 export SOURCES=~/rpmbuild/SOURCES
 export BUILD=~/rpmbuild/BUILD
-export NAME=zstd
-export VERSION=1.4.8
-export URL=https://github.com/facebook/zstd/releases/download/v1.4.8/zstd-1.4.8.tar.gz
-export SOURCE=zstd-1.4.8.tar.gz
+export NAME=jemalloc
+export VERSION=5.2.1
+export URL=https://github.com/jemalloc/jemalloc/releases/download/5.2.1/jemalloc-5.2.1.tar.bz2
+export SOURCE=jemalloc-5.2.1.tar.bz2
 #description
 #pre
 #post
 #prep
-#wget https://github.com/facebook/zstd/releases/download/v1.4.8/zstd-1.4.8.tar.gz
 export __build_dir_=$BUILD/$NAME-$VERSION
 cd $SOURCES
 #setup
 test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
 cd $__build_dir_
-export CC=riscv64-unknown-linux-gnu-gcc
-export CXX=riscv64-unknown-linux-gnu-g++
+./configure --prefix=$SYSROOT/usr \
+            --host=riscv64-unknown-linux-gnu \
 #build
 cd $__build_dir_
-export CC=riscv64-unknown-linux-gnu-gcc
-export CXX=riscv64-unknown-linux-gnu-g++
 make -j$(nproc)
 #install
 cd $__build_dir_
-make install PREFIX=$SYSROOT/usr
+make install
 #clean
 
 #files
