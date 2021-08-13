@@ -10,6 +10,8 @@ echo =========Setup Routing and NAT=======
 #iptables -P FORWARD ACCEPT
 #modprobe -r ip_tables
 
+ifconfig -a ppp0 txqueuelen 1500
+
 # Step 7: Setup Routing and NAT
 
 # Once we've established an IP link between our computer and the Raspberry Pi, we can
