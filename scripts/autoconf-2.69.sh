@@ -2,24 +2,22 @@
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 export SOURCES=~/rpmbuild/SOURCES
 export BUILD=~/rpmbuild/BUILD
-export NAME=xxx
-export VERSION=1.0.0
-export URL=url
-export SOURCE=source0
+export NAME=autoconf
+export VERSION=2.69
+export URL=http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.xz
+export SOURCE=autoconf-2.69.tar.xz
 #description
 #pre
 #post
 #prep
-#wget url
+#wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.xz
 export __build_dir_=$BUILD/$NAME-$VERSION
 cd $SOURCES
 #setup
 test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
 cd $__build_dir_
-export DESTDIR=$SYSROOT$prefix
-export CC=riscv64-unknown-linux-gnu-gcc
-export AR=riscv64-unknown-linux-gnu-ar
-export RANLIB=riscv64-unknown-linux-gnu-ranlib
+./configure --prefix=$SYSROOT/usr \
+            --host=riscv64-unknown-linux-gnu \
 #build
 cd $__build_dir_
 make -j$(nproc)
@@ -29,7 +27,6 @@ make install
 #clean
 
 #files
-$prefix
 #defattr(-,root,root,-)
 #config
 #doc

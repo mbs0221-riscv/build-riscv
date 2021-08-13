@@ -5,7 +5,7 @@ function parse_url(){
         export __url_=$1
         export __filename_=$(echo $__url_ | sed 's/.*\///')
         export __package_=$(echo $__filename_ | sed 's/-.*//')
-        export __build_dir_=$(echo $__filename_ | sed 's/.tar//;s/.gz//;s/.xz//;s/.bz2//')
+        export __build_dir_=$(echo $__filename_ | sed 's/.*\///;s/.tar//;s/.gz\|.sz\|.lz\|.xz\|.bz2//')
 
         echo ===============================BUILD PACKAGE========================================
         echo __url_: $__url_

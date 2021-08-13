@@ -5,10 +5,11 @@ function parse_url(){
         export __url_=$1
 	export __prefix_=${2:-/usr/local}
         export __tarfile_=$(echo $__url_ | sed 's/.*\///')
-        export __filename_=$(echo $__tarfile_ | sed 's/.tar//;s/.gz//;s/.xz//;s/.bz2//;s/.lz//;')
+	export __filename_=$(echo $__tarfile_ | sed 's/.*\///;s/.tar//;s/.src//;s/.gz\|.sz\|.lz\|.xz\|.bz2//')
         export __package_=$(echo $__filename_ | sed 's/-.*//')
 	export __version_=$(echo $__filename_ | sed 's/.*-//')
 	export __specfile_=~/rpmbuild/SPECS/$__filename_.spec
+
         echo ===============================BUILD PACKAGE========================================
         echo __url_: $__url_
 	echo __prefix: $__prefix_
