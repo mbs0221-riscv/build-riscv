@@ -27,8 +27,8 @@ ifconfig -a ppp0 txqueuelen 1500
 
 # ====================================================
 # HTTP Proxy
-#export http_proxy="$IPREMOTE:8889"
-#export https_proxy="$IPREMOTE:8889"
+export http_proxy="$IPREMOTE:8889"
+export https_proxy="$IPREMOTE:8889"
 
 # ====================================================
 # NORMAL USER

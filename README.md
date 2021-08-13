@@ -112,6 +112,10 @@ Convert RPM SPEC FILES INTO SHELL BUILD SCRIPTS
 ls ~/rpmbuild/SPECS/*.spec | xargs -i ./convert.sh {}
 ```
 
+```
+
+```
+
 SYNC RPM PACKAGES FROM THE HOST
 ```
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/rpmbuild/RPMS ~/rpmbuild/RPMS
