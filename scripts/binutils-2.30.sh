@@ -2,15 +2,15 @@
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 export SOURCES=~/rpmbuild/SOURCES
 export BUILD=~/rpmbuild/BUILD
-export NAME=acl
-export VERSION=2.2.52
-export URL=http://download.savannah.gnu.org/releases/acl/acl-2.2.52.src.tar.gz
-export SOURCE=acl-2.2.52.src.tar.gz
+export NAME=binutils
+export VERSION=2.30
+export URL=http://ftp.gnu.org/gnu/binutils/binutils-2.30.tar.xz
+export SOURCE=binutils-2.30.tar.xz
 #description
 #pre
 #post
 #prep
-#wget http://download.savannah.gnu.org/releases/acl/acl-2.2.52.src.tar.gz
+#wget http://ftp.gnu.org/gnu/binutils/binutils-2.30.tar.xz
 export __build_dir_=$BUILD/$NAME-$VERSION
 cd $SOURCES
 #setup
@@ -20,10 +20,10 @@ cd $__build_dir_
             --host=riscv64-unknown-linux-gnu \
 #build
 cd $__build_dir_
-make clean && make -j$(nproc)
+make -j$(nproc)
 #install
 cd $__build_dir_
-make install install-lib
+make install
 #clean
 
 #files

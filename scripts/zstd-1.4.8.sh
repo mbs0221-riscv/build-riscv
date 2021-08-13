@@ -16,14 +16,16 @@ cd $SOURCES
 #setup
 test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
 cd $__build_dir_
-./configure --prefix=$SYSROOT/usr/local \
-            --host=riscv64-unknown-linux-gnu \
+export CC=riscv64-unknown-linux-gnu-gcc
+export CXX=riscv64-unknown-linux-gnu-g++
 #build
 cd $__build_dir_
+export CC=riscv64-unknown-linux-gnu-gcc
+export CXX=riscv64-unknown-linux-gnu-g++
 make -j$(nproc)
 #install
 cd $__build_dir_
-make install
+make DESTDIR=$SYSROOT/usr/local install
 #clean
 
 #files

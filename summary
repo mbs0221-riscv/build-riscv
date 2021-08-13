@@ -8,7 +8,12 @@ cat ~/rpmbuild/SPECS/*.spec | grep Source0 | grep -v source0 | \
 #find ~/rpmbuild/SPECS/*.spec | sed "s/.*\///;s/.spec//" > ~/rpmbuild/SPECS/spec.list
 find ~/rpmbuild/RPMS/x86_64/*.rpm | sed "s/.*\///;s/-1.x86_64.rpm\|-stable.x86_64.rpm//" > ~/rpmbuild/RPMS/x86_64/rpm.list
 find ~/rpmbuild/SOURCES/*.tar.* > ~/rpmbuild/SOURCES/sources.list
+echo ================has rpm packages============================
+cat ~/rpmbuild/RPMS/x86_64/rpm.list
+cat ~/rpmbuild/RPMS/x86_64/rpm.list | wc
 echo ================has no spec files===========================
 grep -F -v -f ~/rpmbuild/SPECS/spec.list ~/rpmbuild/SOURCES/sources.list | sort | uniq
+grep -F -v -f ~/rpmbuild/SPECS/spec.list ~/rpmbuild/SOURCES/sources.list | sort | uniq | wc
 echo ================build failed================================
 grep -F -v -f ~/rpmbuild/RPMS/x86_64/rpm.list ~/rpmbuild/SPECS/spec.list | sort | uniq
+grep -F -v -f ~/rpmbuild/RPMS/x86_64/rpm.list ~/rpmbuild/SPECS/spec.list | sort | uniq | wc
