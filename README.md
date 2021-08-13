@@ -96,8 +96,8 @@ cd ~/rpmbuild/SPECS
 ./build-rpm.sh
 ```
 
+FIND FAILED TO BUILD RPM PACKAGES
 ```
-# find failed to build packages
 find ~/rpmbuild/SPECS/*.spec | sed "s/.*\///;s/.spec//" > ~/rpmbuild/SPECS/spec.list
 find ~/rpmbuild/RPMS/x86_64/*.rpm | sed "s/.*\///;s/-1.x86_64.rpm\|-stable.x86\_64.rpm//" > ~/rpmbuild/RPMS/x86_64/rpm.list
 find ~/rpmbuild/SOURCES/*.tar.* | sed "s/.*\///;s/.tar//;s/.gz\|.sz\|.lz\|.xz\|.bz2//" > ~/rpmbuild/SOURCES/sources.list
@@ -107,7 +107,12 @@ echo ================build failed================================
 grep -F -v -f ~/rpmbuild/RPMS/x86_64/rpm.list ~/rpmbuild/SPECS/spec.list | sort | uniq
 ```
 
-## rsync rpm packages from the host
+Convert RPM SPEC FILES INTO SHELL BUILD SCRIPTS
+```
+ls ~/rpmbuild/SPECS/*.spec | xargs -i ./convert.sh {}
+```
+
+SYNC RPM PACKAGES FROM THE HOST
 ```
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/rpmbuild/RPMS ~/rpmbuild/RPMS
 ```

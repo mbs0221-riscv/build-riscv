@@ -16,9 +16,6 @@ function parse_url(){
         cd ~/rpmbuild/SOURCES
 
         test -e $__filename_ || wget $__url_
-        test -d $__build_dir_ || tar -xvf $__filename_ && cd $__build_dir_
-
-        echo entering $__build_dir_ :
 }
 
 function install_patch(){

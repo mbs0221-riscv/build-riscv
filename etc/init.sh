@@ -104,10 +104,21 @@ echo private key is generated 1>>$STDOUT
 dropbearkey -y -f /root/.ssh/id_dropbear | grep -E "ssh-rsa|ssh-dss|ecdsa-sha2-nistp256|ssh-ed25519" > $NFS_HOME/.ssh/authorized_keys
 echo public key is sent 1>>$STDOUT
 
+# ==================================================== 
+# test ping
+ping -c 3 $PEERNAME
+if [ $? -eq 0 ]; then
+	cat /etc/hosts 1>>$STDOUT
+else
+	echo -e "\n$IPREMOTE        $PEERNAME" >> /etc/hosts
+	echo "add host: $IPREMOTE $PEERNAME" 1>>$STDOUT
+fi
+
 # ====================================================
 # sync and install rpm packages
+echo "sync and install rpm packages" 1>>$STDOUT
 test -d /var/www/rpms || mkdir -p /var/www/rpms
-rsync -avzP -e 'dbclient -p 2222' kiki212@inspiron-5488:~/rpmbuild/RPMS/x86_64 /var/www/rpms 1>>$STDOUT 2>>$STDERR
+rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/rpmbuild/RPMS/x86_64 /var/www/rpms 1>>$STDOUT 2>>$STDERR
 
 #test -e .install || \
 #	grep -F -v -f $NFS_ROOT/etc/ignore-packages.txt $NFS_ROOT/etc/packages.txt | sort | uniq | xargs -i rpm -i /var/www/rpms/{} 1>>$STDOUT && \

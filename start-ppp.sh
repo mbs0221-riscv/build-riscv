@@ -17,8 +17,10 @@ ping -c 5 vc709
 if [ $? -eq 0 ]; then
 
 	ifconfig -a ppp0 txqueuelen 1500
+	ifconfig -a ppp0 txqueuelen 1500
 
 	source setup-route.sh
+	source check-nc.sh
 	
       	echo =========ports:======================
       	nc -zv 10.0.5.2 2222  # dropbear
