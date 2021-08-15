@@ -51,9 +51,9 @@ test $(id -u ftp) || \
 	adduser -h /var/ftp -D -H ftp
 
 # RSYNCD USER
-#test $(id -u rsyncd) || \
-#	addgroup -g 48 rsyncd && \
-#	adduser -h /home/rsync -g "rsyncd Daemon" -s /bin/false -G rsyncd -D -u 48 rsyncd
+test $(id -u rsyncd) || \
+	addgroup -g 48 rsyncd && \
+	adduser -h /home/rsync -g "rsyncd Daemon" -s /bin/false -G rsyncd -D -u 48 rsyncd
 
 # ====================================================
 # authorized_keys
@@ -80,7 +80,7 @@ chmod 600 /home/ubuntu/.ssh/config
 chmod 600 /home/kiki/.ssh/config
 
 # ====================================================
-# install rsync and dropbear
+# rsync
 test $(which rsync) || \
 	rpm -i $RPMS/rsync-3.1.2-1.x86_64.rpm
 
@@ -88,6 +88,10 @@ test $(which rsync) || \
 test $(which dropbear) || \
 	rpm -i $RPMS/zlib-1.2.11-1.x86_64.rpm && \
 	rpm -i $RPMS/dropbear-2020.81-1.x86_64.rpm
+
+# vsftpd
+test $(which vsftpd) || \
+	rpm -i vsftpd-3.0.4-1.x86_64.rpm
 
 # ====================================================
 # dropbear
@@ -118,10 +122,19 @@ fi
 # sync and install rpm packages
 echo "sync and install rpm packages" 1>>$STDOUT
 test -d /var/www/rpms || mkdir -p /var/www/rpms
-rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/rpmbuild/RPMS/x86_64 /var/www/rpms 1>>$STDOUT 2>>$STDERR
+#rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/rpmbuild/RPMS/x86_64 /var/www/rpms 1>>$STDOUT 2>>$STDERR
+
+# sync and install rpm packages
+#rsync -avzp -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/rpmbuild/RPMS/x86_64 --files-from=FILE
+
+# sync /lib /usr/lib /usr/local/lib
+export SYSROOT=~/chipyard/riscv-tools-install/sysroot/lib
+rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/lib          /lib           1>>$STDOUT 2>>$STDERR
+#rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/lib      /usr/lib       1>>$STDOUT 2>>$STDERR
+#rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/locallib /usr/local/lib 1>>$STDOUT 2>>$STDERR
 
 #test -e .install || \
-#	grep -F -v -f $NFS_ROOT/etc/ignore-packages.txt $NFS_ROOT/etc/packages.txt | sort | uniq | xargs -i rpm -i /var/www/rpms/{} 1>>$STDOUT && \
+#grep -F -v -f $NFS_ROOT/etc/ignore-packages.txt $NFS_ROOT/etc/packages.txt | sort | uniq | xargs -i rpm -i /var/www/rpms/{} 1>>$STDOUT && \
 #	touch .install
 
 #test -e .ntpdate || \
