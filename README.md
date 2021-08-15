@@ -1,11 +1,12 @@
-# Connect the Rocketchip to the Network Using UART
-## Step -2: modify uart parameters
+# build riscv-linux on rocketchip from scratch!
+## Connect the Rocketchip to the Network Using UART
+### Step 0: modify uart parameters
 In `fpga/src/main/scala/vc709/Configs.scala`, we add following line
 ```
 case PeripheryUARTKey => List(UARTParams(address = BigInt(0x64000000L), baudRate=921600, nTxEntries = 1024, nRxEntries = 1024))
 ```
 
-## Step -1: modify sifive uart driver.
+### Step 1: modify sifive uart driver.
 ```
 cd linux/
 vim drivers/tty/serial/sifive.c
@@ -30,7 +31,7 @@ export SYSROOT=$RISCV/sysroot
 export ROOTFS=/path/to/rootfs
 
 ```
-## Step 1: pppd
+### Step 2: pppd
 ```
 # minimal dependency
 [ok] libpcap.so.1.9.1 required by ppp
@@ -48,7 +49,7 @@ sysctl -w net.ipv4.ip_forward=1
 iptables -t nat -A POSTROUTING -o eno0 -j MASQUERADE
 ```
 
-## Step 2: dropbear
+### Step 3: dropbear
 [Dropbear SSH](https://matt.ucc.asn.au/dropbear/dropbear.html)
 ```
 # host side
@@ -58,7 +59,7 @@ sudo make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" install
 
 The `libnss` is also needed for dropbear to work, and can be found in the `SYSROOT`.
 
-## ntp-server
+### Step 4: ntp-server
 ```
 # local timezone
 cp /usr/share/zoneinfo/Asia/Shanghai $ROOTFS/etc/localtime
@@ -69,7 +70,8 @@ service ntp-systemd-netif start
 service ntp-systemd-netif status
 ```
 
-## Step 3: build library and software
+## build library and software
+### building rpm packages from source code
 ```
 # download compressed packages
 wget -N -i packages.txt -P ~/rpmbuild/SOURCES/
@@ -96,7 +98,7 @@ cd ~/rpmbuild/SPECS
 ./build-rpm.sh
 ```
 
-FIND FAILED TO BUILD RPM PACKAGES
+Find failed to built rpm packages
 ```
 find ~/rpmbuild/SPECS/*.spec | sed "s/.*\///;s/.spec//" > ~/rpmbuild/SPECS/spec.list
 find ~/rpmbuild/RPMS/x86_64/*.rpm | sed "s/.*\///;s/-1.x86_64.rpm\|-stable.x86\_64.rpm//" > ~/rpmbuild/RPMS/x86_64/rpm.list
@@ -107,17 +109,18 @@ echo ================build failed================================
 grep -F -v -f ~/rpmbuild/RPMS/x86_64/rpm.list ~/rpmbuild/SPECS/spec.list | sort | uniq
 ```
 
-Convert RPM SPEC FILES INTO SHELL BUILD SCRIPTS
+Convert rpm spec files into shell scripts
 ```
 ls ~/rpmbuild/SPECS/*.spec | xargs -i ./convert.sh {}
 ```
 
+### systemd
 ```
 # systemd
 apt install intltool xmlto
 ```
 
-## Build GngPG
+### GngPG
 ```
 # GnuPG: https://www.gnupg.org/download/
 
@@ -132,32 +135,41 @@ apt install intltool xmlto
 ./run-spec.sh scute-1.7.0.spec
 ```
 
-The `libgpg-error-1.42` should build Before cross-compiling `scute`.
+The `libgpg-error-1.42` should be built before cross-compiling `scute`.
 ```
-cd libgpg-error-1.42/
+cd libgpg-error-1.42
 ./configure --prefix=/usr
 make -j$(nproc) && sudo make install
 ```
 
-Add following lines in `/etc/ImageMagick-6/policy.xml` to solve the security issue in building `scute`.
+Comment out following lines in `/etc/ImageMagick-6/policy.xml` to solve the security issue in building `scute`.
 ```
-  <!--  <policy domain="coder" rights="none" pattern="EPS" /> -->
+  <policy domain="coder" rights="none" pattern="EPS" />
 ```
 
-SYNC RPM PACKAGES FROM THE HOST
+## rsync
 ```
-rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/rpmbuild/RPMS ~/rpmbuild/RPMS
+export USERREMOTE=ubuntu
+export IPREMOTE=10.0.5.3
+
+# sync rpm packages from the host-side
+rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/rpmbuild/RPMS /var/www/rpms
+
+# sync libs from the host-side sysroot
+rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/lib/            /lib
+rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/usr/lib/        /usr/lib
+rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/usr/local/lib/  /usr/local/lib
 ```
 
 ## nghttpd
 install following packags to run nghttpd
 ```
-c-ares-1.17.2-1.x86_64.rpm
-jansson-2.13-1.x86_64.rpm
-jemalloc-5.2.1-1.x86_64.rpm
-libev-4.33-1.x86_64.rpm
-libxml2-2.9.12-1.x86_64.rpm
-nghttp2-1.44.0-1.x86_64.rpm
+rpm -i c-ares-1.17.2-1.x86_64.rpm
+rpm -i jansson-2.13-1.x86_64.rpm
+rpm -i jemalloc-5.2.1-1.x86_64.rpm
+rpm -i libev-4.33-1.x86_64.rpm
+rpm -i libxml2-2.9.12-1.x86_64.rpm
+rpm -i nghttp2-1.44.0-1.x86_64.rpm
 ```
 
 ## Reference
