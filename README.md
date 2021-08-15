@@ -115,7 +115,10 @@ ls ~/rpmbuild/SPECS/*.spec | xargs -i ./convert.sh {}
 ```
 # systemd
 apt install intltool xmlto
+```
 
+## Build GngPG
+```
 # GnuPG: https://www.gnupg.org/download/
 
 ./run-spec.sh libgpg-error-1.42.spec
@@ -129,7 +132,7 @@ apt install intltool xmlto
 ./run-spec.sh scute-1.7.0.spec
 ```
 
-The libgpg-error-1.42 should build Before cross-compiling `scute`.
+The `libgpg-error-1.42` should build Before cross-compiling `scute`.
 ```
 cd libgpg-error-1.42/
 ./configure --prefix=/usr
