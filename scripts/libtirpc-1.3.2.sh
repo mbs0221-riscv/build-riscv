@@ -1,33 +1,29 @@
 #!/bin/bash
-# AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=libtirpc
 export VERSION=1.3.2
+# Release:        1%{?dist}
+# Summary:        The libtirpc package contains libraries that support programs that use the Remote Procedure Call (RPC) API. It replaces the RPC, but not the NIS library entries that used to be in glibc.
+# License:        GPLv3+
 export URL=https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.2.tar.bz2
 export SOURCE=libtirpc-1.3.2.tar.bz2
-#description
-libtirpc.so
-	provides the Remote Procedure Call (RPC) API functions required by other programs.
-#prep
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
+# Requires(post): info
+# Requires(preun): info
+# %description
+# libtirpc.so provides the Remote Procedure Call (RPC) API functions required by other programs.
+prep
+setup
 ./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --disable-gssapi \
             --enable-shared
-#build
-cd $__build_dir_
+build
 make -j$(nproc)
-#install
-cd $__build_dir_
+install
 make install
-#clean
+clean
 
-#files
-#defattr(-,root,root,-)
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /usr
+# %defattr(-,root,root,-)
+epilog

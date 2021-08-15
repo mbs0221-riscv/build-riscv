@@ -4,7 +4,7 @@
 
 cat ~/rpmbuild/SPECS/*.spec | grep Source0 | grep -v source0 | \
 	sed 's/Source0:        //' | sort | uniq | \
-	sed "s/.*\///;s/.tar//;s/.gz\|.sz\|.lz\|.xz\|.bz2//" > ~/rpmbuild/SPECS/spec.list
+	sed "s/.*\///;s/.tar//;s/.src//;s/.gz\|.sz\|.lz\|.xz\|.bz2\|.tgz//" > ~/rpmbuild/SPECS/spec.list
 #find ~/rpmbuild/SPECS/*.spec | sed "s/.*\///;s/.spec//" > ~/rpmbuild/SPECS/spec.list
 find ~/rpmbuild/RPMS/x86_64/*.rpm | sed "s/.*\///;s/-1.x86_64.rpm\|-stable.x86_64.rpm//" > ~/rpmbuild/RPMS/x86_64/rpm.list
 find ~/rpmbuild/SOURCES/*.tar.* > ~/rpmbuild/SOURCES/sources.list

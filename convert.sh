@@ -15,51 +15,46 @@ test -d $prefix || mkdir -p $prefix
 
 target=$prefix/$shell_file
 touch $target
+
 echo generate build-script in $target
-cat $1 > $target
 
 # HEADER
-sed -i "1i \#!/bin/bash" $target
-sed -i "2i \# AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY" $target
-sed -i "3i export SOURCES=~/rpmbuild/SOURCES" $target
-sed -i "4i export BUILD=~/rpmbuild/BUILD" $target
+echo "#!/bin/bash" > $target
+echo "source ../build-utils.sh" >> $target
+cat $1 >> $target
+
+# ENVIRONMENT VARIEBLES
 sed -i "s/Name:           /export NAME=/" $target
 sed -i "s/Version:        /export VERSION=/" $target
 sed -i "s/Source0:        /export SOURCE=/" $target
 sed -i "s/URL:            /export URL=/" $target
 
-# DOWNLOAD AND EXTRACT
-sed -i "/%setup/a cd \$__build_dir_" $target                                                 
-sed -i "/%setup -n/i %setup/" $target                                                        
-sed -i "s/%setup -n[ \t]*/export __build_dir_=\$BUILD\//" $target                            
-sed -i "/%setup/i export __build_dir_=\$BUILD\/\$NAME-\$VERSION" $target                     
-sed -i "/%setup/i cd \$SOURCES" $target                                                      
-sed -i "/%setup/a test -e \$SOURCE || wget \$URL && tar -xvf \$SOURCE -C \$BUILD" $target
-
 # CONFIGURE
-sed -i "s/%{?buildroot}/\$SYSROOT/g" $target       # %{?buildroot}
+sed -i "s/%{?buildroot}/\$SYSROOT/g" $target
+sed -i "s/%{?_sourcedir}/\$SOURCES/g" $target
 
-# BUILD AND INSTALL
-sed -i "/%build/a cd \$__build_dir_" $target 
-sed -i "/%install/a cd \$__build_dir_" $target 
+# SPEC COMMAND
+sed -i "s/%pre/pre/" $target
+sed -i "s/%post/post/" $target
+sed -i "s/%prep/prep/" $target
+sed -i "s/%setup/setup/" $target
+sed -i "s/%build/build/" $target
+sed -i "s/%install/install/" $target
+sed -i "s/%clean/clean/" $target
 
 # MAKEFLAGS
 sed -i "s/-j8/-j\$(nproc)/" $target 
 
 # EPILOG
-echo "
-test \$? -eq 0 || exit 0
-cd \$__build_dir_
-echo pass: \$NAME-\$VERSION
-" >> $target
+echo epilog >> $target
 
 # REMOVE EXTRES
-sed -i "s/.*: .*//g" $target                        #  .*: .*         remove package info
-sed -i "s/^\/.*//g" $target                         # ^\/.*           remove path
-sed -i "s/%/#/g" $target                            # %               remove spec % command
-sed -i "s/.*\!$//g" $target                         # .*\!$           remove description
-sed -i "s/[ \t]*$//g" $target                       # [ \t]*$         strip tail
-sed -i "/^$/d" $target                              # ^$              remove empty lines
-sed -i "s/rm .*//g" $target                         # rm .*           do not remove build target
+sed -i "s/.*: .*\|.*\.$/# &/g" $target              # comment header
+sed -i "s/^%.*$/# &/g" $target                      # comment command
+sed -i "s/.*\!$/# &/g" $target                      # comment sentences
+sed -i "s/^\/.*/# path: &/g" $target                # comment path
+sed -i "s/[ \t]*$//g" $target                       # strip tail
+sed -i "/^$/d" $target                              # remove empty lines
+sed -i "s/rm .*//g" $target                         # do not remove build target
 
 chmod +x $target

@@ -1,36 +1,34 @@
 #!/bin/bash
-# AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=zstd
 export VERSION=1.4.8
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=https://github.com/facebook/zstd/releases/download/v1.4.8/zstd-1.4.8.tar.gz
 export SOURCE=zstd-1.4.8.tar.gz
-#description
-#pre
-#post
-#prep
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+pre
+post
+prep
 #wget https://github.com/facebook/zstd/releases/download/v1.4.8/zstd-1.4.8.tar.gz
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
+setup
 export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
-#build
-cd $__build_dir_
+build
 export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
 make -j$(nproc)
-#install
-cd $__build_dir_
+install
 make install PREFIX=$SYSROOT/usr
-#clean
+clean
 
-#files
-#defattr(-,root,root,-)
-#config
-#doc
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /usr
+# %defattr(-,root,root,-)
+# %config
+# %doc
+epilog

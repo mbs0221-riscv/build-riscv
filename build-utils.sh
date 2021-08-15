@@ -1,50 +1,85 @@
 #!/bin/bash
 
-function parse_url(){
+function make_spec(){
 
-        export __url_=$1
-        export __filename_=$(echo $__url_ | sed 's/.*\///')
-        export __package_=$(echo $__filename_ | sed 's/-.*//')
-        export __build_dir_=$(echo $__filename_ | sed 's/.*\///;s/.tar//;s/.gz\|.sz\|.lz\|.xz\|.bz2//')
+        export URL=$1
+        export PREFIX=${2:-/usr/local}
+        export SOURCE=$(echo $URL | sed 's/.*\///')
+        export NAME_VERSION=$(echo $SOURCE | sed 's/.tar//;s/.src//;s/.gz\|.sz\|.lz\|.xz\|.bz2\|.tgz//')
+        export NAME=$(echo $NAME_VERION | sed 's/-[0-9].*//')
+        export VERSION=$(echo $NAME_VERSION | sed 's/.*-//')
+        export SPECFILE=$NAME.spec
 
         echo ===============================BUILD PACKAGE========================================
-        echo __url_: $__url_
-        echo __filename_: $__filename_
-        echo __package_: $__package_
-        echo __build_dir_: $__build_dir_
+        echo URL:      $URL
+        echo PREFIX:   $PREFIX
+        echo SOURCE:   $SOURCE
+        echo NAME:     $NAME
+        echo VERSION:  $VERSION
+        echo SPECFILE: $SPECFILE
 
-        cd ~/rpmbuild/SOURCES
-
-        test -e $__filename_ || wget $__url_
+        test -e $SPECFILE || echo create new spec file && \
+                cp template.spec $SPECFILE && \
+                sed -i "s#\$prefix#$PREFIX#"   $SPECFILE && \
+                sed -i "s#\$name#$NAME#"       $SPECFILE && \
+                sed -i "s#\$version#$VERSION#" $SPECFILE && \
+                sed -i "s#\$url#$URL#"         $SPECFILE && \
+                sed -i "s#\$source#$SOURCE#"   $SPECFILE && \
+                sed -i "s#-j8#-j\$(nproc)#"    $SPECFILE
 }
 
-function install_patch(){
+function prep(){
 
-        export __url_=$1
-        export __filename_=$(echo $__url_ | sed 's/.*\///')
-        export __package_=$(echo $__filename_ | sed 's/-.*//')
-
-        echo __package_ $__package_
-        echo install patch: $__filename_
-
-        test -e $__filename_ || wget $__url_
-
-        patch -Np1 -i $__filename_
+	cd $SOURCES
 }
 
-function make_install(){
-        make -j$(nproc) && make install
+function setup(){
+
+	if [ "$1" = "-n" ]; then
+		export __build_dir_=$BUILD/$2
+	else
+		export __build_dir_=$BUILD/$NAME-$VERSION
+	fi
+
+	rm -rf $__build_dir_
+
+	cd $SOURCES
+	test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
+
+	cd $__build_dir_
 }
 
-function ninja_install(){
-        ninja -j$(nproc) && ninja install
+function pre(){
+	cd $SOURCES
+}
+
+function post(){
+	cd $SOURCES
+}
+
+function prep(){
+	cd $SOURCES
+}
+
+function build(){
+
+	cd $__build_dir_
+}
+
+function install(){
+
+	cd $__build_dir_
+}
+
+function clean(){
+
+	cd $__build_dir_
 }
 
 function epilog(){
 
         test $? -eq 0 || exit 0
 
-        cd ~/rpmbuild/SOURCES
-  	rm -rf $__build_dir_
+        rm -rf $__build_dir_
         echo pass: $__filename_
 }

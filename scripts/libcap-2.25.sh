@@ -16,14 +16,16 @@ cd $SOURCES
 #setup
 test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
 cd $__build_dir_
-./configure --prefix=$SYSROOT/usr \
-            --host=riscv64-unknown-linux-gnu \
 #build
 cd $__build_dir_
+export CC=riscv64-unknown-linux-gnu-gcc
+export CXX=riscv64-unknown-linux-gnu-g++
+export AR=riscv64-unknown-linux-gnu-ar
+export RANLIB=riscv64-unknown-linux-gnu-ranlib
 make -j$(nproc)
 #install
 cd $__build_dir_
-make install
+make install FAKEROOT=$SYSROOT/usr/local
 #clean
 
 #files

@@ -2,4 +2,18 @@
 # Usage:
 #       ./run.sh example.spec
 
-./convert.sh $1 | sed 's/.* in //' | xargs -i bash {}
+#export SYSROOT=$ROOTFS
+export SOURCES=~/rpmbuild/SOURCES
+export BUILD=~/rpmbuild/BUILD
+
+info=$(./convert.sh $1)
+echo $info
+
+filename=$(echo $info | sed 's/.* in //')
+cat $filename
+
+# change directory
+cd $(dirname $filename)
+
+# run generated scripts
+bash -v $(basename $filename)

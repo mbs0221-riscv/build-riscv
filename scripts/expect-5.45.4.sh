@@ -1,35 +1,35 @@
 #!/bin/bash
-# AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=expect
 export VERSION=5.45.4
+# Release:        1#{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=http://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz
 export SOURCE=expect5.45.4.tar.gz
+# Requires(post): info
+# Requires(preun): info
 #description
+# A helloworld program from the packagecloud.io blog!
 #pre
 #post
 #prep
 #wget http://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup/
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-export __build_dir_=$BUILD/expect5.45.4
-cd $__build_dir_
+#setup
+setup -n expect5.45.4
 ./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 #build
-cd $__build_dir_
+build
 make -j$(nproc)
 #install
-cd $__build_dir_
+install
 make install
 #clean
 
 #files
+# path: /usr
 #defattr(-,root,root,-)
 #config
 #doc
-test $? -eq 0 || exit 0
-cd $__build_dir_
+epilog

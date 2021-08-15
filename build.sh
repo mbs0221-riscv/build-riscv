@@ -1,10 +1,19 @@
 #!/bin/bash
 
-__tarfile_=$(./mkspec.sh $1 $2 | grep __tarfile_: | sed 's/.*: //')
-__specfile_=$(./mkspec.sh $1 $2 | grep __specfile_: | sed 's/.*\///')
+export SPECS=~/rpmbuild/SPECS
+export SOURCES=~/rpmbuild/SOURCES
 
-cat $__specfile_
+source build-utils.sh
 
-test -e ~/rpmbuild/SOURCES/$__tarfile_ || wget -P ~/rpmbuild/SOURCES $1
+# make spec file
+cd $SPECS
+make_spec $1 $2
+cat $SPECFILE
 
-rpmbuild -ba $__specfile_
+# prepare
+cd $SOURCES
+test -e $SOURCE || wget $URL
+
+# build rpm package
+cd $SPECS
+rpmbuild -ba $SPECFILE
