@@ -34,13 +34,13 @@ sed -i "s/%{?buildroot}/\$SYSROOT/g" $target
 sed -i "s/%{?_sourcedir}/\$SOURCES/g" $target
 
 # SPEC COMMAND
-sed -i "s/%pre/pre/" $target
-sed -i "s/%post/post/" $target
-sed -i "s/%prep/prep/" $target
-sed -i "s/%setup/setup/" $target
-sed -i "s/%build/build/" $target
-sed -i "s/%install/install/" $target
-sed -i "s/%clean/clean/" $target
+sed -i "s/%pre/# pre\npre/" $target
+sed -i "s/%post/# pre\npost/" $target
+sed -i "s/%prep/# prep\nprep/" $target
+sed -i "s/%setup/# setup\nsetup/" $target
+sed -i "s/%build/# build\nbuild/" $target
+sed -i "s/%install/# install\ninstall/" $target
+sed -i "s/%clean/# clean\nclean/" $target
 
 # MAKEFLAGS
 sed -i "s/-j8/-j\$(nproc)/" $target 

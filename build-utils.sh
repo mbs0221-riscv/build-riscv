@@ -6,9 +6,9 @@ function make_spec(){
         export PREFIX=${2:-/usr/local}
         export SOURCE=$(echo $URL | sed 's/.*\///')
         export NAME_VERSION=$(echo $SOURCE | sed 's/.tar//;s/.src//;s/.gz\|.sz\|.lz\|.xz\|.bz2\|.tgz//')
-        export NAME=$(echo $NAME_VERION | sed 's/-[0-9].*//')
+        export NAME=$(echo $NAME_VERSION | sed 's/-[0-9].*//')
         export VERSION=$(echo $NAME_VERSION | sed 's/.*-//')
-        export SPECFILE=$NAME.spec
+        export SPECFILE=$NAME_VERSION.spec
 
         echo ===============================BUILD PACKAGE========================================
         echo URL:      $URL
@@ -78,8 +78,5 @@ function clean(){
 
 function epilog(){
 
-        test $? -eq 0 || exit 0
-
-        rm -rf $__build_dir_
-        echo pass: $__filename_
+        test $? -eq 0
 }

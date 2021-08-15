@@ -113,7 +113,32 @@ ls ~/rpmbuild/SPECS/*.spec | xargs -i ./convert.sh {}
 ```
 
 ```
+# systemd
+apt install intltool xmlto
 
+# GnuPG: https://www.gnupg.org/download/
+
+./run-spec.sh libgpg-error-1.42.spec
+./run-spec.sh libgcrypt-1.8.8.spec
+./run-spec.sh libksba-1.6.0.spec
+./run-spec.sh libassuan-2.5.5.spec
+./run-spec.sh ntbtls-0.2.0.spec
+./run-spec.sh npth-1.6.spec
+./run-spec.sh gpgme-1.16.0.spec
+./run-spec.sh gpa-0.10.0.spec [gtk+-2.0]
+./run-spec.sh scute-1.7.0.spec
+```
+
+The libgpg-error-1.42 should build Before cross-compiling `scute`.
+```
+cd libgpg-error-1.42/
+./configure --prefix=/usr
+make -j$(nproc) && sudo make install
+```
+
+Add following lines in `/etc/ImageMagick-6/policy.xml` to solve the security issue in building `scute`.
+```
+  <!--  <policy domain="coder" rights="none" pattern="EPS" /> -->
 ```
 
 SYNC RPM PACKAGES FROM THE HOST

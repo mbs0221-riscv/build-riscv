@@ -1,36 +1,41 @@
 #!/bin/bash
-# AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=libcap
 export VERSION=2.25
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.tar.xz
 export SOURCE=libcap-2.25.tar.xz
-#description
-#pre
-#post
-#prep
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+# pre
+pre
+# pre
+post
+# pre
+prep
 #wget https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.tar.xz
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
-#build
-cd $__build_dir_
+# setup
+setup
+# build
+build
 export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
 export AR=riscv64-unknown-linux-gnu-ar
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
 make -j$(nproc)
-#install
-cd $__build_dir_
-make install FAKEROOT=$SYSROOT/usr/local
-#clean
+# install
+install
+make install FAKEROOT=$SYSROOT/usr
+# clean
+clean
 
-#files
-#defattr(-,root,root,-)
-#config
-#doc
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /usr
+# %defattr(-,root,root,-)
+# %config
+# %doc
+epilog

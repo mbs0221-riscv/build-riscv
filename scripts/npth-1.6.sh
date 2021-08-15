@@ -1,12 +1,12 @@
 #!/bin/bash
 source ../build-utils.sh
-export NAME=attr
-export VERSION=2.4.47
+export NAME=npth
+export VERSION=1.6
 # Release:        1%{?dist}
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=http://download.savannah.gnu.org/releases/attr/attr-2.4.47.src.tar.gz
-export SOURCE=attr-2.4.47.src.tar.gz
+export URL=https://www.gnupg.org/ftp/gcrypt/npth/npth-1.6.tar.bz2
+export SOURCE=npth-1.6.tar.bz2
 # Requires(post): info
 # Requires(preun): info
 # %description

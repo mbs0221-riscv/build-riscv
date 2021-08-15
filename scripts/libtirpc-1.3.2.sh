@@ -11,16 +11,21 @@ export SOURCE=libtirpc-1.3.2.tar.bz2
 # Requires(preun): info
 # %description
 # libtirpc.so provides the Remote Procedure Call (RPC) API functions required by other programs.
+# pre
 prep
+# setup
 setup
 ./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --disable-gssapi \
             --enable-shared
+# build
 build
 make -j$(nproc)
+# install
 install
 make install
+# clean
 clean
 
 # %files
