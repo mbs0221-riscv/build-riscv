@@ -148,6 +148,18 @@ SYNC RPM PACKAGES FROM THE HOST
 ```
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/rpmbuild/RPMS ~/rpmbuild/RPMS
 ```
+
+## nghttpd
+install following packags to run nghttpd
+```
+c-ares-1.17.2-1.x86_64.rpm
+jansson-2.13-1.x86_64.rpm
+jemalloc-5.2.1-1.x86_64.rpm
+libev-4.33-1.x86_64.rpm
+libxml2-2.9.12-1.x86_64.rpm
+nghttp2-1.44.0-1.x86_64.rpm
+```
+
 ## Reference
 * [Connecting to your Raspberry Pi Console via the Serial Cable](https://medium.com/@sarala.saraswati/connecting-to-your-raspberry-pi-console-via-the-serial-cable-44d7df95f03e)
 * [Connect the Raspberry Pi to Network Using UART](https://www.instructables.com/Connect-the-Raspberry-Pi-to-network-using-UART/)

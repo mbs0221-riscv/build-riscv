@@ -129,7 +129,7 @@ test -d /var/www/rpms || mkdir -p /var/www/rpms
 
 # sync /lib /usr/lib /usr/local/lib
 export SYSROOT=~/chipyard/riscv-tools-install/sysroot/lib
-rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/lib          /lib           1>>$STDOUT 2>>$STDERR
+rsync -avzP --progress -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/lib          /lib           1>>$STDOUT 2>>$STDERR
 #rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/lib      /usr/lib       1>>$STDOUT 2>>$STDERR
 #rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/locallib /usr/local/lib 1>>$STDOUT 2>>$STDERR
 
