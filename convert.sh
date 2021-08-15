@@ -20,6 +20,7 @@ echo generate build-script in $target
 
 # HEADER
 echo "#!/bin/bash" > $target
+echo "# AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY" >> $target
 echo "source ../build-utils.sh" >> $target
 cat $1 >> $target
 

@@ -1,32 +1,35 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=libevent
 export VERSION=2.1.12
+# Release:        stable%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
 export SOURCE=libevent-2.1.12-stable.tar.gz
-#description
-#prep
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup/
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-export __build_dir_=$BUILD/libevent-2.1.12-stable
-cd $__build_dir_
-#build
-cd $__build_dir_
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+# pre
+prep
+# setup
+setup -n libevent-2.1.12-stable
+# build
+build
 sed -i 's/python/&3/' event_rpcgen.py
 ./configure --prefix=$SYSROOT/usr                     \
             --host=riscv64-unknown-linux-gnu               \
             --enable-shared                                &&
 make -j$(nproc)
-#install
-cd $__build_dir_
+# install
+install
 make install
-#clean
+# clean
+clean
 
-#files
-#defattr(-,root,root,-)
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /usr
+# %defattr(-,root,root,-)
+epilog

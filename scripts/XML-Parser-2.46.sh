@@ -1,36 +1,47 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=XML-Parser
 export VERSION=2.46
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.46.tar.gz
 export SOURCE=XML-Parser-2.46.tar.gz
-#description
-#pre
-#post
-#prep
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+# pre
+pre
+# pre
+post
+# pre
+prep
 #wget https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.46.tar.gz
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
+# setup
+setup
+# build
+build
 export DESTDIR=$SYSROOT/usr/local
 export CC=riscv64-unknown-linux-gnu-gcc
 export AR=riscv64-unknown-linux-gnu-ar
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
-#build
-cd $__build_dir_
-make -j$(nproc) -f Makefile.PL
-#install
-cd $__build_dir_
+perl Makefile.PL
+     CC=riscv64-unknown-linux-gnu-gcc \
+     AR=riscv64-unknown-linux-gnu-ar \
+     RANLIB=riscv64-unknown-linux-gnu-ranlib \
+     DESTDIR=$SYSROOT/usr/local &&
+make
+# install
+install
 make install
-#clean
+# clean
+clean
 
-#files
-#defattr(-,root,root,-)
-#config
-#doc
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /usr/local
+# %defattr(-,root,root,-)
+# %config
+# %doc
+epilog

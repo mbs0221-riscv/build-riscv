@@ -1,27 +1,30 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=helloworld
 export VERSION=1.0
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=https://blog.packagecloud.io
 export SOURCE=helloworld-1.0.tar.gz
-#description
-#prep
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
-#build
-cd $__build_dir_
-make PREFIX=/usr #{?_smp_mflags}
-#install
-cd $__build_dir_
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+# pre
+prep
+# setup
+setup
+# build
+build
+make PREFIX=/usr %{?_smp_mflags}
+# install
+install
 make PREFIX=/usr DESTDIR=$SYSROOT install
-#clean
+# clean
+clean
 
-#files
-#{_bindir}/helloworld
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# %{_bindir}/helloworld
+epilog

@@ -1,4 +1,5 @@
 #!/bin/bash
+# AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
 export NAME=zstd
 export VERSION=1.4.8
@@ -11,19 +12,26 @@ export SOURCE=zstd-1.4.8.tar.gz
 # Requires(preun): info
 # %description
 # A helloworld program from the packagecloud.io blog!
+# pre
 pre
+# pre
 post
+# pre
 prep
 #wget https://github.com/facebook/zstd/releases/download/v1.4.8/zstd-1.4.8.tar.gz
+# setup
 setup
 export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
+# build
 build
 export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
 make -j$(nproc)
+# install
 install
 make install PREFIX=$SYSROOT/usr
+# clean
 clean
 
 # %files

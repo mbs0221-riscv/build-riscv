@@ -1,4 +1,5 @@
 #!/bin/bash
+# AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
 export NAME=libgpg-error
 export VERSION=1.42

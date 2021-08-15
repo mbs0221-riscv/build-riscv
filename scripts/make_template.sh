@@ -1,37 +1,42 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=xxx
 export VERSION=1.0.0
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=url
 export SOURCE=source0
-#description
-#pre
-#post
-#prep
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+# pre
+pre
+# pre
+post
+# pre
+prep
 #wget url
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
+# setup
+setup
 export DESTDIR=$SYSROOT$prefix
 export CC=riscv64-unknown-linux-gnu-gcc
 export AR=riscv64-unknown-linux-gnu-ar
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
-#build
-cd $__build_dir_
+# build
+build
 make -j$(nproc)
-#install
-cd $__build_dir_
+# install
+install
 make install
-#clean
+# clean
+clean
 
-#files
+# %files
 $prefix
-#defattr(-,root,root,-)
-#config
-#doc
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %defattr(-,root,root,-)
+# %config
+# %doc
+epilog

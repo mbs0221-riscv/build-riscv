@@ -1,20 +1,23 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=json-c
 export VERSION=0.15
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=https://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz
 export SOURCE=json-c-0.15.tar.gz
-#description
-#prep
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
-#build
-cd $__build_dir_
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+# pre
+prep
+# setup
+setup
+# build
+build
 mkdir build &&
 cd    build &&
 cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr \
@@ -22,13 +25,14 @@ cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr \
       -DBUILD_STATIC_LIBS=OFF    \
       .. &&
 make
-#install
-cd $__build_dir_
+# install
+install
 cd build
 make install
-#clean
+# clean
+clean
 
-#files
-#defattr(-,root,root,-)
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /usr
+# %defattr(-,root,root,-)
+epilog

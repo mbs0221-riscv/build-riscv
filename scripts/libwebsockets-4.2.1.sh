@@ -1,24 +1,29 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=libwebsockets
 export VERSION=4.2.1
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=https://github.com/warmcat/libwebsockets/archive/refs/tags/v4.2.1.tar.gz
 export SOURCE=v4.2.1.tar.gz
-#description
-#pre
-#post
-#prep
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+# pre
+pre
+# pre
+post
+# pre
+prep
 #wget https://github.com/warmcat/libwebsockets/archive/refs/tags/v4.2.1.tar.gz
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
+# setup
+setup
 mkdir build && cd build
-#build
-cd $__build_dir_
+# build
+build
 export CROSS_COMPILE=riscv64-unknown-linux-gnu
 export INSTALL_PREFIX=$SYSROOT/usr
 cd build
@@ -34,15 +39,16 @@ cmake .. \
     -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
     -DLIB_SUFFIX=64
 make
-#install
-cd $__build_dir_
+# install
+install
 cd build
 make install
-#clean
+# clean
+clean
 
-#files
-#defattr(-,root,root,-)
-#config
-#doc
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /usr
+# %defattr(-,root,root,-)
+# %config
+# %doc
+epilog

@@ -1,31 +1,41 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=man-db
 export VERSION=2.8.1
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=http://download.savannah.gnu.org/releases/man-db/man-db-2.8.1.tar.xz
 export SOURCE=man-db-2.8.1.tar.xz
-#description
-#prep
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+# pre
+prep
+# setup
+setup
 # require libpipeline
+export PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
 export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 ./configure --prefix=$SYSROOT/usr \
-            --host=riscv64-unknown-linux-gnu
-#build
-cd $__build_dir_
+            --exec-prefix=$SYSROOT/usr/local \
+            --host=riscv64-unknown-linux-gnu \
+            --with-gzip=GZIP \
+            --with-bzip2=BZIP2 \
+            --with-xz=XZ \
+# build
+build
 make -j$(nproc)
-#install
-cd $__build_dir_
+# install
+install
 make install
-#clean
+# clean
+clean
 
-#files
-#defattr(-,root,root,-)
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /usr
+# %defattr(-,root,root,-)
+epilog

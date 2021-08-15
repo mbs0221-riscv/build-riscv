@@ -1,31 +1,35 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=gmp
 export VERSION=6.1.2
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.xz
 export SOURCE=gmp-6.1.2.tar.xz
-#description
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
 # ./configure --prefix=$SYSROOT/usr --host=riscv64-unknown-linux-gnu
 # make -j$(nproc) prefix=$SYSROOT/usr && make install prefix=$SYSROOT/usr
-#prep
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
+# pre
+prep
+# setup
+setup
 ./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
-#build
-cd $__build_dir_
+# build
+build
 make -j$(nproc)
-#install
-cd $__build_dir_
+# install
+install
 make install
-#clean
+# clean
+clean
 
-#files
-#defattr(-,root,root,-)
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /usr
+# %defattr(-,root,root,-)
+epilog

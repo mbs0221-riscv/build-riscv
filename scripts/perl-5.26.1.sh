@@ -1,36 +1,39 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=perl
 export VERSION=5.26.1
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=http://www.cpan.org/src/5.0/perl-5.26.1.tar.xz
 export SOURCE=perl-5.26.1.tar.xz
-#description
-#pre
-#prep
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
-export export LD_LIBRARY_PATH=$SYSROOT/lib:$SYSROOT/usr/lib:$SYSROOT/usr/local/lib$LD_LIBRARY_PATH
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+# pre
+pre
+# pre
+prep
+# setup
+setup
 sh Configure -Dcc=riscv64-unknown-linux-gnu-gcc \
              -Dprefix=$SYSROOT/opt/perl5 \
              -Dusethreads \
              -Duseshrplib \
-#build
-cd $__build_dir_
+# build
+build
 make -j$(nproc)
-make -j$(nproc) test
-#install
-cd $__build_dir_
+# install
+install
 make install
-#clean
+# clean
+clean
 
-#files
-#defattr(-,root,root,-)
-#config
-#doc
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /opt
+# %defattr(-,root,root,-)
+# %config
+# %doc
+epilog

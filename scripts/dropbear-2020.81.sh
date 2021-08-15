@@ -1,33 +1,38 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+source ../build-utils.sh
 export NAME=dropbear
 export VERSION=2020.81
+# Release:        1%{?dist}
+# Summary:        A hello world program
+# License:        GPLv3+
 export URL=https://matt.ucc.asn.au/dropbear/releases/dropbear-2020.81.tar.bz2
 export SOURCE=dropbear-2020.81.tar.bz2
-#description
-#prep
-export __build_dir_=$BUILD/$NAME-$VERSION
-cd $SOURCES
-#setup
-test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
-cd $__build_dir_
+# Requires(post): info
+# Requires(preun): info
+# %description
+# A helloworld program from the packagecloud.io blog!
+# pre
+prep
+# setup
+setup
 ./configure --prefix=$SYSROOT/usr/local \
             --host=riscv64-unknown-linux-gnu \
             --with-zlib=$SYSROOT/usr
-#build
-cd $__build_dir_
+# build
+build
 make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" SCPPROGRESS=1 strip
-#install
-cd $__build_dir_
+# install
+install
 
 make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" SCPPROGRESS=1 install
 #ln -s /usr/local/bin/dbclient /usr/bin/dbclient
-#clean
+# clean
+clean
 
-#files
-#defattr(-,root,root,-)
-#doc /usr/local/share
-test $? -eq 0 || exit 0
-cd $__build_dir_
+# %files
+# path: /usr/local/bin
+# path: /usr/local/sbin
+# %defattr(-,root,root,-)
+# %doc /usr/local/share
+epilog
