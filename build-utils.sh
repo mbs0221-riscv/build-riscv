@@ -44,7 +44,7 @@ function setup(){
 	rm -rf $__build_dir_
 
 	cd $SOURCES
-	test -e $SOURCE || wget $URL && tar -xvf $SOURCE -C $BUILD
+	test -e $SOURCE || wget --no-check-certificate $URL && tar -xvf $SOURCE -C $BUILD
 
 	cd $__build_dir_
 }

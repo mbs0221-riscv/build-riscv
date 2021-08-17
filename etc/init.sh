@@ -122,14 +122,16 @@ fi
 # sync and install rpm packages
 echo "sync and install rpm packages" 1>>$STDOUT
 test -d /var/www/rpms || mkdir -p /var/www/rpms
+rsync -avzP -e 'dbclient -y -p 2222' ubuntu@$PEERNAME:~/rpmbuild/RPMS/x86_64 /var/www/rpms 1>>$STDOUT 2>>$STDERR
 #rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/rpmbuild/RPMS/x86_64 /var/www/rpms 1>>$STDOUT 2>>$STDERR
 
 # sync and install rpm packages
+#rsync -avzp -e 'dbclient -y -p 2222' ubuntu@$PEERNAME:~/rpmbuild/RPMS/x86_64 --files-from=FILE
 #rsync -avzp -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/rpmbuild/RPMS/x86_64 --files-from=FILE
 
 # sync /lib /usr/lib /usr/local/lib
-export SYSROOT=~/chipyard/riscv-tools-install/sysroot/lib
-rsync -avzP --progress -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/lib          /lib           1>>$STDOUT 2>>$STDERR
+#export SYSROOT=~/chipyard/riscv-tools-install/sysroot/lib
+#rsync -avzP --progress -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/lib          /lib           1>>$STDOUT 2>>$STDERR
 #rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/lib      /usr/lib       1>>$STDOUT 2>>$STDERR
 #rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/locallib /usr/local/lib 1>>$STDOUT 2>>$STDERR
 

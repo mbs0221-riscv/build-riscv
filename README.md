@@ -65,7 +65,7 @@ The `libnss` is also needed for dropbear to work, and can be found in the `SYSRO
 cp /usr/share/zoneinfo/Asia/Shanghai $ROOTFS/etc/localtime
 
 # host side
-sudo apt –y install ntp 
+sudo apt install ntp -y
 service ntp-systemd-netif start
 service ntp-systemd-netif status
 ```
@@ -120,10 +120,43 @@ ls ~/rpmbuild/SPECS/*.spec | xargs -i ./convert.sh {}
 apt install intltool xmlto
 ```
 
-### GngPG
+## build library and software
 ```
-# GnuPG: https://www.gnupg.org/download/
+#
+./run-spec.sh libpcap-1.9.1.spec
 
+#
+./run-spec.sh libtirpc-1.3.2.spec
+./run-spec.sh rpcbind-1.2.6.spec
+
+
+# libcap
+./run-spec.sh libcap-2.48.spec
+
+# ppp/dropbear/rsync
+./run-spec.sh ppp-2.4.9.spec
+./run-spec.sh dropbear-2020.81.spec
+
+sudo apt install doxygen
+./run-spec.sh attr-2.4.47.spec
+./run-spec.sh popt-1.18.spec
+./run-spec.sh rsync-3.1.2.spec
+
+
+./run-spec.sh procps-ng-3.3.17.spec
+./run-spec.sh psmisc-23.1.spec
+
+# gmp/mpfr/mpc
+./run-spec.sh gmp-6.1.2.spec
+./run-spec.sh mpfr-4.0.1.spec
+./run-spec.sh mpc-1.1.0.spec
+
+# readline/pcre2/libbytesize
+./run-spec.sh readline-8.1.spec
+./run-spec.sh pcre2-10.37.spec
+./run-spec.sh libbytesize-2.6.spec
+
+# GnuPG: https://www.gnupg.org/download/
 ./run-spec.sh libgpg-error-1.42.spec
 ./run-spec.sh libgcrypt-1.8.8.spec
 ./run-spec.sh libksba-1.6.0.spec
