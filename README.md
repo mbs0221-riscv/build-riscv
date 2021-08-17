@@ -125,26 +125,67 @@ apt install intltool xmlto
 #
 ./run-spec.sh libpcap-1.9.1.spec
 
-#
+# nfs-utils
 ./run-spec.sh libtirpc-1.3.2.spec
 ./run-spec.sh rpcbind-1.2.6.spec
 
 
 # libcap
 ./run-spec.sh libcap-2.48.spec
+./run-spec.sh libevent-2.1.12-stable.spec
 
-# ppp/dropbear/rsync
-./run-spec.sh ppp-2.4.9.spec
-./run-spec.sh dropbear-2020.81.spec
+# asm
+./run-spec.sh nasm-2.15.05.spec
+./run-spec.sh yasm-1.3.0.spec
 
-sudo apt install doxygen
+# compress
+./run-spec.sh gzip-1.10.spec
+./run-spec.sh lzo-2.10.spec
+./run-spec.sh xz-5.2.3.spec
+./run-spec.sh xz-5.2.5.spec
+./run-spec.sh zlib-1.2.11.spec
+./run-spec.sh zstd-1.4.8.spec
+
+# database
+./run-spec.sh sqlite-autoconf-3360000.spec
+./run-spec.sh memcached-1.6.9.spec
+./run-spec.sh redis-6.2.5.spec
+
+./run-spec.sh gdbm-1.19.spec
+./run-spec.sh gdbm-1.20.spec
+
+# attr/acl
 ./run-spec.sh attr-2.4.47.spec
+./run-spec.sh acl-2.2.52.spec
+
+# python 3.9
+sudo apt install python3.9
+./run-spec.sh Python-3.9.6.spec
+./run-spec.sh libxml2-2.9.12.spec
+
+# guile/
+## bdw-gc for libunistring
+cd gc-8.0.4
+./configure --prefix=/usr
+make -j$(nproc) && sudo make install
+
+## libunistring for guile
+sudo apt install libunistring-dev
+
+## guile
+cd guile-3.0.7
+./configure --prefix=/usr
+make -j12 && sudo make install
+
+# date/time
+sudo apt install lzip
+./run-spec.sh tzdb-2021a.spec
+./run-spec.sh openssl-1.1.1k.spec
+
+# rsync
+sudo apt install doxygen
 ./run-spec.sh popt-1.18.spec
 ./run-spec.sh rsync-3.1.2.spec
-
-
-./run-spec.sh procps-ng-3.3.17.spec
-./run-spec.sh psmisc-23.1.spec
 
 # gmp/mpfr/mpc
 ./run-spec.sh gmp-6.1.2.spec
