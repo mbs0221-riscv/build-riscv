@@ -192,6 +192,9 @@ rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/rpmbuild/RPMS /var
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/lib/            /lib
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/usr/lib/        /usr/lib
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/usr/local/lib/  /usr/local/lib
+
+# sync rpm packages between laptop and host
+rsync -avzP ~/rpmbuild/ -e ssh ubuntu@optiplex-5060:~/rpmbuild/
 ```
 
 ## nghttpd

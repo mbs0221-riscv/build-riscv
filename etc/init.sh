@@ -82,6 +82,8 @@ chmod 600 /home/kiki/.ssh/config
 # ====================================================
 # rsync
 test $(which rsync) || \
+	rpm -i $RPMS/attr-2.4.47-1.x86_64.rpm && \
+        rpm -i $
 	rpm -i $RPMS/rsync-3.1.2-1.x86_64.rpm
 
 # dropbear
@@ -122,8 +124,7 @@ fi
 # sync and install rpm packages
 echo "sync and install rpm packages" 1>>$STDOUT
 test -d /var/www/rpms || mkdir -p /var/www/rpms
-rsync -avzP -e 'dbclient -y -p 2222' ubuntu@$PEERNAME:~/rpmbuild/RPMS/x86_64 /var/www/rpms 1>>$STDOUT 2>>$STDERR
-#rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/rpmbuild/RPMS/x86_64 /var/www/rpms 1>>$STDOUT 2>>$STDERR
+rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/rpmbuild/RPMS/x86_64 /var/www/rpms 1>>$STDOUT 2>>$STDERR
 
 # sync and install rpm packages
 #rsync -avzp -e 'dbclient -y -p 2222' ubuntu@$PEERNAME:~/rpmbuild/RPMS/x86_64 --files-from=FILE
