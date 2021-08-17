@@ -1,0 +1,123 @@
+receiving incremental file list
+automotive/basicmath/
+automotive/basicmath/output_large.txt
+     16,465,695 100%  148.90kB/s    0:01:47 (xfr#1, ir-chk=1022/1056)
+automotive/basicmath/output_small.txt
+        426,600 100%   92.19kB/s    0:00:04 (xfr#2, ir-chk=1021/1056)
+automotive/bitcount/
+automotive/bitcount/output_large.txt
+            634 100%    1.60kB/s    0:00:00 (xfr#3, ir-chk=1054/1113)
+automotive/bitcount/output_small.txt
+            627 100%    1.58kB/s    0:00:00 (xfr#4, ir-chk=1053/1113)
+automotive/qsort/
+automotive/qsort/output_large.txt
+      1,572,490 100%   43.39kB/s    0:00:35 (xfr#5, ir-chk=1044/1113)
+automotive/qsort/output_small.txt
+         53,463 100%  267.74kB/s    0:00:00 (xfr#6, ir-chk=1043/1113)
+automotive/susan/
+automotive/susan/output_large.corners.pgm
+        110,607 100%   45.50kB/s    0:00:02 (xfr#7, ir-chk=1031/1113)
+automotive/susan/output_large.edges.pgm
+        110,607 100%   78.05kB/s    0:00:01 (xfr#8, ir-chk=1030/1113)
+automotive/susan/output_large.smoothing.pgm
+        110,607 100%   60.04kB/s    0:00:01 (xfr#9, ir-chk=1029/1113)
+automotive/susan/output_small.corners.pgm
+          7,233 100%   11.58kB/s    0:00:00 (xfr#10, ir-chk=1028/1113)
+automotive/susan/output_small.edges.pgm
+          7,233 100%    8.74kB/s    0:00:00 (xfr#11, ir-chk=1027/1113)
+automotive/susan/output_small.smoothing.pgm
+          7,233 100%    8.73kB/s    0:00:00 (xfr#12, ir-chk=1026/1113)
+consumer/jpeg/
+consumer/jpeg/output_large_decode.ppm
+        786,447 100%  124.92kB/s    0:00:06 (xfr#13, ir-chk=1007/1116)
+consumer/jpeg/output_large_encode.jpeg
+         27,013 100%   32.93kB/s    0:00:00 (xfr#14, ir-chk=1006/1116)
+consumer/jpeg/output_small_decode.ppm
+        196,623 100%   53.26kB/s    0:00:03 (xfr#15, ir-chk=1005/1116)
+consumer/jpeg/output_small_encode.jpeg
+          9,810 100%    9.36MB/s    0:00:00 (xfr#16, ir-chk=1004/1116)
+consumer/lame/
+consumer/lame/output_large.mp3
+        480,642 100%   40.05kB/s    0:00:11 (xfr#17, ir-chk=1077/1402)
+consumer/lame/output_small.mp3
+         32,428 100%   64.11kB/s    0:00:00 (xfr#18, ir-chk=1076/1402)
+consumer/typeset/
+consumer/typeset/large.lout.ld
+          3,036 100%    2.90MB/s    0:00:00 (xfr#19, ir-chk=1791/3252)
+consumer/typeset/lout.li
+          3,283 100%    3.13MB/s    0:00:00 (xfr#20, ir-chk=1790/3252)
+consumer/typeset/output_large.ps
+         58,111 100%   27.71MB/s    0:00:00 (xfr#21, ir-chk=1789/3252)
+consumer/typeset/output_small.ps
+         21,254 100%   48.27kB/s    0:00:00 (xfr#22, ir-chk=1788/3252)
+consumer/typeset/small.lout.ld
+          2,546 100%    5.77kB/s    0:00:00 (xfr#23, ir-chk=1784/3252)
+network/dijkstra/
+network/dijkstra/output_large.dat
+          6,931 100%   15.67kB/s    0:00:00 (xfr#24, ir-chk=1121/3252)
+network/dijkstra/output_small.dat
+          1,342 100%    3.03kB/s    0:00:00 (xfr#25, ir-chk=1120/3252)
+network/patricia/
+network/patricia/output_large.txt
+      1,750,935 100%  133.38kB/s    0:00:12 (xfr#26, ir-chk=1113/3252)
+network/patricia/output_small.txt
+        289,862 100%  189.34kB/s    0:00:01 (xfr#27, ir-chk=1112/3252)
+office/ispell/tests/output_large.txt
+              0 100%    0.00kB/s    0:00:00 (xfr#28, to-chk=949/4629)
+office/ispell/tests/output_small.txt
+              0 100%    0.00kB/s    0:00:00 (xfr#29, to-chk=948/4629)
+office/stringsearch/
+office/stringsearch/output_large.txt
+         92,672 100%   88.38MB/s    0:00:00 (xfr#30, to-chk=453/4629)
+office/stringsearch/output_small.txt
+          3,197 100%    3.05MB/s    0:00:00 (xfr#31, to-chk=452/4629)
+security/blowfish/
+security/blowfish/output_large.asc
+      3,247,554 100%    9.59MB/s    0:00:00 (xfr#32, to-chk=400/4629)
+security/blowfish/output_large.enc
+      3,247,553 100%   40.73kB/s    0:01:17 (xfr#33, to-chk=399/4629)
+security/blowfish/output_small.asc
+        311,826 100%   74.35MB/s    0:00:00 (xfr#34, to-chk=398/4629)
+security/blowfish/output_small.enc
+        311,825 100%   37.17kB/s    0:00:08 (xfr#35, to-chk=397/4629)
+security/sha/
+security/sha/output_large.txt
+             85 100%    0.20kB/s    0:00:00 (xfr#36, to-chk=173/4629)
+security/sha/output_small.txt
+             85 100%    0.20kB/s    0:00:00 (xfr#37, to-chk=172/4629)
+telecomm/CRC32/
+telecomm/CRC32/output_large.txt
+             50 100%    0.12kB/s    0:00:00 (xfr#38, to-chk=155/4629)
+telecomm/CRC32/output_small.txt
+             50 100%    0.12kB/s    0:00:00 (xfr#39, to-chk=154/4629)
+telecomm/FFT/
+telecomm/FFT/output_large.inv.txt
+        688,571 100%   48.34kB/s    0:00:13 (xfr#40, to-chk=136/4629)
+telecomm/FFT/output_large.txt
+        970,428 100%   61.86kB/s    0:00:15 (xfr#41, to-chk=135/4629)
+telecomm/FFT/output_small.inv.txt
+        172,800 100%   63.30kB/s    0:00:02 (xfr#42, to-chk=134/4629)
+telecomm/FFT/output_small.txt
+        116,211 100%   41.48kB/s    0:00:02 (xfr#43, to-chk=133/4629)
+telecomm/adpcm/
+telecomm/adpcm/output_large.adpcm
+      6,652,800 100%   47.18kB/s    0:02:17 (xfr#44, to-chk=127/4629)
+telecomm/adpcm/output_large.pcm
+     26,611,200 100%   42.02kB/s    0:10:18 (xfr#45, to-chk=126/4629)
+telecomm/adpcm/output_small.adpcm
+        342,216 100%   44.34kB/s    0:00:07 (xfr#46, to-chk=125/4629)
+telecomm/adpcm/output_small.pcm
+      1,368,864 100%   46.50kB/s    0:00:28 (xfr#47, to-chk=124/4629)
+telecomm/gsm/
+telecomm/gsm/output_large.decode.run
+      1,159,072 100%   48.33kB/s    0:00:23 (xfr#48, to-chk=84/4629)
+telecomm/gsm/output_large.encode.gsm
+        239,052 100%   42.23kB/s    0:00:05 (xfr#49, to-chk=83/4629)
+telecomm/gsm/output_small.decode.run
+         21,312 100%   21.19kB/s    0:00:00 (xfr#50, to-chk=82/4629)
+telecomm/gsm/output_small.encode.gsm
+          4,389 100%    4.01kB/s    0:00:01 (xfr#51, to-chk=81/4629)
+
+sent 1,391 bytes  received 42,598,160 bytes  37,059.20 bytes/sec
+total size is 472,253,906  speedup is 11.09
+
