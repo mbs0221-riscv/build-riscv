@@ -18,10 +18,9 @@ pre
 post
 # pre
 prep
-#wget http://ftp.gnu.org/gnu/bc/bc-1.07.1.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --with-readline
 # build
@@ -29,12 +28,12 @@ build
 make -j$(nproc)
 # install
 install
-make install-exec-recursive
+make install
 # clean
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 # %config
 # %doc

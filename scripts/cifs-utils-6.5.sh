@@ -15,7 +15,6 @@ export SOURCE=cifs-utils-6.5.tar.bz2
 prep
 # setup
 setup
-#export ROOTSBINDIR=$SYSROOT/sbin
 ./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --disable-pam \

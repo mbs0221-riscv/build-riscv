@@ -11,7 +11,7 @@ export SOURCE=bc-1.06.95.tar.bz2
 # Requires(post): info
 # Requires(preun): info
 # %description
-# # A helloworld program from the packagecloud.io blog!
+# A helloworld program from the packagecloud.io blog!
 # pre
 pre
 # pre
@@ -22,6 +22,7 @@ prep
 setup
 ./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
+            --with-readline
 # build
 build
 make -j$(nproc)
