@@ -152,16 +152,19 @@ Comment out following lines in `/etc/ImageMagick-6/policy.xml` to solve the secu
 export USERREMOTE=ubuntu
 export IPREMOTE=10.0.5.3
 
-# sync rpm packages from the host-side
+# sync rpm packages
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/rpmbuild/RPMS /var/www/rpms
 
-# sync libs from the host-side sysroot
+# sync libs
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/lib/            /lib
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/usr/lib/        /usr/lib
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/usr/local/lib/  /usr/local/lib
 
-# sync rpm packages between laptop and host
-rsync -avzP ~/rpmbuild/ -e ssh ubuntu@optiplex-5060:~/rpmbuild/
+# sync rpm packages
+rsync -avzP ~/rpmbuild/ -e ssh ubuntu@IPREMOTE:~/rpmbuild/
+
+# sync benchmarks
+rsync -avzP -e ssh $USERREMOTE@$IPREMOTE:~/benchmark/mibench ~/benchmark/
 ```
 
 ## nghttpd
