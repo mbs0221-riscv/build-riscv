@@ -1,17 +1,17 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=attr
-export VERSION=2.4.47
+export NAME=libedit-20210714
+export VERSION=3.1
 # Release:        1%{?dist}
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=http://download.savannah.gnu.org/releases/attr/attr-2.4.47.src.tar.gz
-export SOURCE=attr-2.4.47.src.tar.gz
+export URL=http://thrysoee.dk/editline/libedit-20210714-3.1.tar.gz
+export SOURCE=libedit-20210714-3.1.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
-# # A helloworld program from the packagecloud.io blog!
+# A helloworld program from the packagecloud.io blog!
 # pre
 pre
 # pre
@@ -20,18 +20,16 @@ post
 prep
 # setup
 setup
-sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in &&
-INSTALL_USER=root  \
-INSTALL_GROUP=root \
+export CFLAGS="$CFLAGS -I$SYSROOT/include -I$SYSROOT/include/ncurses"
+export LDFLAGS="$CFLAGS -L$SYSROOT/lib"
 ./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
-            --disable-static
 # build
 build
 make -j$(nproc)
 # install
 install
-make install install-dev install-lib
+make install
 # clean
 clean
 

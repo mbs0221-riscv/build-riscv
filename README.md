@@ -65,7 +65,7 @@ The `libnss` is also needed for dropbear to work, and can be found in the `SYSRO
 cp /usr/share/zoneinfo/Asia/Shanghai $ROOTFS/etc/localtime
 
 # host side
-sudo apt –y install ntp 
+sudo apt install ntp -y
 service ntp-systemd-netif start
 service ntp-systemd-netif status
 ```
@@ -120,10 +120,84 @@ ls ~/rpmbuild/SPECS/*.spec | xargs -i ./convert.sh {}
 apt install intltool xmlto
 ```
 
-### GngPG
+## build library and software
 ```
-# GnuPG: https://www.gnupg.org/download/
+#
+./run-spec.sh libpcap-1.9.1.spec
 
+# nfs-utils
+./run-spec.sh libtirpc-1.3.2.spec
+./run-spec.sh rpcbind-1.2.6.spec
+
+
+# libcap
+./run-spec.sh libcap-2.48.spec
+./run-spec.sh libevent-2.1.12-stable.spec
+
+# asm
+./run-spec.sh nasm-2.15.05.spec
+./run-spec.sh yasm-1.3.0.spec
+
+# compress
+./run-spec.sh gzip-1.10.spec
+./run-spec.sh lzo-2.10.spec
+./run-spec.sh xz-5.2.3.spec
+./run-spec.sh xz-5.2.5.spec
+./run-spec.sh zlib-1.2.11.spec
+./run-spec.sh zstd-1.4.8.spec
+
+# database
+./run-spec.sh sqlite-autoconf-3360000.spec
+./run-spec.sh memcached-1.6.9.spec
+./run-spec.sh redis-6.2.5.spec
+
+./run-spec.sh gdbm-1.19.spec
+./run-spec.sh gdbm-1.20.spec
+
+# attr/acl
+./run-spec.sh attr-2.4.47.spec
+./run-spec.sh acl-2.2.52.spec
+
+# python 3.9
+sudo apt install python3.9
+./run-spec.sh Python-3.9.6.spec
+./run-spec.sh libxml2-2.9.12.spec
+
+# guile/
+## bdw-gc for libunistring
+cd gc-8.0.4
+./configure --prefix=/usr
+make -j$(nproc) && sudo make install
+
+## libunistring for guile
+sudo apt install libunistring-dev
+
+## guile
+cd guile-3.0.7
+./configure --prefix=/usr
+make -j12 && sudo make install
+
+# date/time
+sudo apt install lzip
+./run-spec.sh tzdb-2021a.spec
+./run-spec.sh openssl-1.1.1k.spec
+
+# rsync
+sudo apt install doxygen
+./run-spec.sh popt-1.18.spec
+./run-spec.sh rsync-3.1.2.spec
+
+# gmp/mpfr/mpc
+./run-spec.sh gmp-6.1.2.spec
+./run-spec.sh mpfr-4.0.1.spec
+./run-spec.sh mpc-1.1.0.spec
+
+# readline/pcre2/libbytesize
+./run-spec.sh readline-8.1.spec
+./run-spec.sh pcre2-10.37.spec
+./run-spec.sh libbytesize-2.6.spec
+
+# GnuPG: https://www.gnupg.org/download/
 ./run-spec.sh libgpg-error-1.42.spec
 ./run-spec.sh libgcrypt-1.8.8.spec
 ./run-spec.sh libksba-1.6.0.spec
