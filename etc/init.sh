@@ -106,20 +106,21 @@ else
 	echo "add host: $IPREMOTE $PEERNAME" 1>>$STDOUT
 fi
 
-# sync and install rpm packages [OK]
+# sync rpm packages
 echo "sync and install rpm packages" 1>>$STDOUT
-test -d /var/www/rpms || mkdir -p /var/www/rpms
-rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/rpmbuild/RPMS/ /tmp/rpms/ 1>>$STDOUT 2>>$STDERR
+test -d /tmp/rpms || mkdir -p /tmp/rpms
+rsync -avzP -e 'dbclient -y -p 2222' ubuntu@$PEERNAME:~/rpmbuild/RPMS/ /tmp/rpms/ 1>>$STDOUT 2>>$STDERR
 
-# sync /lib /usr/lib /usr/local/lib
-#rsync -avzP --progress -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/lib/           /lib/           1>>$STDOUT 2>>$STDERR
-#rsync -avzP --progress -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/lib/       /usr/lib/       1>>$STDOUT 2>>$STDERR
-#rsync -avzP --progress -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/local/lib/ /usr/local/lib/ 1>>$STDOUT 2>>$STDERR
+# sync libs
+#rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/lib/           /lib/           1>>$STDOUT 2>>$STDERR
+#rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/lib/       /usr/lib/       1>>$STDOUT 2>>$STDERR
+#rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/local/lib/ /usr/local/lib/ 1>>$STDOUT 2>>$STDERR
 
 # benchmark
-test -d /var/www/benchmark || mkdir /var/www/benchmark
+test -d /tmp/benchmark || mkdir /tmp/benchmark
 rsync -avzP --files-from=$NFS_HOME/benchmark/mibench/rsync.files \
 	-e 'dbclient -y -p 2222' kiki212@inspiron-5488:~/benchmark/mibench/ /tmp/benchmark/mibench/ 1>>$STDOUT 2>>$STDERR
+
 rsync -avzP --files-from=$NFS_HOME/benchmark/riscv-coremark/rsync.files \
 	-e 'dbclient -y -p 2222' kiki212@inspiron-5488:~/benchmark/riscv-coremark/ /tmp/benchmark/riscv-coremark/ 1>>$STDOUT 2>>$STDERR
 
