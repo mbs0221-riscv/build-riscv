@@ -197,6 +197,11 @@ sudo apt install doxygen
 ./run-spec.sh pcre2-10.37.spec
 ./run-spec.sh libbytesize-2.6.spec
 
+# GNU TLS
+./run-spec.sh nettle-3.7.spec 
+./run-spec.sh guile-3.0.7.spec
+./run-spec.sh gnutls-3.1.5.spec
+
 # GnuPG: https://www.gnupg.org/download/
 ./run-spec.sh libgpg-error-1.42.spec
 ./run-spec.sh libgcrypt-1.8.8.spec
@@ -230,15 +235,20 @@ export IPREMOTE=10.0.5.3
 rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/rpmbuild/RPMS /var/www/rpms
 
 # sync libs
-rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/lib/            /lib
-rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/usr/lib/        /usr/lib
-rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/usr/local/lib/  /usr/local/lib
+rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/lib/            /lib/
+rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/usr/lib/        /usr/lib/
+rsync -azvpP -e 'dbclient -y -p 2222' $USERREMOTE@$IPREMOTE:~/sysroot/usr/local/lib/  /usr/local/lib/
 
 # sync rpm packages
 rsync -avzP ~/rpmbuild/ -e ssh ubuntu@IPREMOTE:~/rpmbuild/
 
 # sync benchmarks
-rsync -avzP -e ssh $USERREMOTE@$IPREMOTE:~/benchmark/mibench ~/benchmark/
+rsync -avzP -e ssh ubuntu@10.10.72.159:~/benchmark/riscv-coremark ~/benchmark/
+rsync -avzP -e ssh ubuntu@10.10.72.159:~/benchmark/mibench ~/benchmark/
+
+# backup benchmarks
+rsync -avzp ~/benchmark/mibench/ --exclude=.git -e 'dbclient -y -p 2222' root@vc709:/var/www/benchmark/mibench/
+rsync -avzP --exclude=.git -e 'dbclient -y -p 2222' root@10.0.5.2:/var/www/benchmark/mibench/ ~/benchmark/mibench/
 ```
 
 ## nghttpd
