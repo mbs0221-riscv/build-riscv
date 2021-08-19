@@ -45,8 +45,7 @@ export ROOTFS=/path/to/rootfs
 make -j12 && make install
 
 # route
-sysctl -w net.ipv4.ip_forward=1
-iptables -t nat -A POSTROUTING -o eno0 -j MASQUERADE
+./setup-route.sh
 ```
 
 ### Step 3: dropbear
@@ -122,41 +121,9 @@ apt install intltool xmlto
 
 ## build library and software
 ```
-#
-./run-spec.sh libpcap-1.9.1.spec
-
 # nfs-utils
 ./run-spec.sh libtirpc-1.3.2.spec
 ./run-spec.sh rpcbind-1.2.6.spec
-
-
-# libcap
-./run-spec.sh libcap-2.48.spec
-./run-spec.sh libevent-2.1.12-stable.spec
-
-# asm
-./run-spec.sh nasm-2.15.05.spec
-./run-spec.sh yasm-1.3.0.spec
-
-# compress
-./run-spec.sh gzip-1.10.spec
-./run-spec.sh lzo-2.10.spec
-./run-spec.sh xz-5.2.3.spec
-./run-spec.sh xz-5.2.5.spec
-./run-spec.sh zlib-1.2.11.spec
-./run-spec.sh zstd-1.4.8.spec
-
-# database
-./run-spec.sh sqlite-autoconf-3360000.spec
-./run-spec.sh memcached-1.6.9.spec
-./run-spec.sh redis-6.2.5.spec
-
-./run-spec.sh gdbm-1.19.spec
-./run-spec.sh gdbm-1.20.spec
-
-# attr/acl
-./run-spec.sh attr-2.4.47.spec
-./run-spec.sh acl-2.2.52.spec
 
 # python 3.9
 sudo apt install python3.9
@@ -177,16 +144,6 @@ cd guile-3.0.7
 ./configure --prefix=/usr
 make -j12 && sudo make install
 
-# date/time
-sudo apt install lzip
-./run-spec.sh tzdb-2021a.spec
-./run-spec.sh openssl-1.1.1k.spec
-
-# rsync
-sudo apt install doxygen
-./run-spec.sh popt-1.18.spec
-./run-spec.sh rsync-3.1.2.spec
-
 # gmp/mpfr/mpc
 ./run-spec.sh gmp-6.1.2.spec
 ./run-spec.sh mpfr-4.0.1.spec
@@ -201,17 +158,6 @@ sudo apt install doxygen
 ./run-spec.sh nettle-3.7.spec 
 ./run-spec.sh guile-3.0.7.spec
 ./run-spec.sh gnutls-3.1.5.spec
-
-# GnuPG: https://www.gnupg.org/download/
-./run-spec.sh libgpg-error-1.42.spec
-./run-spec.sh libgcrypt-1.8.8.spec
-./run-spec.sh libksba-1.6.0.spec
-./run-spec.sh libassuan-2.5.5.spec
-./run-spec.sh ntbtls-0.2.0.spec
-./run-spec.sh npth-1.6.spec
-./run-spec.sh gpgme-1.16.0.spec
-./run-spec.sh gpa-0.10.0.spec [gtk+-2.0]
-./run-spec.sh scute-1.7.0.spec
 ```
 
 The `libgpg-error-1.42` should be built before cross-compiling `scute`.
@@ -224,6 +170,21 @@ make -j$(nproc) && sudo make install
 Comment out following lines in `/etc/ImageMagick-6/policy.xml` to solve the security issue in building `scute`.
 ```
   <policy domain="coder" rights="none" pattern="EPS" />
+```
+
+## inotify-tools
+```
+sudo apt install inotify-tools
+```
+
+```
+[root@vc709 ~]#uname -r
+5.14.0-rc3
+[root@vc709 ~]#ll /proc/sys/fs/inotify/*
+-rw-r--r--    1 root     root             0 Jan  1 14:47 /proc/sys/fs/inotify/max_queued_events
+-rw-r--r--    1 root     root             0 Jan  1 14:47 /proc/sys/fs/inotify/max_user_instances
+-rw-r--r--    1 root     root             0 Jan  1 14:47 /proc/sys/fs/inotify/max_user_watches
+[root@vc709 ~]#
 ```
 
 ## rsync
@@ -247,19 +208,8 @@ rsync -avzP -e ssh ubuntu@10.10.72.159:~/benchmark/riscv-coremark ~/benchmark/
 rsync -avzP -e ssh ubuntu@10.10.72.159:~/benchmark/mibench ~/benchmark/
 
 # backup benchmarks
-rsync -avzp ~/benchmark/mibench/ --exclude=.git -e 'dbclient -y -p 2222' root@vc709:/var/www/benchmark/mibench/
-rsync -avzP --exclude=.git -e 'dbclient -y -p 2222' root@10.0.5.2:/var/www/benchmark/mibench/ ~/benchmark/mibench/
-```
-
-## nghttpd
-install following packags to run nghttpd
-```
-rpm -i c-ares-1.17.2-1.x86_64.rpm
-rpm -i jansson-2.13-1.x86_64.rpm
-rpm -i jemalloc-5.2.1-1.x86_64.rpm
-rpm -i libev-4.33-1.x86_64.rpm
-rpm -i libxml2-2.9.12-1.x86_64.rpm
-rpm -i nghttp2-1.44.0-1.x86_64.rpm
+rsync -avzp ~/benchmark/mibench/ --exclude=.git -e 'dbclient -y -p 2222' root@vc709:/tmp/benchmark/mibench/
+rsync -avzP -e 'dbclient -y -p 2222' root@vc709:/tmp/benchmark/mibench/ ~/benchmark/mibench/
 ```
 
 ## Reference

@@ -16,7 +16,7 @@ export SOURCE=libpcap-1.9.1.tar.gz
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --target=riscv64-unknown-linux-gnu \
             --with-pcap=linux
@@ -30,6 +30,6 @@ make install
 clean
 
 # %files
-# path: /usr/local/
+# path: /usr
 # %defattr(-,root,root,-)
 epilog

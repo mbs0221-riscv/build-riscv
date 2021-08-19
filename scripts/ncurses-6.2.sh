@@ -18,8 +18,7 @@ prep
 setup
 # build
 build
-#./configure --prefix=$ROOTFS --host=riscv64-unknown-linux-gnu --without-cxx --without-cxx-binding --without-ada --without-progs --without-tests --with-shared
-./configure --prefix=$SYSROOT \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --without-cxx \
             --without-cxx-binding \
@@ -31,10 +30,13 @@ make -j$(nproc)
 # install
 install
 make install
+cd $SYSROOT/usr/lib
+ln -s libncurses.so.6 libtinfo.so.6
+ln -s libtinfo.so.6 libtinfo.so
 # clean
 clean
 
 # %files
-# path: /
+# path: /usr
 # %defattr(-,root,root,-)
 epilog

@@ -106,30 +106,31 @@ else
 	echo "add host: $IPREMOTE $PEERNAME" 1>>$STDOUT
 fi
 
+USERNAME=ubuntu
+
 # sync rpm packages
 echo "sync and install rpm packages" 1>>$STDOUT
 test -d /tmp/rpms || mkdir -p /tmp/rpms
-rsync -avzP -e 'dbclient -y -p 2222' ubuntu@$PEERNAME:~/rpmbuild/RPMS/ /tmp/rpms/ 1>>$STDOUT 2>>$STDERR
-
-# sync libs
-#rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/lib/           /lib/           1>>$STDOUT 2>>$STDERR
-#rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/lib/       /usr/lib/       1>>$STDOUT 2>>$STDERR
-#rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/usr/local/lib/ /usr/local/lib/ 1>>$STDOUT 2>>$STDERR
+rsync -avzP -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/rpmbuild/RPMS/ /tmp/rpms/ 1>>$STDOUT 2>>$STDERR
 
 # benchmark
 test -d /tmp/benchmark || mkdir /tmp/benchmark
 rsync -avzP --files-from=$NFS_HOME/benchmark/mibench/rsync.files \
-	-e 'dbclient -y -p 2222' kiki212@inspiron-5488:~/benchmark/mibench/ /tmp/benchmark/mibench/ 1>>$STDOUT 2>>$STDERR
+	-e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/benchmark/mibench/ /tmp/benchmark/mibench/ 1>>$STDOUT 2>>$STDERR
 
 rsync -avzP --files-from=$NFS_HOME/benchmark/riscv-coremark/rsync.files \
-	-e 'dbclient -y -p 2222' kiki212@inspiron-5488:~/benchmark/riscv-coremark/ /tmp/benchmark/riscv-coremark/ 1>>$STDOUT 2>>$STDERR
+	-e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/benchmark/riscv-coremark/ /tmp/benchmark/riscv-coremark/ 1>>$STDOUT 2>>$STDERR
 
-#test -e .install || \
-#grep -F -v -f $NFS_ROOT/etc/ignore-packages.txt $NFS_ROOT/etc/packages.txt | sort | uniq | xargs -i rpm -i /var/www/rpms/{} 1>>$STDOUT && \
-#	touch .install
+test -f .install || (
+  echo "packages ignored:" 1>>$STDOUT
+  cat $NFS_ROOT/etc/packages.txt | grep -E '^#.*' 1>>$STDOUT
+  echo "packages to be installed:" 1>>$STDOUT
+  cat $NFS_ROOT/etc/packages.txt | sed 's/^#.*//g;/^$/d' 1>>$STDOUT
+  cat $NFS_ROOT/etc/packages.txt | sed 's/^#.*//g;/^$/d' | xargs -i rpm -i /tmp/rpms/x86_64/{} 1>>$STDOUT
+) && touch .install
 
-#test -e .ntpdate || \
-#	ntpdate $IPREMOTE 1>>$STDOUT && \
-#	touch .ntpdate
+test -f .ntpdate || (
+  ntpdate $IPREMOTE 1>>$STDOUT && \
+) && touch .ntpdate
 
 exit 0
