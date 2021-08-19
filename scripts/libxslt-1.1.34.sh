@@ -19,6 +19,7 @@ setup
 export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 export PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 sed -i s/3000/5000/ libxslt/transform.c doc/xsltproc.1 doc/xsltproc.xml
+sed -i -r '/max(Parser)?Depth/d' ./tests/fuzz/fuzz.c &&
 ./configure --prefix=$SYSROOT/usr/local/ \
             --host=riscv64-unknown-linux-gnu \
 	    --with-sysroot=$SYSROOT \

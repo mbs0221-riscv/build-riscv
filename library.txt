@@ -1,0 +1,6 @@
+libjemalloc.so.2
+libxml2.so.2
+libev.so.4
+libcares.so.2
+libjansson.so.4
+libstdc++.so.6
