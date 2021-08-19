@@ -29,11 +29,15 @@ export PREFIX=$SYSROOT/usr
 export CC=riscv64-unknown-linux-gnu-gcc
 export AR=riscv64-unknown-linux-gnu-ar
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
-#make -j$(nproc) libbz2.a bzip2 bzip2recover -f Makefile-libbz2_so
-make -j$(nproc) all
+make -j$(nproc) -f Makefile-libbz2_so
+make clean
+export CC=riscv64-unknown-linux-gnu-gcc
+export AR=riscv64-unknown-linux-gnu-ar
+export RANLIB=riscv64-unknown-linux-gnu-ranlib
+make -j$(nproc)
 # install
 install
-make install PREFIX=$SYSROOT/usr
+make PREFIX=$SYSROOT/usr install
 # clean
 clean
 

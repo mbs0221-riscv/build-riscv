@@ -1,6 +1,6 @@
 #!/bin/bash
 # Usage:
-#       ./run.sh example.spec
+#       ./run-spec.sh example.spec
 
 #export SYSROOT=$ROOTFS
 
@@ -25,6 +25,6 @@ bash $(basename $filename)
 
 # generate rpm package automatically
 if [ $? -eq 0 ]; then
-	cd $SPECS
-	rpmbuild -ba $SPECFILE
+        cd $SPECS
+        rpmbuild -ba $SPECFILE
 fi

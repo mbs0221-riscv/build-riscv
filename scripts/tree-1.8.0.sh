@@ -1,13 +1,13 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libgpg-error
-export VERSION=1.42
+export NAME=tree
+export VERSION=1.8.0
 # Release:        1%{?dist}
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.42.tar.bz2
-export SOURCE=libgpg-error-1.42.tar.bz2
+export URL=http://mama.indstate.edu/users/ice/tree/src/tree-1.8.0.tgz
+export SOURCE=tree-1.8.0.tgz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -20,14 +20,16 @@ post
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
-            --host=riscv64-unknown-linux-gnu \
+#./configure --prefix=$SYSROOT/usr \
+#            --host=riscv64-unknown-linux-gnu \
 # build
 build
+export CC=riscv64-unknown-linux-gnu-gcc
+export CXX=riscv64-unknown-linux-gnu-g++
 make -j$(nproc)
 # install
 install
-make install
+make DESTDIR=$SYSROOT/usr install
 # clean
 clean
 

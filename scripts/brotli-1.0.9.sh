@@ -1,13 +1,13 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libgpg-error
-export VERSION=1.42
+export NAME=brotli
+export VERSION=1.0.9
 # Release:        1%{?dist}
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.42.tar.bz2
-export SOURCE=libgpg-error-1.42.tar.bz2
+export URL=https://github.com/google/brotli/archive/v1.0.9/brotli-1.0.9.tar.gz
+export SOURCE=brotli-1.0.9.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -20,13 +20,19 @@ post
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
-            --host=riscv64-unknown-linux-gnu \
+sed -i 's@-R..libdir.@@' scripts/*.pc.in
+test -d build || mkdir build
+cd build
+# cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr -DCMAKE_BUILD_TYPE=Release ..
 # build
 build
+export CC=riscv64-unknown-linux-gnu-gcc
+export CXX=riscv64-unknown-linux-gnu-g++
+cd build
 make -j$(nproc)
 # install
 install
+cd build
 make install
 # clean
 clean

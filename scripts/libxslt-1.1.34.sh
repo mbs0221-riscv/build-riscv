@@ -22,6 +22,7 @@ sed -i s/3000/5000/ libxslt/transform.c doc/xsltproc.1 doc/xsltproc.xml
 ./configure --prefix=$SYSROOT/usr/local/ \
             --host=riscv64-unknown-linux-gnu \
 	    --with-sysroot=$SYSROOT \
+            --with-python=$SYSROOT/usr \
             --disable-static
 # build
 build

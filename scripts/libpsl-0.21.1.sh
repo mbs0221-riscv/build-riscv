@@ -1,13 +1,13 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libgpg-error
-export VERSION=1.42
+export NAME=libpsl
+export VERSION=0.21.1
 # Release:        1%{?dist}
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.42.tar.bz2
-export SOURCE=libgpg-error-1.42.tar.bz2
+export URL=https://github.com/rockdaboot/libpsl/releases/download/0.21.1/libpsl-0.21.1.tar.gz
+export SOURCE=libpsl-0.21.1.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -20,8 +20,9 @@ post
 prep
 # setup
 setup
+sed -i 's/env python/&3/' src/psl-make-dafsa &&
 ./configure --prefix=$SYSROOT/usr \
-            --host=riscv64-unknown-linux-gnu \
+            --host=riscv64-unknown-linux-gnu
 # build
 build
 make -j$(nproc)

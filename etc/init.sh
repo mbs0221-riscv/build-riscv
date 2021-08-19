@@ -83,17 +83,12 @@ chmod 600 /home/kiki/.ssh/config
 # rsync
 test $(which rsync) || \
 	rpm -i $RPMS/attr-2.4.47-1.x86_64.rpm && \
-        rpm -i $
 	rpm -i $RPMS/rsync-3.1.2-1.x86_64.rpm
 
 # dropbear
 test $(which dropbear) || \
 	rpm -i $RPMS/zlib-1.2.11-1.x86_64.rpm && \
 	rpm -i $RPMS/dropbear-2020.81-1.x86_64.rpm
-
-# vsftpd
-test $(which vsftpd) || \
-	rpm -i vsftpd-3.0.4-1.x86_64.rpm
 
 # ====================================================
 # dropbear

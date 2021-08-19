@@ -1,13 +1,13 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=pcre
-export VERSION=8.45
+export NAME=dmalloc
+export VERSION=5.6.5
 # Release:        1%{?dist}
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://ftp.pcre.org/pub/pcre/pcre-8.45.tar.bz2
-export SOURCE=pcre-8.45.tar.bz2
+export URL=https://dmalloc.com/releases/dmalloc-5.6.5.tgz
+export SOURCE=dmalloc-5.6.5.tgz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -15,18 +15,13 @@ export SOURCE=pcre-8.45.tar.bz2
 # pre
 pre
 # pre
+post
+# pre
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/ \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
-            --docdir=$SYSROOT/usr/share/doc/pcre-8.45 \
-            --enable-unicode-properties       \
-            --enable-pcre16                   \
-            --enable-pcre32                   \
-            --enable-pcregrep-libz            \
-            --enable-pcretest-libreadline     \
-            --disable-static
 # build
 build
 make -j$(nproc)

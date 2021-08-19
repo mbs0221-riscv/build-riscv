@@ -1,13 +1,13 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=pcre
-export VERSION=8.45
+export NAME=apr-util
+export VERSION=1.6.1
 # Release:        1%{?dist}
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://ftp.pcre.org/pub/pcre/pcre-8.45.tar.bz2
-export SOURCE=pcre-8.45.tar.bz2
+export URL=https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2
+export SOURCE=apr-util-1.6.1.tar.bz2
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -15,18 +15,17 @@ export SOURCE=pcre-8.45.tar.bz2
 # pre
 pre
 # pre
+post
+# pre
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/ \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
-            --docdir=$SYSROOT/usr/share/doc/pcre-8.45 \
-            --enable-unicode-properties       \
-            --enable-pcre16                   \
-            --enable-pcre32                   \
-            --enable-pcregrep-libz            \
-            --enable-pcretest-libreadline     \
-            --disable-static
+            --with-apr=$SYSROOT/usr     \
+            --with-gdbm=$SYSROOT/usr    \
+            --with-openssl=$SYSROOT/usr \
+            --with-crypto &&
 # build
 build
 make -j$(nproc)

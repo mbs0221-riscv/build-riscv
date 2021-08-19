@@ -1,13 +1,13 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libgpg-error
-export VERSION=1.42
+export NAME=libjpeg-turbo
+export VERSION=2.0.6
 # Release:        1%{?dist}
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.42.tar.bz2
-export SOURCE=libgpg-error-1.42.tar.bz2
+export URL=https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-2.0.6.tar.gz
+export SOURCE=libjpeg-turbo-2.0.6.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -20,13 +20,20 @@ post
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
-            --host=riscv64-unknown-linux-gnu \
+mkdir -v build &&
+cd       build &&
+export CC=riscv64-unknown-linux-gnu-gcc
+export CXX=riscv64-unknown-linux-gnu-g++
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr \
+      -DBUILD_STATIC_LIBS=OFF ..
 # build
 build
+cd build
 make -j$(nproc)
 # install
 install
+cd build
 make install
 # clean
 clean
