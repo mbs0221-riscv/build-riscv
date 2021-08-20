@@ -39,12 +39,16 @@ and change above lines into following
   │ │                                <*>   SLIP (serial line) support                                                                       │ │  
   │ │                                [*]   CSLIP compressed headers                                                                         │ │  
 ```
-
+Then we build dropbear and ppp rpm package
 ```
+# build rpm package
+~/rpmbuild/SPECS$ ./run-spec.sh ppp-2.4.9.spec
+~/rpmbuild/SPECS$ ./run-spec.sh dropbear-2020.81.spec
+~/rpmbuild/SPECS$ ./run-spec.sh rsync-3.1.2.spec
+
+# start host-side ppp service
 sudo ./start-ppp.sh
 ```
-
-### dropbear
 
 ### ntp-server
 ```
@@ -116,6 +120,13 @@ build rpm packages
   ```
   ls ~/rpmbuild/SPECS/*.spec | xargs -i ./convert.sh {}
   ```
+
+build examples
+```
+# build libpcap/tcpdump from source
+./build.sh https://www.tcpdump.org/release/libpcap-1.10.1.tar.gz
+./build.sh https://www.tcpdump.org/release/tcpdump-4.99.1.tar.gz
+```
 
 build library
 ```
