@@ -69,6 +69,7 @@ nfs-utils-2.5.3-1.x86_64.rpm
 #ppp-2.4.9-1.x86_64.rpm
 pptpd-1.4.0-1.x86_64.rpm
 popt-1.18-1.x86_64.rpm
+#libiconv-1.16-1.x86_64.rpm
 #rsync-3.1.2-1.x86_64.rpm
 #dropbear-2020.81-1.x86_64.rpm
 openssh-8.6p1-1.x86_64.rpm
