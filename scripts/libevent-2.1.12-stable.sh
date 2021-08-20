@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libevent
 export VERSION=2.1.12
 # Release:        stable%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz

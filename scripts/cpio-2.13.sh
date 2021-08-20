@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=cpio
 export VERSION=2.13
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://mirror.bjtu.edu.cn/gnu/cpio/cpio-2.13.tar.gz

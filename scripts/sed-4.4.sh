@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=sed
 export VERSION=4.4
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/sed/sed-4.4.tar.xz

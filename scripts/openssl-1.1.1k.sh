@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=openssl
 export VERSION=1.1.1k
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.openssl.org/source/openssl-1.1.1k.tar.gz

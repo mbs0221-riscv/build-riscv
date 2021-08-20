@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libgcrypt
 export VERSION=1.8.8
 # Release:        1%{?dist}
+# Group:          GnuPG
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.8.8.tar.bz2

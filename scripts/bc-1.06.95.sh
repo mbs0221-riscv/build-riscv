@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=bc
 export VERSION=1.06.95
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://alpha.gnu.org/gnu/bc/bc-1.06.95.tar.bz2
@@ -22,7 +23,6 @@ prep
 setup
 ./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
-            --with-readline
 # build
 build
 make -j$(nproc)

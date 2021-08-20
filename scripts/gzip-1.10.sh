@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=gzip
 export VERSION=1.10
 # Release:        1%{?dist}
+# Group:          Compression
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/gzip/gzip-1.10.tar.xz

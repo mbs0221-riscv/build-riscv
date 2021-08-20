@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libmicrohttpd
 export VERSION=0.9.73
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://mirror.easyname.at/gnu/libmicrohttpd/libmicrohttpd-0.9.73.tar.gz
@@ -21,7 +22,7 @@ prep
 #wget https://mirror.easyname.at/gnu/libmicrohttpd/libmicrohttpd-0.9.73.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
@@ -33,7 +34,7 @@ make install
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 # %config
 # %doc

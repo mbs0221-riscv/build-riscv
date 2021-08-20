@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=scute
 export VERSION=1.7.0
 # Release:        1%{?dist}
+# Group:          GnuPG
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.gnupg.org/ftp/gcrypt/scute/scute-1.7.0.tar.bz2
@@ -11,7 +12,7 @@ export SOURCE=scute-1.7.0.tar.bz2
 # Requires(post): info
 # Requires(preun): info
 # %description
-# # A helloworld program from the packagecloud.io blog!
+# A helloworld program from the packagecloud.io blog!
 # pre
 pre
 # pre

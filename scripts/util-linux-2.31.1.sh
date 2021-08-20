@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=util
 export VERSION=2.31.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.kernel.org/pub/linux/utils/util-linux/v2.31/util-linux-2.31.1.tar.xz

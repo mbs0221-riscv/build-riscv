@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=mpfr
 export VERSION=4.0.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://www.mpfr.org/mpfr-4.0.1/mpfr-4.0.1.tar.xz

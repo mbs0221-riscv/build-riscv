@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=inetutils
 export VERSION=2.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://mirror.bjtu.edu.cn/gnu/inetutils/inetutils-2.1.tar.gz

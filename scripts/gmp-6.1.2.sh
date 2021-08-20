@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=gmp
 export VERSION=6.1.2
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.xz

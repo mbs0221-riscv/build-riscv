@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=bison
 export VERSION=3.0.4
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/bison/bison-3.0.4.tar.xz

@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=automake
 export VERSION=1.15
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/automake/automake-1.15.tar.xz
@@ -11,7 +12,7 @@ export SOURCE=automake-1.15.tar.xz
 # Requires(post): info
 # Requires(preun): info
 # %description
-# # A helloworld program from the packagecloud.io blog!
+# A helloworld program from the packagecloud.io blog!
 # pre
 pre
 # pre

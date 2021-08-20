@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=kbd
 export VERSION=2.0.4
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.kernel.org/pub/linux/utils/kbd/kbd-2.0.4.tar.xz

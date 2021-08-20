@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=helloworld
 export VERSION=1.0
 # Release:        1%{?dist}
+# Group:          Benchmark
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://blog.packagecloud.io

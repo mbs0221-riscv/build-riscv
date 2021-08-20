@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=dropbear
 export VERSION=2020.81
 # Release:        1%{?dist}
+# Group:          Network
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://matt.ucc.asn.au/dropbear/releases/dropbear-2020.81.tar.bz2
@@ -16,7 +17,7 @@ export SOURCE=dropbear-2020.81.tar.bz2
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --with-zlib=$SYSROOT/usr
 # build
@@ -26,13 +27,12 @@ make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" SCPPROGRESS=1 
 install
 
 make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" SCPPROGRESS=1 install
-#ln -s /usr/local/bin/dbclient /usr/bin/dbclient
 # clean
 clean
 
 # %files
-# path: /usr/local/bin
-# path: /usr/local/sbin
+# path: /usr/bin
+# path: /usr/sbin
 # %defattr(-,root,root,-)
-# %doc /usr/local/share
+# %doc /usr/share
 epilog

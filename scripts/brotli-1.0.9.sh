@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=brotli
 export VERSION=1.0.9
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/google/brotli/archive/v1.0.9/brotli-1.0.9.tar.gz
@@ -23,7 +24,8 @@ setup
 sed -i 's@-R..libdir.@@' scripts/*.pc.in
 test -d build || mkdir build
 cd build
-# cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr -DCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr -DCMAKE_BUILD_TYPE=Release ..
+# Group:          Library
 # build
 build
 export CC=riscv64-unknown-linux-gnu-gcc

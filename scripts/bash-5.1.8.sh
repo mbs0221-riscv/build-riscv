@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=bash
 export VERSION=5.1.8
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz
@@ -18,9 +19,7 @@ prep
 setup
 sed -i '81c STRIP ?= strip' Makefile.in
 ./configure --prefix=$SYSROOT                 \
-            --target=riscv64-unknown-linux-gnu     \
             --host=riscv64-unknown-linux-gnu       \
-            --build=x86_64-linux-gnu               \
             --with-curses                          \
             --with-installed-readline              \
             --with-included-gettext                \
@@ -31,13 +30,8 @@ sed -i '81c STRIP ?= strip' Makefile.in
             --enable-function-import               \
             --enable-brace-expansion               \
             --enable-select
-export CC=riscv64-unknown-linux-gnu-gcc
-export AR=riscv64-unknown-linux-gnu-ar
-export RANLIB=riscv64-unknown-linux-gnu-ranlib
-export STRIP=riscv64-unknown-linux-gnu-strip
 # build
 build
-export STRIP=riscv64-unknown-linux-gnu-strip
 make -j$(nproc) strip
 # install
 install

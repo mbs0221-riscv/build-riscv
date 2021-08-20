@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libvpx
 export VERSION=1.10.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/webmproject/libvpx/archive/v1.10.0/libvpx-1.10.0.tar.gz

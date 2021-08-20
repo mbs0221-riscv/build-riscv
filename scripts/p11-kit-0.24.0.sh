@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=p11-kit
 export VERSION=0.24.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/p11-glue/p11-kit/releases/download/0.24.0/p11-kit-0.24.0.tar.xz

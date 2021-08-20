@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=psmisc
 export VERSION=23.1
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.1.tar.xz

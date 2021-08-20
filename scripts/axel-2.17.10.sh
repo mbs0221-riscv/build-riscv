@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=axel
 export VERSION=2.17.10
 # Release:        1%{?dist}
+# Group:          Network
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/axel-download-accelerator/axel/releases/download/v2.17.10/axel-2.17.10.tar.xz

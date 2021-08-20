@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=lzo
 export VERSION=2.10
 # Release:        1%{?dist}
+# Group:          Compression
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz

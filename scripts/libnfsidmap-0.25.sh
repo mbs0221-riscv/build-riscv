@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libnfsidmap
 export VERSION=0.25
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap/libnfsidmap-0.25.tar.gz

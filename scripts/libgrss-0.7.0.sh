@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libgrss
 export VERSION=0.7.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://download.gnome.org/sources/libgrss/0.7/libgrss-0.7.0.tar.xz

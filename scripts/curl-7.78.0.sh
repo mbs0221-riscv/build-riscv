@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=curl
 export VERSION=7.78.0
 # Release:        1%{?dist}
+# Group:          Network
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://curl.se/download/curl-7.78.0.tar.xz
@@ -11,7 +12,7 @@ export SOURCE=curl-7.78.0.tar.xz
 # Requires(post): info
 # Requires(preun): info
 # %description
-# # A helloworld program from the packagecloud.io blog!
+# A helloworld program from the packagecloud.io blog!
 # pre
 pre
 # pre

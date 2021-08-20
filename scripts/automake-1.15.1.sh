@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=automake
 export VERSION=1.15.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/automake/automake-1.15.1.tar.xz

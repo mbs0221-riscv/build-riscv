@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libtool
 export VERSION=2.4.6
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.xz

@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=rpcsvc-proto
 export VERSION=1.4.2
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=url

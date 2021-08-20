@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libpcap
 export VERSION=1.9.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://www.us.tcpdump.org/release/libpcap-1.9.1.tar.gz

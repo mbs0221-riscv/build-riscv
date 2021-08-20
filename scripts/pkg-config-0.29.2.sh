@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=pkg-config
 export VERSION=0.29.2
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz

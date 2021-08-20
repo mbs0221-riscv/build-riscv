@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=guile
 export VERSION=3.0.7
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://mirror.easyname.at/gnu/guile/guile-3.0.7.tar.xz

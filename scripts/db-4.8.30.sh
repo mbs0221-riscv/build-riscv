@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=db
 export VERSION=4.8.30
 # Release:        1%{?dist}
+# Group:          Database
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://src.fedoraproject.org/repo/pkgs/db4/db-4.8.30.tar.gz/f80022099c5742cd179343556179aa8c/db-4.8.30.tar.gz
@@ -17,7 +18,7 @@ prep
 # setup
 setup
 cd build_unix/
-../dist/configure --prefix=$SYSROOT/usr/local \
+../dist/configure --prefix=$SYSROOT/usr \
                   --host=riscv64-unknown-linux-gnu
 # build
 build
@@ -31,6 +32,6 @@ make install
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 epilog

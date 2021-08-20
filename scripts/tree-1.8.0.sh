@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=tree
 export VERSION=1.8.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://mama.indstate.edu/users/ice/tree/src/tree-1.8.0.tgz

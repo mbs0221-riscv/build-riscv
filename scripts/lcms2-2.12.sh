@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=lcms2
 export VERSION=2.12
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://downloads.sourceforge.net/lcms/lcms2-2.12.tar.gz

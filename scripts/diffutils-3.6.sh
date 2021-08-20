@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=diffutils
 export VERSION=3.6
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/diffutils/diffutils-3.6.tar.xz

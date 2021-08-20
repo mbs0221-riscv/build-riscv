@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=bzip2
 export VERSION=1.0.6
 # Release:        1%{?dist}
+# Group:          Compression
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://sourceforge.net/projects/bzip2/files/bzip2-1.0.6.tar.gz

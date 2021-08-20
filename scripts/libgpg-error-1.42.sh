@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libgpg-error
 export VERSION=1.42
 # Release:        1%{?dist}
+# Group:          GnuPG
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.42.tar.bz2

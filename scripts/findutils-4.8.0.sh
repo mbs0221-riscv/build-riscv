@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=findutils
 export VERSION=4.8.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/findutils/findutils-4.8.0.tar.xz

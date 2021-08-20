@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=mbedtls
 export VERSION=3.0.0
 # Release:        1%{?dist}
+# Group:          Benchmark
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/ARMmbed/mbedtls/archive/refs/tags/v3.0.0.tar.gz
@@ -16,22 +17,23 @@ export SOURCE=v3.0.0.tar.gz
 prep
 # setup
 setup
+export CC=riscv64-unknown-linux-gnu-gcc
+test -d build || mkdir build
+cd build &&
+cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr/ \
+      -DUSE_SHARED_MBEDTLS_LIBRARY=On ../
 # build
 build
-export CC=riscv64-unknown-linux-gnu-gcc
-mkdir build &&
 cd build &&
-cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr/local/ \
-      -DUSE_SHARED_MBEDTLS_LIBRARY=On ../
 make -j$(nproc)
 # install
 install
-cd build
+cd build &&
 make install
 # clean
 clean
 
 # %files
-# path: /usr/local/
+# path: /usr/
 # %defattr(-,root,root,-)
 epilog

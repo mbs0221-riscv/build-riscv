@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=gperf
 export VERSION=3.1
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/pub/gnu/gperf/gperf-3.1.tar.gz
@@ -22,7 +23,7 @@ export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
 export STRIP=riscv64-unknown-linux-gnu-strip
-./configure --prefix=$SYSROOT/usr/local/   \
+./configure --prefix=$SYSROOT/usr/   \
             --host=riscv64-unknown-linux-gnu    &&
 make -j$(nproc)
 # install
@@ -32,6 +33,6 @@ make install
 clean
 
 # %files
-# path: /usr/local/
+# path: /usr/
 # %defattr(-,root,root,-)
 epilog

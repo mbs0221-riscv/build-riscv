@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=mpc
 export VERSION=1.1.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz

@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=node
 export VERSION=v16.6.2
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/v16.6.2/node-v16.6.2.tar.gz
@@ -21,7 +22,7 @@ prep
 #wget https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/v16.6.2/node-v16.6.2.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
@@ -33,7 +34,7 @@ make install
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 # %config
 # %doc

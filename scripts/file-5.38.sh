@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=file
 export VERSION=5.38
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://repository.timesys.com/buildsources/f/file/file-5.38/file-5.38.tar.gz
@@ -16,10 +17,10 @@ export SOURCE=file-5.38.tar.gz
 prep
 # setup
 setup
-#./configure --prefix=$SYSROOT/usr/local/ \
+#./configure --prefix=$SYSROOT/usr/ \
 #            --host=riscv64-unknown-linux-gnu
-#make -j$(nproc) prefix=$SYSROOT/usr/local && make install prefix=$SYSROOT/usr/local
-./configure --prefix=$SYSROOT/usr/local/ \
+#make -j$(nproc) prefix=$SYSROOT/usr && make install prefix=$SYSROOT/usr/local
+./configure --prefix=$SYSROOT/usr/ \
             --host=riscv64-unknown-linux-gnu
 # build
 build
@@ -31,6 +32,6 @@ make install
 clean
 
 # %files
-# path: /usr/local/
+# path: /usr/
 # %defattr(-,root,root,-)
 epilog

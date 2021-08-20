@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=e2fsprogs
 export VERSION=1.43.9
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.43.9/e2fsprogs-1.43.9.tar.gz

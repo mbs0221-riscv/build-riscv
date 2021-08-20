@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=mutt
 export VERSION=2.1.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.mutt.org/pub/mutt/mutt-2.1.1.tar.gz

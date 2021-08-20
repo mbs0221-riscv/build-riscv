@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=shadow
 export VERSION=4.5
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/shadow-maint/shadow/releases/download/4.5/shadow-4.5.tar.xz

@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=tiff
 export VERSION=4.3.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://download.osgeo.org/libtiff/tiff-4.3.0.tar.gz

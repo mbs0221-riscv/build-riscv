@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=db
 export VERSION=5.3.28
 # Release:        1%{?dist}
+# Group:          Database
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://anduin.linuxfromscratch.org/BLFS/bdb/db-5.3.28.tar.gz

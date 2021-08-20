@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=XML-Parser
 export VERSION=2.46
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.46.tar.gz
@@ -23,7 +24,7 @@ prep
 setup
 # build
 build
-export DESTDIR=$SYSROOT/usr/local
+export DESTDIR=$SYSROOT/usr
 export CC=riscv64-unknown-linux-gnu-gcc
 export AR=riscv64-unknown-linux-gnu-ar
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
@@ -31,7 +32,7 @@ perl Makefile.PL
      CC=riscv64-unknown-linux-gnu-gcc \
      AR=riscv64-unknown-linux-gnu-ar \
      RANLIB=riscv64-unknown-linux-gnu-ranlib \
-     DESTDIR=$SYSROOT/usr/local &&
+     DESTDIR=$SYSROOT/usr &&
 make
 # install
 install
@@ -40,7 +41,7 @@ make install
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 # %config
 # %doc

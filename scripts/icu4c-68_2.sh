@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=icu4c
 export VERSION=68_2
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://github.com/unicode-org/icu/releases/download/release-68-2/icu4c-68_2-src.tgz

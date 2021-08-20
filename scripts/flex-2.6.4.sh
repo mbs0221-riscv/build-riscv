@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=flex
 export VERSION=2.6.4
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz

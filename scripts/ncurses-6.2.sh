@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=ncurses
 export VERSION=6.2
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.2.tar.gz

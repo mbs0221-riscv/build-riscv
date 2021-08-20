@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=nettle
 export VERSION=3.7
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.gnu.org/gnu/nettle/nettle-3.7.tar.gz

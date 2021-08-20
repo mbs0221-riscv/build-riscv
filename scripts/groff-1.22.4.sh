@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=groff
 export VERSION=1.22.4
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz
@@ -21,7 +22,7 @@ prep
 #wget http://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
@@ -33,7 +34,7 @@ make install
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 # %config
 # %doc
