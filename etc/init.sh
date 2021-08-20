@@ -108,29 +108,32 @@ fi
 
 USERNAME=ubuntu
 
-# sync rpm packages
-echo "sync and install rpm packages" 1>>$STDOUT
+# sync libs
+echo "sync libs" 1>>$STDOUT
+rsync -avzP -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/sysroot/lib/ /lib/ 1>>$STDOUT 2>>$STDERR
+
+# sync packages
+echo "sync rpm packages" 1>>$STDOUT
 test -d /tmp/rpms || mkdir -p /tmp/rpms
 rsync -avzP -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/rpmbuild/RPMS/ /tmp/rpms/ 1>>$STDOUT 2>>$STDERR
 
+# install packages
+echo "packages to be installed:" 1>>$STDOUT
+touch /root/.install
+grep -F -v -f /root/.install $NFS_ROOT/etc/packages.txt | sed 's/^#.*//g;/^$/d' 1>>$STDOUT
+grep -F -v -f /root/.install $NFS_ROOT/etc/packages.txt | sed 's/^#.*//g;/^$/d' | xargs -i rpm -i /tmp/rpms/x86_64/{}
+grep -F -v -f /root/.install $NFS_ROOT/etc/packages.txt | sed 's/^#.*//g;/^$/d' >> /root/.install
+
+# sync time
+ntpdate $IPREMOTE 1>>$STDOUT
+
 # benchmark
+echo "sync benchmarks"
 test -d /tmp/benchmark || mkdir /tmp/benchmark
 rsync -avzP --files-from=$NFS_HOME/benchmark/mibench/rsync.files \
 	-e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/benchmark/mibench/ /tmp/benchmark/mibench/ 1>>$STDOUT 2>>$STDERR
 
 rsync -avzP --files-from=$NFS_HOME/benchmark/riscv-coremark/rsync.files \
 	-e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/benchmark/riscv-coremark/ /tmp/benchmark/riscv-coremark/ 1>>$STDOUT 2>>$STDERR
-
-test -f .install || (
-  echo "packages ignored:" 1>>$STDOUT
-  cat $NFS_ROOT/etc/packages.txt | grep -E '^#.*' 1>>$STDOUT
-  echo "packages to be installed:" 1>>$STDOUT
-  cat $NFS_ROOT/etc/packages.txt | sed 's/^#.*//g;/^$/d' 1>>$STDOUT
-  cat $NFS_ROOT/etc/packages.txt | sed 's/^#.*//g;/^$/d' | xargs -i rpm -i /tmp/rpms/x86_64/{} 1>>$STDOUT
-) && touch .install
-
-test -f .ntpdate || (
-  ntpdate $IPREMOTE 1>>$STDOUT && \
-) && touch .ntpdate
 
 exit 0
