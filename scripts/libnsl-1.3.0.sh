@@ -1,26 +1,30 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libuuid
-export VERSION=1.0.3
+export NAME=libnsl
+export VERSION=1.3.0
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://sourceforge.net/projects/libuuid/files/libuuid-1.0.3.tar.gz
-export SOURCE=libuuid-1.0.3.tar.gz
+export URL=https://github.com/thkukuk/libnsl/releases/download/v1.3.0/libnsl-1.3.0.tar.xz
+export SOURCE=libnsl-1.3.0.tar.xz
 # Requires(post): info
 # Requires(preun): info
 # %description
 # A helloworld program from the packagecloud.io blog!
 # pre
+pre
+# pre
+post
+# pre
 prep
 # setup
 setup
+./configure --prefix=$SYSROOT/usr \
+            --host=riscv64-unknown-linux-gnu \
 # build
 build
-./configure --prefix=$SYSROOT/usr               \
-            --host=riscv64-unknown-linux-gnu               &&
 make -j$(nproc)
 # install
 install
@@ -29,6 +33,8 @@ make install
 clean
 
 # %files
-# path: /usr/
+# path: /usr
 # %defattr(-,root,root,-)
+# %config
+# %doc
 epilog

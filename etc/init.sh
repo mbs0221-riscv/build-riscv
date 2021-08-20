@@ -110,7 +110,8 @@ USERNAME=ubuntu
 
 # sync libs
 echo "sync libs" 1>>$STDOUT
-rsync -avzP -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/sysroot/lib/ /lib/ 1>>$STDOUT 2>>$STDERR
+rsync -avzP -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/sysroot/lib/     /lib/     1>>$STDOUT 2>>$STDERR
+rsync -avzP -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/sysroot/usr/lib/ /usr/lib/ 1>>$STDOUT 2>>$STDERR
 
 # sync packages
 echo "sync rpm packages" 1>>$STDOUT

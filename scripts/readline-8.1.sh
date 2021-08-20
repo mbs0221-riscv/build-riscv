@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=readline
 export VERSION=8.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.gnu.org/gnu/readline/readline-8.1.tar.gz

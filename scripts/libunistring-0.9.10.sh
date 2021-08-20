@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libunistring
 export VERSION=0.9.10
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://mirror.easyname.at/gnu/libunistring/libunistring-0.9.10.tar.xz

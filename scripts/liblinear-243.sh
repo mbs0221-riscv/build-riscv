@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=liblinear
 export VERSION=243
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/cjlin1/liblinear/archive/v243/liblinear-243.tar.gz

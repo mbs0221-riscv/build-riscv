@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libatomic_ops
 export VERSION=7.6.10
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.hboehm.info/gc/gc_source/libatomic_ops-7.6.10.tar.gz

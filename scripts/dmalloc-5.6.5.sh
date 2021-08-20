@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=dmalloc
 export VERSION=5.6.5
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://dmalloc.com/releases/dmalloc-5.6.5.tgz

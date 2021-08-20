@@ -1,5 +1,5 @@
 # libs
-attr-2.4.47-1.x86_64.rpm
+#attr-2.4.47-1.x86_64.rpm
 acl-2.2.52-1.x86_64.rpm
 #lcov-1.15-1.x86_64.rpm
 #ncurses-6.2-1.x86_64.rpm
@@ -70,9 +70,9 @@ nfs-utils-2.5.3-1.x86_64.rpm
 pptpd-1.4.0-1.x86_64.rpm
 popt-1.18-1.x86_64.rpm
 #rsync-3.1.2-1.x86_64.rpm
-dropbear-2020.81-1.x86_64.rpm
+#dropbear-2020.81-1.x86_64.rpm
 openssh-8.6p1-1.x86_64.rpm
-vsftpd-3.0.4-1.x86_64.rpm
+#vsftpd-3.0.4-1.x86_64.rpm
 
 # download
 axel-2.17.10-1.x86_64.rpm

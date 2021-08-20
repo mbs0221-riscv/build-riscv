@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libffi
 export VERSION=3.4.2
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz
@@ -18,7 +19,7 @@ prep
 setup
 # build
 build
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --enable-shared \
             --with-sysroot &&
@@ -30,6 +31,6 @@ make install
 clean
 
 # %files
-# path: /usr/local/
+# path: /usr/
 # %defattr(-,root,root,-)
 epilog

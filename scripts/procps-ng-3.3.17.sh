@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=procps-ng
 export VERSION=3.3.17
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.17.tar.xz

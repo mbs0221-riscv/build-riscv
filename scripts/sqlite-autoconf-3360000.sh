@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=sqlite-autoconf
 export VERSION=3360000
 # Release:        1%{?dist}
+# Group:          Database
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=url
@@ -16,7 +17,7 @@ export SOURCE=sqlite-autoconf-3360000.tar.gz
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local/ \
+./configure --prefix=$SYSROOT/usr/ \
             --host=riscv64-unknown-linux-gnu
 # build
 build
@@ -28,6 +29,6 @@ make install
 clean
 
 # %files
-# path: /usr/local/
+# path: /usr/
 # %defattr(-,root,root,-)
 epilog

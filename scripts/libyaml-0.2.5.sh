@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libyaml
 export VERSION=0.2.5
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/yaml/libyaml/archive/0.2.5/libyaml-0.2.5.tar.gz
@@ -17,7 +18,7 @@ prep
 # setup
 setup
 ./bootstrap &&
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --disable-static
 # build
@@ -30,7 +31,7 @@ make install
 clean
 
 # %files
-# path: /usr/local/
+# path: /usr/
 # %defattr(-,root,root,-)
 # %config
 # %doc

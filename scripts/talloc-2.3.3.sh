@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=talloc
 export VERSION=2.3.3
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.samba.org/ftp/talloc/talloc-2.3.3.tar.gz

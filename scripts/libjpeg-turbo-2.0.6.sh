@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libjpeg-turbo
 export VERSION=2.0.6
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-2.0.6.tar.gz

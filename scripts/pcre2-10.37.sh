@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=pcre2
 export VERSION=10.37
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.pcre.org/pub/pcre/pcre2-10.37.tar.bz2
