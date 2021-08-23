@@ -1,5 +1,9 @@
 #!/bin/bash
 
+export SPECS=~/rpmbuild/SPECS
+export SOURCES=~/rpmbuild/SOURCES
+export BUILD=~/rpmbuild/BUILD
+
 function make_spec(){
 
         export SOURCE=$(echo $URL | sed 's/.*\///')
@@ -24,7 +28,7 @@ function make_spec(){
                 sed -i "s#\$name#$NAME#"       $SPECFILE && \
                 sed -i "s#\$version#$VERSION#" $SPECFILE && \
                 sed -i "s#\$url#$URL#"         $SPECFILE && \
-                sed -i "s#\$source#$SOURCE#"   $SPECFILE && \
+                sed -i "s#\$source#$URL#"   $SPECFILE && \
                 sed -i "s#-j8#-j\$(nproc)#"    $SPECFILE
 
         cat $SPECFILE

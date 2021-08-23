@@ -21,15 +21,19 @@ post
 prep
 # setup
 setup -n x265_3.4
-mkdir build && cd build
+test build || mkdir build
+cd build
 export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
-cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr %{_builddir}/x265_3.4/source/
+export LDFLAGS="$LDFLAGS -ldl"
+cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr $BUILD/x265_3.4/source/
 # build
 build
+cd build
 make -j$(nproc)
 # install
 install
+cd build
 make install
 # clean
 clean

@@ -13,8 +13,9 @@ export SPECS=~/rpmbuild/SPECS
 export SOURCES=~/rpmbuild/SOURCES
 export BUILD=~/rpmbuild/BUILD
 
+export SYSROOT=$ROOTFS
+
 export SPECFILE=$1
-export TEMPSPEC=temp.spec
 
 info=$(./convert.sh $SPECFILE)
 echo $info
@@ -28,9 +29,3 @@ cd $(dirname $filename)
 
 # run generated scripts
 bash $(basename $filename)
-
-# generate rpm package automatically
-if [ $? -eq 0 ]; then
-        cd $SPECS
-#        rpmbuild -bb $SPECFILE
-fi

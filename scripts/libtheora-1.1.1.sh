@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=lame
-export VERSION=3.100
+export NAME=libtheora
+export VERSION=1.1.1
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://downloads.sourceforge.net/lame/lame-3.100.tar.gz
-export SOURCE=lame-3.100.tar.gz
+export URL=https://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.xz
+export SOURCE=libtheora-1.1.1.tar.xz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -21,11 +21,9 @@ post
 prep
 # setup
 setup
-export CFLAGS="$CFLAGS -I$SYSROOT/include -I$SYSROOT/include/ncurses"
-export LDFLAGS="$CFLAGS -L$SYSROOT/lib"
+sed -i 's/png_\(sizeof\)/\1/g' examples/png2theora.c &&
 ./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
-            --enable-mp3rtp
 # build
 build
 make -j$(nproc)

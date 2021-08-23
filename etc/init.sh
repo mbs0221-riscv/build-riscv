@@ -76,7 +76,8 @@ cat /root/.install | sed '/^$/d' | sort | uniq > /root/.install
 cat $NFS_ROOT/etc/packages.txt | grep '^*' | sed 's/*//' | sort | uniq > /root/.init-packages
 cat $NFS_ROOT/etc/packages.txt | grep -v -E '\*|#|^$' | sort | uniq > /root/.packages
 
-echo "install init-packages" 1>>$STDOUT
+echo "install init-packages:" 1>>$STDOUT
+grep -F -v -f /root/.install /root/.init-packages 1>>$STDOUT
 grep -F -v -f /root/.install /root/.init-packages | xargs -i rpm -i $RPMS/{}
 grep -F -v -f /root/.install /root/.init-packages >> /root/.install
 
@@ -111,9 +112,10 @@ USERNAME=ubuntu
 
 test -d /tmp/rpms || mkdir -p /tmp/rpms
 
-echo "sync and install rpm packages" 1>>$STDOUT
-rsync -avzP --files-from=/root/.packages -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/rpmbuild/RPMS/ /tmp/rpms/
-grep -F -v -f /root/.install /root/.packages | xargs -i rpm -i /tmp/rpms/x86_64/{}
+echo "sync and install rpm packages:" 1>>$STDOUT
+
+rsync -avzP --files-from=/root/.packages -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/rpmbuild/RPMS/x86_64/ /tmp/rpms/
+grep -F -v -f /root/.install /root/.packages | xargs -i rpm -i /tmp/rpms/{}
 grep -F -v -f /root/.install /root/.packages >> /root/.install
 
 echo "sync benchmarks" 1>>$STDOUT

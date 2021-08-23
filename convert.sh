@@ -33,6 +33,7 @@ sed -i "s/URL:            /export URL=/" $target
 # CONFIGURE
 sed -i "s/%buildroot/\$SYSROOT/g" $target
 sed -i "s/%_sourcedir/\$SOURCES/g" $target
+sed -i "s/%_builddir/\$BUILD/g" $target
 
 # SPEC COMMAND
 sed -i "s/%pre/# pre\npre/" $target

@@ -16,21 +16,11 @@ export BUILD=~/rpmbuild/BUILD
 export SPECFILE=$1
 export TEMPSPEC=temp.spec
 
-info=$(./convert.sh $SPECFILE)
-echo $info
+cp $SPECFILE $TEMPSPEC
+sed -i 's/%buildroot/$SYSROOT/g' $TEMPSPEC
+cat $TEMPSPEC
 
-# content of generated scripts
-filename=$(echo $info | sed 's/.* in //')
-cat $filename
+rpmbuild -bi $TEMPSPEC 
 
-# change directory
-cd $(dirname $filename)
+exit 0
 
-# run generated scripts
-bash $(basename $filename)
-
-# generate rpm package automatically
-if [ $? -eq 0 ]; then
-        cd $SPECS
-#        rpmbuild -bb $SPECFILE
-fi
