@@ -31,5 +31,5 @@ bash $(basename $filename)
 # generate rpm package automatically
 if [ $? -eq 0 ]; then
         cd $SPECS
-        rpmbuild -bb $SPECFILE
+#        rpmbuild -bb $SPECFILE
 fi

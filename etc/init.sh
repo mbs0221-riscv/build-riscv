@@ -69,24 +69,21 @@ touch /home/kiki/.ssh/config
 chmod 600 /home/ubuntu/.ssh/config
 chmod 600 /home/kiki/.ssh/config
 
-# rsync
-test $(which rsync) || \
-	rpm -i $RPMS/attr-2.4.47-1.x86_64.rpm && \
-	rpm -i $RPMS/rsync-3.1.2-1.x86_64.rpm
+# ===========================================================
+# install init-packages
+touch /root/.install
+cat /root/.install | sed '/^$/d' | sort | uniq > /root/.install
+cat $NFS_ROOT/etc/packages.txt | grep '^*' | sed 's/*//' | sort | uniq > /root/.init-packages
+cat $NFS_ROOT/etc/packages.txt | grep -v -E '\*|#|^$' | sort | uniq > /root/.packages
 
-# dropbear
-test $(which dropbear) || \
-	rpm -i $RPMS/zlib-1.2.11-1.x86_64.rpm && \
-	rpm -i $RPMS/dropbear-2020.81-1.x86_64.rpm
-
-# vsftpd
-test $(which vsftpd) || \
-	rpm -i vsftpd-3.0.4-1.x86_64.rpm
+echo "install init-packages" 1>>$STDOUT
+grep -F -v -f /root/.install /root/.init-packages | xargs -i rpm -i $RPMS/{}
+grep -F -v -f /root/.install /root/.init-packages >> /root/.install
 
 # dropbear
 test -e /var/run/dropbear.pid || \
-	/usr/local/sbin/dropbear -E -R -p 2222 1>>$STDOUT 2>>$STDERR
-echo dropbear is running 1>>$STDOUT
+	/usr/sbin/dropbear -E -R -p 2222 1>>$STDOUT 2>>$STDERR && \
+	echo dropbear is running 1>>$STDOUT
 
 # generate private key
 test -e /root/.ssh/id_dropbear || \
@@ -106,30 +103,20 @@ else
 	echo "add host: $IPREMOTE $PEERNAME" 1>>$STDOUT
 fi
 
-USERNAME=ubuntu
-
-# sync libs
-echo "sync libs" 1>>$STDOUT
-rsync -avzP -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/sysroot/lib/     /lib/     1>>$STDOUT 2>>$STDERR
-rsync -avzP -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/sysroot/usr/lib/ /usr/lib/ 1>>$STDOUT 2>>$STDERR
-
-# sync packages
-echo "sync rpm packages" 1>>$STDOUT
-test -d /tmp/rpms || mkdir -p /tmp/rpms
-rsync -avzP -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/rpmbuild/RPMS/ /tmp/rpms/ 1>>$STDOUT 2>>$STDERR
-
-# install packages
-echo "packages to be installed:" 1>>$STDOUT
-touch /root/.install
-grep -F -v -f /root/.install $NFS_ROOT/etc/packages.txt | sed 's/^#.*//g;/^$/d' 1>>$STDOUT
-grep -F -v -f /root/.install $NFS_ROOT/etc/packages.txt | sed 's/^#.*//g;/^$/d' | xargs -i rpm -i /tmp/rpms/x86_64/{}
-grep -F -v -f /root/.install $NFS_ROOT/etc/packages.txt | sed 's/^#.*//g;/^$/d' >> /root/.install
-
-# sync time
+# sync datetime
 ntpdate $IPREMOTE 1>>$STDOUT
 
-# benchmark
-echo "sync benchmarks"
+# install packages
+USERNAME=ubuntu
+
+test -d /tmp/rpms || mkdir -p /tmp/rpms
+
+echo "sync and install rpm packages" 1>>$STDOUT
+rsync -avzP --files-from=/root/.packages -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/rpmbuild/RPMS/ /tmp/rpms/
+grep -F -v -f /root/.install /root/.packages | xargs -i rpm -i /tmp/rpms/x86_64/{}
+grep -F -v -f /root/.install /root/.packages >> /root/.install
+
+echo "sync benchmarks" 1>>$STDOUT
 test -d /tmp/benchmark || mkdir /tmp/benchmark
 rsync -avzP --files-from=$NFS_HOME/benchmark/mibench/rsync.files \
 	-e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/benchmark/mibench/ /tmp/benchmark/mibench/ 1>>$STDOUT 2>>$STDERR

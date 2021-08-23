@@ -32,7 +32,7 @@ build
 make -j$(nproc)
 # install
 install
-make install install-dev install-lib
+sudo make install install-dev install-lib
 # clean
 clean
 

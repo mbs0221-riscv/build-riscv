@@ -9,5 +9,5 @@ INSTALL_MOD_PATH=$ROOTFS make modules_install -j$(nproc) ARCH=riscv CROSS_COMPIL
 rm $ROOTFS/lib/modules/5.14.0-rc3-dirty/build
 rm $ROOTFS/lib/modules/5.14.0-rc3-dirty/source
 make -j$(nproc) ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu-
-ls -l ~/linux/arch/riscv/boot/Image
+ls -lh ~/linux/arch/riscv/boot/Image
 

@@ -29,7 +29,7 @@ build
 make -j$(nproc)
 # install
 install
-make install
+sudo make install
 # clean
 clean
 

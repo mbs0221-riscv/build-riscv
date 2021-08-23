@@ -1,10 +1,14 @@
+# Packages with * is installed first.
+# Packages without * is installed later.
+# Packagas with # is not to be installed.
+
 # libs
-#attr-2.4.47-1.x86_64.rpm
+*attr-2.4.47-1.x86_64.rpm
 acl-2.2.52-1.x86_64.rpm
 #lcov-1.15-1.x86_64.rpm
 #ncurses-6.2-1.x86_64.rpm
 readline-8.1-1.x86_64.rpm
-#openssl-1.1.1k-1.x86_64.rpm
+openssl-1.1.1k-1.x86_64.rpm
 libarchive-3.5.1-1.x86_64.rpm
 libbytesize-2.6-1.x86_64.rpm
 libcap-2.48-1.x86_64.rpm
@@ -56,7 +60,7 @@ gzip-1.10-1.x86_64.rpm
 lzo-2.10-1.x86_64.rpm
 #xz-5.2.3-1.x86_64.rpm
 xz-5.2.5-1.x86_64.rpm
-#zlib-1.2.11-1.x86_64.rpm
+*zlib-1.2.11-1.x86_64.rpm
 zstd-1.4.8-1.x86_64.rpm
 
 # file system
@@ -66,14 +70,14 @@ libtirpc-1.3.2-1.x86_64.rpm
 nfs-utils-2.5.3-1.x86_64.rpm
 
 # network
-#ppp-2.4.9-1.x86_64.rpm
+ppp-2.4.9-1.x86_64.rpm
 pptpd-1.4.0-1.x86_64.rpm
-popt-1.18-1.x86_64.rpm
-#libiconv-1.16-1.x86_64.rpm
-#rsync-3.1.2-1.x86_64.rpm
-#dropbear-2020.81-1.x86_64.rpm
+*popt-1.18-1.x86_64.rpm
+*libiconv-1.16-1.x86_64.rpm
+*rsync-3.1.2-1.x86_64.rpm
+*dropbear-2020.81-1.x86_64.rpm
 openssh-8.6p1-1.x86_64.rpm
-#vsftpd-3.0.4-1.x86_64.rpm
+*vsftpd-3.0.4-1.x86_64.rpm
 
 # download
 axel-2.17.10-1.x86_64.rpm
@@ -83,7 +87,7 @@ libssh2-1.9.0-1.x86_64.rpm
 curl-7.78.0-1.x86_64.rpm
 
 # time
-ntp-4.2.8p15-1.x86_64.rpm
+*ntp-4.2.8p15-1.x86_64.rpm
 tzdb-2021a-1.x86_64.rpm
 
 # nghttp2
@@ -130,14 +134,14 @@ memcached-1.6.9-1.x86_64.rpm
 redis-6.2.5-1.x86_64.rpm
 
 # crypto
-p11-kit-0.24.0-1.x86_64.rpm
+#p11-kit-0.24.0-1.x86_64.rpm
 
 # [applications]
-bash-5.1.8-1.x86_64.rpm
-Python-3.9.6-1.x86_64.rpm
+#bash-5.1.8-1.x86_64.rpm
+#Python-3.9.6-1.x86_64.rpm
 
 # [multi-media]
 # image
-tiff-4.3.0-1.x86_64.rpm
+#tiff-4.3.0-1.x86_64.rpm
 # sound
-libsndfile-1.0.31-1.x86_64.rpm
+#libsndfile-1.0.31-1.x86_64.rpm
