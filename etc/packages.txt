@@ -53,6 +53,7 @@ ntbtls-0.2.0-1.x86_64.rpm
 npth-1.6-1.x86_64.rpm
 gpgme-1.16.0-1.x86_64.rpm
 scute-1.7.0-1.x86_64.rpm
+gnupg-2.2.29-1.x86_64.rpm
 
 # compression
 bzip2-1.0.6-1.x86_64.rpm
@@ -139,6 +140,7 @@ p11-kit-0.24.0-1.x86_64.rpm
 # [applications]
 bash-5.1.8-1.x86_64.rpm
 #Python-3.9.6-1.x86_64.rpm
+AFL-2.57b-1.x86_64.rpm
 
 # [multi-media]
 # image

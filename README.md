@@ -86,6 +86,25 @@ mount -t nfs -o nolock,rsize=65536,wsize=65536,tcp $IPREMOTE:/home/ubuntu $NFS_H
 mount -t nfs -o nolock,rsize=65536,wsize=65536,tcp $IPREMOTE:/nfsroot     $NFS_ROOT
 ```
 
+NFS Performace
+```
+[root@vc709 ~]#time dd if=/dev/zero of=$NFS_HOME/testfile.dat bs=8k count=1024
+1024+0 records in
+1024+0 records out
+8388608 bytes (8.0MB) copied, 32.149532 seconds, 254.8KB/s
+real	0m 32.17s
+user	0m 0.01s
+sys	0m 1.67s
+[root@vc709 ~]#time dd of=/dev/null if=$NFS_HOME/testfile.dat bs=8k
+1024+0 records in
+1024+0 records out
+8388608 bytes (8.0MB) copied, 29.926615 seconds, 273.7KB/s
+real	0m 29.95s
+user	0m 0.03s
+sys	0m 1.16s
+[root@vc709 ~]#
+```
+
 ## build library and software
 build rpm packages
 * Install and configure rpmbuild
