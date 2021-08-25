@@ -28,3 +28,8 @@ afl-fuzz -i testcase -o sync_dir -M fuzzer01 ./afl_test
 afl-fuzz -i testcase -o sync_dir -S fuzzer02 ./afl_test
 afl-fuzz -i testcase -o sync_dir -S fuzzer03 ./afl_test
 afl-fuzz -i testcase -o sync_dir -S fuzzer04 ./afl_test
+
+afl-fuzz -i - -o sync_dir -M fuzzer01 zstd
+afl-fuzz -i - -o sync_dir -S fuzzer02 zstd
+afl-fuzz -i - -o sync_dir -S fuzzer03 zstd
+afl-fuzz -i - -o sync_dir -S fuzzer04 zstd
