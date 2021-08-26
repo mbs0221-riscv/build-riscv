@@ -237,7 +237,7 @@ rsync -avzp ~/benchmark/mibench/ --exclude=.git -e 'dbclient -y -p 2222' root@vc
 rsync -avzP -e 'dbclient -y -p 2222' root@vc709:/tmp/benchmark/mibench/ ~/benchmark/mibench/
 ```
 
-## Running AFL on Rocketchip
+## Run afl-fuzz on riscv-linux
 * [afl-fuzz on ppc](https://mykter.com/2016/04/27/afl-on-ppc)
 
 ## Reference
