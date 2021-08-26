@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libpsl
-export VERSION=0.21.1
+export NAME=cfitsio
+export VERSION=4.0.0
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://github.com/rockdaboot/libpsl/releases/download/0.21.1/libpsl-0.21.1.tar.gz
-export SOURCE=libpsl-0.21.1.tar.gz
+export URL=http://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio-4.0.0.tar.gz
+export SOURCE=cfitsio-4.0.0.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description

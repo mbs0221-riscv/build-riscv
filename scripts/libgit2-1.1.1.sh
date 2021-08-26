@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libpsl
-export VERSION=0.21.1
+export NAME=libgit2
+export VERSION=1.1.1
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://github.com/rockdaboot/libpsl/releases/download/0.21.1/libpsl-0.21.1.tar.gz
-export SOURCE=libpsl-0.21.1.tar.gz
+export URL=https://github.com/libgit2/libgit2/archive/refs/tags/v1.1.1.tar.gz
+export SOURCE=v1.1.1.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -21,14 +21,20 @@ post
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
-            --host=riscv64-unknown-linux-gnu \
+export CC=riscv64-unknown-linux-gnu-gcc
+export CXX=riscv64-unknown-linux-gnu-g++
+test -d build || mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr \
+         -DCMAKE_FIND_ROOT_PATH=$SYSROOT \
 # build
 build
-make -j$(nproc)
+cd build
+cmake --build .
 # install
 install
-make install
+cd build
+cmake --build . --target install
 # clean
 clean
 

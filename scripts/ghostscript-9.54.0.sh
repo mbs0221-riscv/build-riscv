@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libpsl
-export VERSION=0.21.1
+export NAME=ghostscript
+export VERSION=9.54.0
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://github.com/rockdaboot/libpsl/releases/download/0.21.1/libpsl-0.21.1.tar.gz
-export SOURCE=libpsl-0.21.1.tar.gz
+export URL=https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9540/ghostscript-9.54.0.tar.xz
+export SOURCE=ghostscript-9.54.0.tar.xz
 # Requires(post): info
 # Requires(preun): info
 # %description

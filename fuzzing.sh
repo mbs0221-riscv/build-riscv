@@ -1,10 +1,15 @@
 #!/bin/bash
 
+# build AFL-riscv.rpm
+rpmbuild -ba AFL-2.57b.spec
+
 # build afl-clang-fast
-make && sudo make install
+make && make -c llvm_mode
+sudo make install
 
 # cross-compile llvm-mode
 export CC=clang
+export CXX=clang
 export CFLAGS="--gcc-toolchain=$TOOLCHAIN --sysroot=$SYSROOT --target=$TARGET -march=$MARCH"
 export AFL_NO_X86=1
 export LLVM_CONFIG=/usr/bin/llvm-config-12
@@ -21,7 +26,6 @@ afl-clang-fast --gcc-toolchain=$TOOLCHAIN --sysroot=$SYSROOT --target=$TARGET -m
 rsync -azvpP --exclude=output ~/test/ -e 'dbclient -p 2222' root@vc709:~/test/
 
 # run on vc709
-cp -p $NFS_HOME/AFL-2.57b/afl-fuzz /usr/bin/
 AFL_SKIP_CPUFREQ=1 afl-fuzz -i testcase -o output ./afl_test
 
 afl-fuzz -i testcase -o sync_dir -M fuzzer01 ./afl_test

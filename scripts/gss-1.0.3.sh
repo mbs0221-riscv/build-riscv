@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libpsl
-export VERSION=0.21.1
+export NAME=gss
+export VERSION=1.0.3
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://github.com/rockdaboot/libpsl/releases/download/0.21.1/libpsl-0.21.1.tar.gz
-export SOURCE=libpsl-0.21.1.tar.gz
+export URL=http://gnu.askapache.com/gss/gss-1.0.3.tar.gz
+export SOURCE=gss-1.0.3.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
