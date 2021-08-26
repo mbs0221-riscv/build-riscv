@@ -237,6 +237,9 @@ rsync -avzp ~/benchmark/mibench/ --exclude=.git -e 'dbclient -y -p 2222' root@vc
 rsync -avzP -e 'dbclient -y -p 2222' root@vc709:/tmp/benchmark/mibench/ ~/benchmark/mibench/
 ```
 
+## Running AFL on Rocketchip
+* [afl-fuzz on ppc](https://mykter.com/2016/04/27/afl-on-ppc)
+
 ## Reference
 * [Connecting to your Raspberry Pi Console via the Serial Cable](https://medium.com/@sarala.saraswati/connecting-to-your-raspberry-pi-console-via-the-serial-cable-44d7df95f03e)
 * [Connect the Raspberry Pi to Network Using UART](https://www.instructables.com/Connect-the-Raspberry-Pi-to-network-using-UART/)
