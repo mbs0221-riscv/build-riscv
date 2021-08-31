@@ -1,5 +1,6 @@
 #!/bin/bash
 
+CONFIG=${1:-RocketVC709Config}
 LONG_NAME=chipyard.fpga.vc709.VC709FPGATestHarness.$CONFIG
 
 export CHIPYAR=~/chipyard
@@ -22,6 +23,9 @@ cd $FPGA
 make -j$(nproc) SUB_PROJECT=vc709 CONFIG=$CONFIG mcs
 
 # boot the board from mcs
+if [ ! $1 ]; then
+	exit 0
+fi
 
 echo upload: $MCS
 echo upload: $PRM
