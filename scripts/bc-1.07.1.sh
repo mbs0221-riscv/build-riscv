@@ -22,7 +22,7 @@ prep
 #wget http://ftp.gnu.org/gnu/bc/bc-1.07.1.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --with-readline
 # build

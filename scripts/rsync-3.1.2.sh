@@ -20,7 +20,7 @@ prep
 # setup
 setup
 sudo apt install doxygen
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu &&
 # build
 build

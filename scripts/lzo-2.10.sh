@@ -17,11 +17,11 @@ export SOURCE=lzo-2.10.tar.gz
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
        	    --enable-shared                  \
        	    --disable-static                 \
-       	    --docdir=$SYSROOT/usr/share/doc/lzo-2.10
+       	    --docdir=$BUILDROOT/usr/share/doc/lzo-2.10
 # build
 build
 make -j$(nproc)

@@ -32,7 +32,7 @@ export STRIP=riscv64-unknown-linux-gnu-strip
 make -j$(nproc) MALLOC=libc
 # install
 install
-make PREFIX=$SYSROOT/usr install
+make PREFIX=$BUILDROOT/usr install
 # clean
 clean
 

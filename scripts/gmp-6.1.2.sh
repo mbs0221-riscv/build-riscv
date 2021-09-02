@@ -19,7 +19,7 @@ export SOURCE=gmp-6.1.2.tar.xz
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

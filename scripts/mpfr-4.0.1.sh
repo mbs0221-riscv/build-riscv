@@ -20,7 +20,7 @@ prep
 # setup
 setup
 export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --with-gmp=$SYSROOT/usr \
             --enable-shared

@@ -22,7 +22,7 @@ prep
 #wget http://ftp.gnu.org/gnu/grep/grep-3.6.tar.xz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

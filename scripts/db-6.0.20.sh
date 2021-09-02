@@ -22,7 +22,7 @@ prep
 # setup
 setup
 cd build_unix
-../dist/configure --prefix=$SYSROOT/usr \
+../dist/configure --prefix=$BUILDROOT/usr \
                   --host=riscv64-unknown-linux-gnu
 # build
 build

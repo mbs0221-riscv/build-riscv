@@ -19,7 +19,7 @@ prep
 setup
 # build
 build
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --without-cxx \
             --without-cxx-binding \
@@ -31,7 +31,7 @@ make -j$(nproc)
 # install
 install
 make install
-cd $SYSROOT/usr/lib
+cd $BUILDROOT/usr/lib
 ln -s libncurses.so.6 libtinfo.so.6
 ln -s libtinfo.so.6 libtinfo.so
 # clean

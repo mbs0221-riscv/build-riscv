@@ -22,7 +22,7 @@ prep
 #wget https://mirror.easyname.at/gnu/libunistring/libunistring-0.9.10.tar.xz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

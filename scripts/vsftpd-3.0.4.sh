@@ -25,14 +25,14 @@ sed -i '2c CC?=gcc' Makefile
 make CC=riscv64-unknown-linux-gnu-gcc
 # install
 install
-mkdir -p $SYSROOT/etc
-mkdir -p $SYSROOT/usr/sbin/
-mkdir -p $SYSROOT/usr/man/man5
-mkdir -p $SYSROOT/usr/man/man8
-install -m 755 vsftpd        $SYSROOT/usr/sbin/vsftpd
-install -m 644 vsftpd.conf.5 $SYSROOT/usr/man/man5
-install -m 644 vsftpd.8      $SYSROOT/usr/man/man8
-install -m 664 vsftpd.conf   $SYSROOT/etc
+mkdir -p $BUILDROOT/etc
+mkdir -p $BUILDROOT/usr/sbin/
+mkdir -p $BUILDROOT/usr/man/man5
+mkdir -p $BUILDROOT/usr/man/man8
+install -m 755 vsftpd        $BUILDROOT/usr/sbin/vsftpd
+install -m 644 vsftpd.conf.5 $BUILDROOT/usr/man/man5
+install -m 644 vsftpd.8      $BUILDROOT/usr/man/man8
+install -m 664 vsftpd.conf   $BUILDROOT/etc
 # clean
 clean
 

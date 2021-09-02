@@ -22,7 +22,7 @@ prep
 #wget https://ftp.gnu.org/gnu/grub/grub-2.04.tar.xz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/ \
+./configure --prefix=$BUILDROOT/usr/ \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

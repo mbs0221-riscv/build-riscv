@@ -25,7 +25,7 @@ export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
 test -d build || mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr \
+cmake .. -DCMAKE_INSTALL_PREFIX=$BUILDROOT/usr \
          -DCMAKE_FIND_ROOT_PATH=$SYSROOT \
 # build
 build

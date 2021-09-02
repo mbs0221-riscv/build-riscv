@@ -21,7 +21,7 @@ setup
 build
 export CPPFLAGS=-I$SYSROOT/include
 export LDFLAGS=-L$SYSROOT/lib
-./configure --prefix=$SYSROOT/usr           \
+./configure --prefix=$BUILDROOT/usr           \
             --disable-unicode                    \
             --host=riscv64-unknown-linux-gnu     &&
 make -j$(nproc)

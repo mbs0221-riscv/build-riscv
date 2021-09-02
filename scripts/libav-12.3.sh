@@ -21,9 +21,12 @@ post
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+#export CC=afl-clang-fast
+#export CFLAGS="--gcc-toolchain=$TOOLCHAIN --sysroot=$SYSROOT --target=$TARGET -march=$MARCH -fPIC"
+./configure --prefix=$BUILDROOT/usr \
             --cross-prefix=riscv64-unknown-linux-gnu- \
-            --arch=riscv64gc \
+            --enable-cross-compile \
+            --arch=rv64gc \
             --target-os=linux
 # build
 build

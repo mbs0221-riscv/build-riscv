@@ -26,7 +26,7 @@ cd       build &&
 export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
 cmake -DCMAKE_BUILD_TYPE=Release \
-      -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr \
+      -DCMAKE_INSTALL_PREFIX=$BUILDROOT/usr \
       -DBUILD_STATIC_LIBS=OFF ..
 # build
 build

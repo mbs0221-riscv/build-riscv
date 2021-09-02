@@ -27,8 +27,8 @@ cd    build &&
 #export AR=riscv64-unknown-linux-gnu-ar
 #export RANLIB=riscv64-unknown-linux-gnu-ranlib
 #export STRIP=riscv64-unknown-linux-gnu-strip
-meson --prefix=$SYSROOT/usr --buildtype=release ..
-#./configure --prefix=$SYSROOT/usr \
+meson --prefix=$BUILDROOT/usr --buildtype=release ..
+#./configure --prefix=$BUILDROOT/usr \
 #            --host=riscv64-unknown-linux-gnu \
 # build
 build

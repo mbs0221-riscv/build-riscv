@@ -18,7 +18,7 @@ prep
 # setup
 setup
 ./bootstrap &&
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --disable-static
 # build

@@ -22,7 +22,7 @@ prep
 #wget http://ftp.gnu.org/gnu/automake/automake-1.15.1.tar.xz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

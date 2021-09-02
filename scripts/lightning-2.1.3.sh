@@ -22,7 +22,7 @@ prep
 #wget https://mirror.easyname.at/gnu/lightning/lightning-2.1.3.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

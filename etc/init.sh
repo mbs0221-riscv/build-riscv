@@ -114,8 +114,8 @@ test -d /tmp/rpms || mkdir -p /tmp/rpms
 
 echo "sync and install rpm packages:" 1>>$STDOUT
 
-rsync -avzP --files-from=/root/.packages -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/rpmbuild/RPMS/x86_64/ /tmp/rpms/
-grep -F -v -f /root/.install /root/.packages | xargs -i rpm -i /tmp/rpms/{}
+rsync -avzP --files-from=/root/.packages -e 'dbclient -y -p 2222' $USERNAME@$PEERNAME:~/rpmbuild/RPMS/x86_64/ /var/www/RPMS/x86_64/
+grep -F -v -f /root/.install /root/.packages | xargs -i rpm -i /var/www/RPMS/x86_64/{}
 grep -F -v -f /root/.install /root/.packages >> /root/.install
 
 echo "sync benchmarks" 1>>$STDOUT

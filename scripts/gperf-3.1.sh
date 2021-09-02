@@ -23,7 +23,7 @@ export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
 export STRIP=riscv64-unknown-linux-gnu-strip
-./configure --prefix=$SYSROOT/usr/   \
+./configure --prefix=$BUILDROOT/usr/   \
             --host=riscv64-unknown-linux-gnu    &&
 make -j$(nproc)
 # install

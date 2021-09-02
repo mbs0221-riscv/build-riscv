@@ -20,7 +20,7 @@ setup -n libevent-2.1.12-stable
 # build
 build
 sed -i 's/python/&3/' event_rpcgen.py
-./configure --prefix=$SYSROOT/usr                     \
+./configure --prefix=$BUILDROOT/usr                     \
             --host=riscv64-unknown-linux-gnu               \
             --enable-shared                                &&
 make -j$(nproc)

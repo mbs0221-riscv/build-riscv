@@ -2,7 +2,7 @@
 
 echo =========Setup Routing and NAT=======
 
-#iptables -F
+iptables -F
 #iptables -X
 #iptables -Z
 #iptables -P INPUT ACCEPT

@@ -26,10 +26,12 @@ setup
 build
 export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
+#export CC=afl-clang-fast
+#export CFLAGS="--gcc-toolchain=$TOOLCHAIN --sysroot=$SYSROOT --target=$TARGET -march=$MARCH"
 make -j$(nproc)
 # install
 install
-make install PREFIX=$SYSROOT/usr
+make install PREFIX=$BUILDROOT/usr
 # clean
 clean
 

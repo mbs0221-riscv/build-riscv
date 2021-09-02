@@ -24,7 +24,7 @@ setup
 sed -i 's@-R..libdir.@@' scripts/*.pc.in
 test -d build || mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr -DCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_INSTALL_PREFIX=$BUILDROOT/usr -DCMAKE_BUILD_TYPE=Release ..
 # Group:          Library
 # build
 build

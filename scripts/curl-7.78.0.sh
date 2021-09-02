@@ -21,13 +21,23 @@ post
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+export CPPFLAGS="$CPPFLAGS -I$SYSROOT/include -I$SYSROOT/usr/include -I$SYSROOT/usr/local/include"
+export LDFLAGS="$LDFLAGS -L$SYSROOT/lib -L$SYSROOT/usr/lib -L$SYSROOT/usr/local/lib"
+export PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --with-libssh2 \
             --with-openssl \
             --with-zstd
+#            --with-brotli \
+#            --with-libidn2 \
+#            --with-nghttp2 \
+#            --with-gssapi \
 # build
 build
+make clean
 make -j$(nproc)
 # install
 install

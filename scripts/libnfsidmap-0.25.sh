@@ -19,7 +19,7 @@ prep
 setup
 # build
 build
-./configure --prefix=$SYSROOT/usr                     \
+./configure --prefix=$BUILDROOT/usr                     \
             --host=riscv64-unknown-linux-gnu               \
             --enable-shared &&
 make -j$(nproc)

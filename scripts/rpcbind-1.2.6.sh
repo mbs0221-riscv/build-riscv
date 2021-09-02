@@ -20,8 +20,8 @@ setup
 sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
 patch -Np1 -i %{?_sourcedir}/rpcbind-1.2.6-vulnerability_fixes-1.patch &&
 export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-./configure --prefix=$SYSROOT/usr                    \
-            --bindir=$SYSROOT/usr/sbin               \
+./configure --prefix=$BUILDROOT/usr                    \
+            --bindir=$BUILDROOT/usr/sbin               \
             --host=riscv64-unknown-linux-gnu               \
             --with-rpcuser=root                            \
             --with-systemdsystemunitdir=no

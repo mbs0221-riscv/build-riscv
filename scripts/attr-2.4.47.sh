@@ -24,7 +24,7 @@ setup
 sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in &&
 INSTALL_USER=root  \
 INSTALL_GROUP=root \
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --disable-static
 # build
@@ -32,7 +32,7 @@ build
 make -j$(nproc)
 # install
 install
-sudo make install install-dev install-lib
+make install install-dev install-lib
 # clean
 clean
 

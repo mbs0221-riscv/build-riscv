@@ -24,11 +24,11 @@ export CXX=riscv64-unknown-linux-gnu-g++
 make lib
 # install
 install
-mkdir -p $SYSROOT/usr/include
-mkdir -p $SYSROOT/usr/lib
-install -vm644 linear.h $SYSROOT/usr/include &&
-install -vm755 liblinear.so.4 $SYSROOT/usr/lib &&
-ln -sfv liblinear.so.4 $SYSROOT/usr/lib/liblinear.so
+mkdir -p $BUILDROOT/usr/include
+mkdir -p $BUILDROOT/usr/lib
+install -v -m 644 linear.h $BUILDROOT/usr/include &&
+install -v -m 755 liblinear.so.4 $BUILDROOT/usr/lib &&
+ln -sfv $BUILDROOT/usr/lib/liblinear.so.4 $BUILDROOT/usr/lib/liblinear.so
 # clean
 clean
 

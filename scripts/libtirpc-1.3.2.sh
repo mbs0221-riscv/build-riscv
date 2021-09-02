@@ -17,7 +17,7 @@ export SOURCE=libtirpc-1.3.2.tar.bz2
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --disable-gssapi \
             --enable-shared

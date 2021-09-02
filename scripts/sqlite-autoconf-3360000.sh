@@ -17,7 +17,7 @@ export SOURCE=sqlite-autoconf-3360000.tar.gz
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/ \
+./configure --prefix=$BUILDROOT/usr/ \
             --host=riscv64-unknown-linux-gnu
 # build
 build

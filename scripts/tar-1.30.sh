@@ -22,7 +22,7 @@ prep
 #wget http://ftp.gnu.org/gnu/tar/tar-1.30.tar.xz
 # setup
 setup
-./configure --prefix=$SYSROOT/ \
+./configure --prefix=$BUILDROOT/ \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

@@ -23,7 +23,6 @@ mkdir build &&
 cd    build &&
 cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr \
       -DCMAKE_BUILD_TYPE=Release \
-# Group:          Library
       -DBUILD_STATIC_LIBS=OFF    \
       .. &&
 make

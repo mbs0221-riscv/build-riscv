@@ -19,7 +19,6 @@ pre
 post
 # pre
 prep
-#wget https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.tar.xz
 # setup
 setup
 # build
@@ -31,7 +30,7 @@ export RANLIB=riscv64-unknown-linux-gnu-ranlib
 make -j$(nproc)
 # install
 install
-make install FAKEROOT=$SYSROOT/usr
+make install FAKEROOT=$BUILDROOT/usr
 # clean
 clean
 

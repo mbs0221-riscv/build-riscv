@@ -22,14 +22,14 @@ prep
 #wget https://www.ncftp.com/downloads/ncftp/ncftp-3.2.6-src.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
 make -j$(nproc)
 # install
 install
-make DESTDIR=$SYSROOT/usr install
+make DESTDIR=$BUILDROOT/usr install
 # clean
 clean
 

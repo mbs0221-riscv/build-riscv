@@ -31,7 +31,7 @@ export RANLIB=riscv64-unknown-linux-gnu-ranlib
 make -j$(nproc)
 # install
 install
-make install FAKEROOT=$SYSROOT
+make install FAKEROOT=$BUILDROOT
 # clean
 clean
 

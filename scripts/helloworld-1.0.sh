@@ -19,10 +19,10 @@ prep
 setup
 # build
 build
-make PREFIX=/usr %{?_smp_mflags}
+make PREFIX=/usr
 # install
 install
-make PREFIX=/usr DESTDIR=$SYSROOT install
+make PREFIX=/usr DESTDIR=$BUILDROOT install
 # clean
 clean
 
