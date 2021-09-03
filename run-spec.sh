@@ -10,6 +10,7 @@ export SOURCES=~/rpmbuild/SOURCES
 export BUILD=~/rpmbuild/BUILD
 
 export SPECFILE=$1
+export BUILDROOT=$SYSROOT
 
 info=$(./convert.sh $SPECFILE)
 echo $info
