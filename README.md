@@ -50,6 +50,13 @@ Then we build dropbear and ppp rpm package
 sudo ./start-ppp.sh
 ```
 
+### dropbear
+```
+/usr/sbin/dropbear -E -R -p 2222
+test -e /root/.ssh/id_dropbear || dropbearkey -t ed25519 -f /root/.ssh/id_dropbear
+
+```
+
 ### ntp-server
 ```
 # build ntp and tzdb rpm packages
@@ -103,6 +110,17 @@ real	0m 29.95s
 user	0m 0.03s
 sys	0m 1.16s
 [root@vc709 ~]#
+```
+
+SPI performance
+```
+[root@vc709 ~]#time dd if=/dev/zero of=/testfile.dat bs=8k count=1024
+1024+0 records in
+1024+0 records out
+8388608 bytes (8.0MB) copied, 1.522061 seconds, 5.3MB/s
+0.03user 1.35system 0:01.57elapsed 87%CPU (0avgtext+0avgdata 0maxresident)k
+0inputs+0outputs (0major+0minor)pagefaults 0swaps
+
 ```
 
 ## build library and software

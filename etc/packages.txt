@@ -3,14 +3,14 @@
 #Packagas with # is not to be installed.
 
 #libs
-attr-2.4.47-1.x86_64.rpm
+#attr-2.4.47-1.x86_64.rpm
 #acl-2.2.52-1.x86_64.rpm
 #lcov-1.15-1.x86_64.rpm
 #ncurses-6.2-1.x86_64.rpm
 #readline-8.1-1.x86_64.rpm
 #openssl-1.1.1k-1.x86_64.rpm
-libarchive-3.5.1-1.x86_64.rpm
-libbytesize-2.6-1.x86_64.rpm
+#libarchive-3.5.1-1.x86_64.rpm
+#libbytesize-2.6-1.x86_64.rpm
 #libcap-2.48-1.x86_64.rpm
 #libevent-2.1.12-stable.x86_64.rpm
 #libffi-3.4.2-1.x86_64.rpm
@@ -25,7 +25,7 @@ libbytesize-2.6-1.x86_64.rpm
 
 #memory alloc
 #dmalloc-5.6.5-1.x86_64.rpm
-talloc-2.3.3-1.x86_64.rpm
+#talloc-2.3.3-1.x86_64.rpm
 
 #regular expression
 #pcre2-10.37-1.x86_64.rpm
@@ -33,42 +33,42 @@ talloc-2.3.3-1.x86_64.rpm
 
 #json/xml
 #json-c-0.15-1.x86_64.rpm
-libxslt-1.1.34-1.x86_64.rpm
-libyaml-0.2.5-1.x86_64.rpm
+#libxslt-1.1.34-1.x86_64.rpm
+#libyaml-0.2.5-1.x86_64.rpm
 
 #misc
 #expat-2.4.1-1.x86_64.rpm
-file-5.38-1.x86_64.rpm
-gawk-4.2.0-1.x86_64.rpm
-less-487-1.x86_64.rpm
-less-563-1.x86_64.rpm
-sed-4.4-1.x86_64.rpm
+#file-5.38-1.x86_64.rpm
+#gawk-4.2.0-1.x86_64.rpm
+#less-487-1.x86_64.rpm
+#less-563-1.x86_64.rpm
+#sed-4.4-1.x86_64.rpm
 
-#GnuPG: https://www.gnupg.org/download/
-libgpg-error-1.42-1.x86_64.rpm
-libgcrypt-1.8.8-1.x86_64.rpm
-libksba-1.6.0-1.x86_64.rpm
-libassuan-2.5.5-1.x86_64.rpm
-ntbtls-0.2.0-1.x86_64.rpm
-npth-1.6-1.x86_64.rpm
-gpgme-1.16.0-1.x86_64.rpm
-scute-1.7.0-1.x86_64.rpm
-gnupg-2.2.29-1.x86_64.rpm
+# GnuPG: https://www.gnupg.org/download/
+#libgpg-error-1.42-1.x86_64.rpm
+#libgcrypt-1.8.8-1.x86_64.rpm
+#libksba-1.6.0-1.x86_64.rpm
+#libassuan-2.5.5-1.x86_64.rpm
+#ntbtls-0.2.0-1.x86_64.rpm
+#npth-1.6-1.x86_64.rpm
+#gpgme-1.16.0-1.x86_64.rpm
+#scute-1.7.0-1.x86_64.rpm
+#gnupg-2.2.29-1.x86_64.rpm
 
-#compression
-bzip2-1.0.6-1.x86_64.rpm
-gzip-1.10-1.x86_64.rpm
-lzo-2.10-1.x86_64.rpm
+# compression
+#bzip2-1.0.6-1.x86_64.rpm
+#gzip-1.10-1.x86_64.rpm
+#lzo-2.10-1.x86_64.rpm
 #xz-5.2.3-1.x86_64.rpm
-xz-5.2.5-1.x86_64.rpm
+#xz-5.2.5-1.x86_64.rpm
 #zlib-1.2.11-1.x86_64.rpm
 #zstd-1.4.8-1.x86_64.rpm
 
-#file system
-#cifs-utils-6.5-1.x86_64.rpm
-#rpcbind-1.2.6-1.x86_64.rpm
-#libtirpc-1.3.2-1.x86_64.rpm
-#nfs-utils-2.5.3-1.x86_64.rpm
+# file system
+cifs-utils-6.5-1.x86_64.rpm
+rpcbind-1.2.6-1.x86_64.rpm
+libtirpc-1.3.2-1.x86_64.rpm
+nfs-utils-2.5.3-1.x86_64.rpm
 
 #network
 #ppp-2.4.9-1.x86_64.rpm
@@ -78,31 +78,32 @@ xz-5.2.5-1.x86_64.rpm
 #rsync-3.1.2-1.x86_64.rpm
 #dropbear-2020.81-1.x86_64.rpm
 #openssh-8.6p1-1.x86_64.rpm
-*vsftpd-3.0.4-1.x86_64.rpm
+#vsftpd-3.0.4-1.x86_64.rpm
 
 #download
-#axel-2.17.10-1.x86_64.rpm
+# axel-2.17.10-1.x86_64.rpm
 
-#curl
+# curl
 #libssh2-1.9.0-1.x86_64.rpm
-curl-7.78.0-1.x86_64.rpm
+#libgsasl-1.10.0-1.x86_64.rpm
+#curl-7.78.0-1.x86_64.rpm
 
-#time
-*ntp-4.2.8p15-1.x86_64.rpm
+# time
+#ntp-4.2.8p15-1.x86_64.rpm
 #tzdb-2021a-1.x86_64.rpm
 
 #nghttp2
-c-ares-1.17.2-1.x86_64.rpm
+#c-ares-1.17.2-1.x86_64.rpm
 jansson-2.13-1.x86_64.rpm
 jemalloc-5.2.1-1.x86_64.rpm
 libev-4.33-1.x86_64.rpm
 libxml2-2.9.12-1.x86_64.rpm
 nghttp2-1.44.0-1.x86_64.rpm
 
-#z-modem
+# z-modem
 #lrzsz-0.12.20-1.x86_64.rpm
 
-#system
+# system
 #module-init-tools-3.15-1.x86_64.rpm
 #shadow-4.5-1.x86_64.rpm
 #procps-ng-3.3.17-1.x86_64.rpm
@@ -111,25 +112,25 @@ nghttp2-1.44.0-1.x86_64.rpm
 #htop-2.2.0-1.x86_64.rpm
 qemu-6.1.0-1.x86_64.rpm
 
-#asm
-nasm-2.15.05-1.x86_64.rpm
+# asm
+#nasm-2.15.05-1.x86_64.rpm
 #yasm-1.3.0-1.x86_64.rpm
 
-#hpc
+# hpc
 #gmp-6.1.2-1.x86_64.rpm
 #mpfr-4.0.1-1.x86_64.rpm
 #mpc-1.1.0-1.x86_64.rpm
 
-#scientific computing
+# scientific computing
 #gsl-2.6-1.x86_64.rpm
 #gsl-2.7-1.x86_64.rpm
 
-#benchmark
+# benchmark
 #helloworld-1.0-1.x86_64.rpm
 #stress-ng-0.13.00-1.x86_64.rpm
 #mbedtls-3.0.0-1.x86_64.rpm
 
-#database
+# database
 #db-4.8.30-1.x86_64.rpm
 #db-5.3.28-1.x86_64.rpm
 #db-6.0.20-1.x86_64.rpm
@@ -139,20 +140,20 @@ nasm-2.15.05-1.x86_64.rpm
 #memcached-1.6.9-1.x86_64.rpm
 #redis-6.2.5-1.x86_64.rpm
 
-#crypto
-p11-kit-0.24.0-1.x86_64.rpm
+# crypto
+#p11-kit-0.24.0-1.x86_64.rpm
 
-#[applications]
+# [applications]
 #bash-5.1.8-1.x86_64.rpm
 #Python-3.9.6-1.x86_64.rpm
-AFL-2.57b-1.x86_64.rpm
+#AFL-2.57b-1.x86_64.rpm
 
-#[multi-media]
-#image
-tiff-4.3.0-1.x86_64.rpm
-#sound
-lame-3.100-1.x86_64.rpm
-libsndfile-1.0.31-1.x86_64.rpm
-libogg-1.3.5-1.x86_64.rpm
-libvorbis-1.3.7-1.x86_64.rpm
+# [multi-media]
+# image
+#tiff-4.3.0-1.x86_64.rpm
+# sound
+#lame-3.100-1.x86_64.rpm
+#libsndfile-1.0.31-1.x86_64.rpm
+#libogg-1.3.5-1.x86_64.rpm
+#libvorbis-1.3.7-1.x86_64.rpm
 fdk-aac-2.0.2-1.x86_64.rpm
