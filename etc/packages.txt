@@ -80,6 +80,12 @@ nfs-utils-2.5.3-1.x86_64.rpm
 #openssh-8.6p1-1.x86_64.rpm
 #vsftpd-3.0.4-1.x86_64.rpm
 
+#libmnl-1.0.4-1.x86_64.rpm
+#ethtool-5.13-1.x86_64.rpm
+#libnftnl-1.2.0-1.x86_64.rpm
+#libnetfilter_acct-1.0.3-1.x86_64.rpm
+#nfacct-1.0.2-1.x86_64.rpm
+
 #download
 # axel-2.17.10-1.x86_64.rpm
 
@@ -95,10 +101,10 @@ nfs-utils-2.5.3-1.x86_64.rpm
 #nghttp2
 #c-ares-1.17.2-1.x86_64.rpm
 jansson-2.13-1.x86_64.rpm
-jemalloc-5.2.1-1.x86_64.rpm
-libev-4.33-1.x86_64.rpm
-libxml2-2.9.12-1.x86_64.rpm
-nghttp2-1.44.0-1.x86_64.rpm
+#jemalloc-5.2.1-1.x86_64.rpm
+#libev-4.33-1.x86_64.rpm
+#libxml2-2.9.12-1.x86_64.rpm
+#nghttp2-1.44.0-1.x86_64.rpm
 
 # z-modem
 #lrzsz-0.12.20-1.x86_64.rpm
@@ -111,6 +117,12 @@ nghttp2-1.44.0-1.x86_64.rpm
 #gperf-3.1-1.x86_64.rpm
 #htop-2.2.0-1.x86_64.rpm
 qemu-6.1.0-1.x86_64.rpm
+
+# misc
+#tree-1.8.0-1.x86_64.rpm
+#e2fsprogs-1.43.9-1.x86_64.rpm
+#texinfo-6.8-1.x86_64.rpm
+#libcdio-2.1.0-1.x86_64.rpm
 
 # asm
 #nasm-2.15.05-1.x86_64.rpm

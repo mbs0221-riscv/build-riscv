@@ -3,12 +3,12 @@
 echo =========Setup Routing and NAT=======
 
 #modprobe -r ip_tables
-iptables -F
+#iptables -F
 #iptables -X
 #iptables -Z
-#iptables -P INPUT ACCEPT
-#iptables -P OUTPUT ACCEPT
-#iptables -P FORWARD ACCEPT
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
 
 ifconfig -a ppp0 txqueuelen 1500
 ifconfig -a ppp0

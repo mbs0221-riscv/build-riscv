@@ -7,7 +7,7 @@ export BUILD=~/rpmbuild/BUILD
 function make_spec(){
 
         export SOURCE=$(echo $URL | sed 's/.*\///')
-        export NAME_VERSION=$(echo $SOURCE | sed 's/.tar//;s/.src//;s/.gz\|.sz\|.lz\|.xz\|.bz2\|.tgz\|.zip//')
+        export NAME_VERSION=$(echo $SOURCE | sed 's/.tar//;s/.src//;s/\.gz\|\.sz\|\.lz\|\.xz\|\.bz2\|\.tgz\|\.zip//')
         export NAME=$(echo $NAME_VERSION | sed 's/-[0-9].*//')
         export VERSION=$(echo $NAME_VERSION | sed 's/.*-//')
         export SPECFILE=$NAME_VERSION.spec
