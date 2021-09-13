@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=inetutils
 export VERSION=2.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://mirror.bjtu.edu.cn/gnu/inetutils/inetutils-2.1.tar.gz
@@ -22,7 +23,7 @@ prep
 # setup
 setup
 echo '#define PATH_PROCNET_DEV "/proc/net/dev"' >> ifconfig/system/linux.h
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --disable-logger     \
             --disable-whois      \

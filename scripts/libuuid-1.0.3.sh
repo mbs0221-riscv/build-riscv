@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libuuid
 export VERSION=1.0.3
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://sourceforge.net/projects/libuuid/files/libuuid-1.0.3.tar.gz
@@ -18,7 +19,7 @@ prep
 setup
 # build
 build
-./configure --prefix=$SYSROOT/usr/local               \
+./configure --prefix=$BUILDROOT/usr               \
             --host=riscv64-unknown-linux-gnu               &&
 make -j$(nproc)
 # install
@@ -28,6 +29,6 @@ make install
 clean
 
 # %files
-# path: /usr/local/
+# path: /usr/
 # %defattr(-,root,root,-)
 epilog

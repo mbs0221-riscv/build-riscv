@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=tack
 export VERSION=1.09
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://invisible-mirror.net/archives/ncurses/tack-1.09.tgz

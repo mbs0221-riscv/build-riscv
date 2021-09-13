@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=memcached
 export VERSION=1.6.9
 # Release:        1%{?dist}
+# Group:          Database
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.memcached.org/files/memcached-1.6.9.tar.gz
@@ -21,7 +22,7 @@ prep
 #wget https://www.memcached.org/files/memcached-1.6.9.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
@@ -33,7 +34,7 @@ make install
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 # %config
 # %doc

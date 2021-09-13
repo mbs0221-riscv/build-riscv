@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# reboot
-
 fpga_dir=~/chipyard/fpga
 tcl_dir=$fpga_dir/fpga-shells/xilinx/common/tcl
 board=xc7vx690t_0

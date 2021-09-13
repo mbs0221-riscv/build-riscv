@@ -2,18 +2,14 @@
 
 export SPECS=~/rpmbuild/SPECS
 export SOURCES=~/rpmbuild/SOURCES
+export BUILD=~/rpmbuild/BUILD
 
 source build-utils.sh
 
-# make spec file
-cd $SPECS
-make_spec $1 $2
-cat $SPECFILE
+export URL=$1
+export PREFIX=${2:-/usr}
+export TEMPLATE=${3:-make-template.spec}
 
-# prepare
-cd $SOURCES
-test -e $SOURCE || wget $URL
-
-# build rpm package
-cd $SPECS
-rpmbuild -ba $SPECFILE
+make_spec 
+setup
+build_rpm

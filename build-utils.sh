@@ -1,16 +1,19 @@
 #!/bin/bash
 
+export SPECS=~/rpmbuild/SPECS
+export SOURCES=~/rpmbuild/SOURCES
+export BUILD=~/rpmbuild/BUILD
+
 function make_spec(){
 
-        export URL=$1
-        export PREFIX=${2:-/usr/local}
         export SOURCE=$(echo $URL | sed 's/.*\///')
-        export NAME_VERSION=$(echo $SOURCE | sed 's/.tar//;s/.src//;s/.gz\|.sz\|.lz\|.xz\|.bz2\|.tgz//')
+        export NAME_VERSION=$(echo $SOURCE | sed 's/.tar//;s/.src//;s/\.gz\|\.sz\|\.lz\|\.xz\|\.bz2\|\.tgz\|\.zip//')
         export NAME=$(echo $NAME_VERSION | sed 's/-[0-9].*//')
         export VERSION=$(echo $NAME_VERSION | sed 's/.*-//')
         export SPECFILE=$NAME_VERSION.spec
 
         echo ===============================BUILD PACKAGE========================================
+	echo TEMPLATE: $TEMPLATE
         echo URL:      $URL
         echo PREFIX:   $PREFIX
         echo SOURCE:   $SOURCE
@@ -18,14 +21,17 @@ function make_spec(){
         echo VERSION:  $VERSION
         echo SPECFILE: $SPECFILE
 
+	cd $SPECS
         test -e $SPECFILE || echo create new spec file && \
-                cp template.spec $SPECFILE && \
+                cp $TEMPLATE $SPECFILE && \
                 sed -i "s#\$prefix#$PREFIX#"   $SPECFILE && \
                 sed -i "s#\$name#$NAME#"       $SPECFILE && \
                 sed -i "s#\$version#$VERSION#" $SPECFILE && \
                 sed -i "s#\$url#$URL#"         $SPECFILE && \
                 sed -i "s#\$source#$SOURCE#"   $SPECFILE && \
                 sed -i "s#-j8#-j\$(nproc)#"    $SPECFILE
+
+        cat $SPECFILE
 }
 
 function prep(){
@@ -44,7 +50,9 @@ function setup(){
 	rm -rf $__build_dir_
 
 	cd $SOURCES
-	test -e $SOURCE || wget --no-check-certificate $URL && tar -xvf $SOURCE -C $BUILD
+
+	test -e $SOURCE || wget --no-check-certificate $URL
+        tar -xvf $SOURCE -C $BUILD
 
 	cd $__build_dir_
 }
@@ -64,6 +72,11 @@ function prep(){
 function build(){
 
 	cd $__build_dir_
+}
+
+function build_rpm(){
+	cd $SPECS
+        rpmbuild -ba $SPECFILE
 }
 
 function install(){

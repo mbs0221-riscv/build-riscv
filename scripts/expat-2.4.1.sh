@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=expat
 export VERSION=2.4.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-2.4.1.tar.gz

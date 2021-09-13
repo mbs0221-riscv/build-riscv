@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libseccomp
 export VERSION=2.5.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/seccomp/libseccomp/releases/download/v2.5.1/libseccomp-2.5.1.tar.gz
@@ -18,7 +19,7 @@ prep
 setup
 # build
 build
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --with-sysroot=$SYSROOT \
             --enable-dependency-tracking \

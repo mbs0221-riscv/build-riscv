@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=expect
 export VERSION=5.45.4
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz

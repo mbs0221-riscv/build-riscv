@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=htop
 export VERSION=2.2.0
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://hisham.hm/htop/releases/2.2.0/htop-2.2.0.tar.gz
@@ -20,7 +21,7 @@ setup
 build
 export CPPFLAGS=-I$SYSROOT/include
 export LDFLAGS=-L$SYSROOT/lib
-./configure --prefix=$SYSROOT/usr           \
+./configure --prefix=$BUILDROOT/usr           \
             --disable-unicode                    \
             --host=riscv64-unknown-linux-gnu     &&
 make -j$(nproc)

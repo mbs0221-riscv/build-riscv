@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=ntp
 export VERSION=4.2.8p15
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p15.tar.gz
@@ -18,9 +19,9 @@ prep
 setup
 # build
 build
-./configure --prefix=$SYSROOT/usr/local               \
+./configure --prefix=$BUILDROOT/usr               \
             --host=riscv64-unknown-linux-gnu               \
-            --exec-prefix=$SYSROOT/usr/local          \
+            --exec-prefix=$BUILDROOT/usr          \
             --with-yielding-select=yes                     \
             --enable-shared                                &&
 make -j$(nproc)
@@ -31,6 +32,6 @@ make install
 clean
 
 # %files
-# path: /usr/local/
+# path: /usr/
 # %defattr(-,root,root,-)
 epilog

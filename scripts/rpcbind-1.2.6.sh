@@ -4,25 +4,25 @@ source ../build-utils.sh
 export NAME=rpcbind
 export VERSION=1.2.6
 # Release:        1%{?dist}
-# Summary:        The rpcbind program is a replacement for portmap. It is required for import or export of Network File System (NFS) shared directories.
+# Group:          Network
+# Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://downloads.sourceforge.net/rpcbind/rpcbind-1.2.6.tar.bz2
 export SOURCE=rpcbind-1.2.6.tar.bz2
 # Requires(post): info
 # Requires(preun): info
 # %description
-# rpcbind is a server that converts RPC program numbers into universal addresses. It must be running on the host to be able to make RPC calls on a server on that machine.
-# rpcinfo	makes an RPC call to an RPC server and reports data according to the requested options.
+# A helloworld program from the packagecloud.io blog!
 # pre
 prep
 # setup
 setup
 sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
-patch -Np1 -i $SOURCES/rpcbind-1.2.6-vulnerability_fixes-1.patch &&
+patch -Np1 -i %{?_sourcedir}/rpcbind-1.2.6-vulnerability_fixes-1.patch &&
 export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-./configure --prefix=$SYSROOT/usr                     \
+./configure --prefix=$BUILDROOT/usr                    \
+            --bindir=$BUILDROOT/usr/sbin               \
             --host=riscv64-unknown-linux-gnu               \
-            --bindir=$SYSROOT/usr/sbin                \
             --with-rpcuser=root                            \
             --with-systemdsystemunitdir=no
 # build

@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=rsync
 export VERSION=3.1.2
 # Release:        1%{?dist}
+# Group:          Network
 # Summary:        The rsync package contains the rsync utility. This is useful for synchronizing large file archives over a network.
 # License:        GPLv3+
 export URL=https://www.samba.org/ftp/rsync/src/rsync-3.1.2.tar.gz
@@ -19,7 +20,7 @@ prep
 # setup
 setup
 sudo apt install doxygen
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu &&
 # build
 build

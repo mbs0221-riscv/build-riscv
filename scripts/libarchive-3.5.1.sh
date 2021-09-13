@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libarchive
 export VERSION=3.5.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.osuosl.org/pub/blfs/conglomeration/libarchive/libarchive-3.5.1.tar.xz
@@ -16,7 +17,7 @@ export SOURCE=libarchive-3.5.1.tar.xz
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
@@ -28,6 +29,6 @@ make install
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 epilog

@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libwebsockets
 export VERSION=4.2.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/warmcat/libwebsockets/archive/refs/tags/v4.2.1.tar.gz
@@ -21,9 +22,7 @@ prep
 #wget https://github.com/warmcat/libwebsockets/archive/refs/tags/v4.2.1.tar.gz
 # setup
 setup
-mkdir build && cd build
-# build
-build
+test -d build || mkdir build
 export CROSS_COMPILE=riscv64-unknown-linux-gnu
 export INSTALL_PREFIX=$SYSROOT/usr
 cd build
@@ -36,8 +35,10 @@ cmake .. \
     -DCMAKE_CXX_COMPILER=$CROSS_COMPILE-g++ \
     -DCMAKE_AR=$RISCV/bin/$CROSS_COMPILE-ar \
     -DCMAKE_RANLIB=$RISCV/bin/$CROSS_COMPILE-ranlib \
-    -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
-    -DLIB_SUFFIX=64
+    -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX
+# build
+build
+cd build
 make
 # install
 install

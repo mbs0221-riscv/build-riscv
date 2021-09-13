@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=ncftp
 export VERSION=3.2.6
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.ncftp.com/downloads/ncftp/ncftp-3.2.6-src.tar.gz
@@ -21,19 +22,19 @@ prep
 #wget https://www.ncftp.com/downloads/ncftp/ncftp-3.2.6-src.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
 make -j$(nproc)
 # install
 install
-make DESTDIR=$SYSROOT/usr/local install
+make DESTDIR=$BUILDROOT/usr install
 # clean
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 # %config
 # %doc

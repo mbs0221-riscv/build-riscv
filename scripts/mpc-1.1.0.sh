@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=mpc
 export VERSION=1.1.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz
@@ -19,7 +20,7 @@ prep
 # setup
 setup
 #export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --with-mpfr=$SYSROOT/usr \
             --with-gmp=$SYSROOT/usr \

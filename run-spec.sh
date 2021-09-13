@@ -1,14 +1,16 @@
 #!/bin/bash
 # Usage:
-#       ./run.sh example.spec
+#       ./run-spec.sh example.spec
 
-#export SYSROOT=$ROOTFS
+#export CC=clang
+#export CFLAGS="--gcc-toolchain=$TOOLCHAIN --sysroot=$SYSROOT --target=$TARGET -march=$MARCH -Xclang -load -Xclang ~/AFL-2.57b/afl-llvm-pass.so ~/AFL-2.57b/afl-llvm-rt-64.o"
 
 export SPECS=~/rpmbuild/SPECS
 export SOURCES=~/rpmbuild/SOURCES
 export BUILD=~/rpmbuild/BUILD
 
 export SPECFILE=$1
+export BUILDROOT=$SYSROOT
 
 info=$(./convert.sh $SPECFILE)
 echo $info
@@ -21,10 +23,10 @@ cat $filename
 cd $(dirname $filename)
 
 # run generated scripts
-bash $(basename $filename)
+source $(basename $filename)
 
 # generate rpm package automatically
 if [ $? -eq 0 ]; then
-	cd $SPECS
-	rpmbuild -ba $SPECFILE
+        cd $SPECS
+#        rpmbuild -bb $SPECFILE
 fi

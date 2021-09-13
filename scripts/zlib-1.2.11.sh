@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=zlib
 export VERSION=1.2.11
 # Release:        1%{?dist}
+# Group:          Compression
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://www.zlib.net/zlib-1.2.11.tar.gz

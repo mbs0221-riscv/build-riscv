@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=glibc
 export VERSION=2.34
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.gnu.org/gnu/glibc/glibc-2.34.tar.xz

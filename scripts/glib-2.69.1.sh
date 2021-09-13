@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=glib
 export VERSION=2.69.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://download.gnome.org/sources/glib/2.69/glib-2.69.1.tar.xz

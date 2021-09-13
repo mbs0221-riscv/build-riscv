@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=mpfr
 export VERSION=4.0.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://www.mpfr.org/mpfr-4.0.1/mpfr-4.0.1.tar.xz
@@ -19,7 +20,7 @@ prep
 # setup
 setup
 export PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --with-gmp=$SYSROOT/usr \
             --enable-shared

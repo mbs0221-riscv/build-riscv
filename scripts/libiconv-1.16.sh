@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libiconv
 export VERSION=1.16
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://mirror.easyname.at/gnu/libiconv/libiconv-1.16.tar.gz
@@ -21,7 +22,7 @@ prep
 #wget https://mirror.easyname.at/gnu/libiconv/libiconv-1.16.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

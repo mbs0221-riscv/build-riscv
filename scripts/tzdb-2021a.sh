@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=tzdb
 export VERSION=2021a
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://data.iana.org/time-zones/releases/tzdb-2021a.tar.lz
@@ -20,6 +21,7 @@ prep
 setup
 export DESTDIR=$SYSROOT
 export CC=riscv64-unknown-linux-gnu-gcc
+sudo apt install lzip
 # build
 build
 make -j$(nproc)

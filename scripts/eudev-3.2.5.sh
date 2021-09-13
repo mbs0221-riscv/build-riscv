@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=eudev
 export VERSION=3.2.5
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://dev.gentoo.org/~blueness/eudev/eudev-3.2.5.tar.gz

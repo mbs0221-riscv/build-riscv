@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libedit-20210714
 export VERSION=3.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://thrysoee.dk/editline/libedit-20210714-3.1.tar.gz
@@ -20,9 +21,9 @@ post
 prep
 # setup
 setup
-export CFLAGS="$CFLAGS -I$SYSROOT/include -I$SYSROOT/include/ncurses"
-export LDFLAGS="$CFLAGS -L$SYSROOT/lib"
-./configure --prefix=$SYSROOT/usr \
+export CFLAGS="$CFLAGS -I$SYSROOT/usr/include -I$SYSROOT/usr/include/ncurses"
+export LDFLAGS="$CFLAGS -L$SYSROOT/usr/lib"
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

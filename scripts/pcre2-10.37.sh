@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=pcre2
 export VERSION=10.37
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.pcre.org/pub/pcre/pcre2-10.37.tar.bz2
@@ -18,9 +19,9 @@ pre
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/ \
+./configure --prefix=$BUILDROOT/usr/ \
             --host=riscv64-unknown-linux-gnu \
-            --docdir=$SYSROOT/usr/share/doc/pcre2-10.37 \
+            --docdir=$BUILDROOT/usr/share/doc/pcre2-10.37 \
             --enable-unicode                    \
             --enable-pcre2-16                   \
             --enable-pcre2-32                   \

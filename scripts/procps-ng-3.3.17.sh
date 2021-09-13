@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=procps-ng
 export VERSION=3.3.17
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.17.tar.xz
@@ -21,9 +22,9 @@ prep
 #wget https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.17.tar.xz
 # setup
 setup -n procps-3.3.17
-export CFLAGS="$CFLAGS -I$SYSROOT/include -I$SYSROOT/include/ncurses"
-export LDFLAGS="$CFLAGS -L$SYSROOT/lib"
-./configure --prefix=$SYSROOT/usr \
+export CFLAGS="$CFLAGS -I$SYSROOT/usr/include -I$SYSROOT/usr/include/ncurses"
+export LDFLAGS="$CFLAGS -L$SYSROOT/usr/lib"
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

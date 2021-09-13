@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=wget
 export VERSION=1.21
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.gnu.org/gnu/wget/wget-1.21.tar.gz

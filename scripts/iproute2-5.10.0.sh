@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=iproute2
 export VERSION=5.10.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.10.0.tar.xz

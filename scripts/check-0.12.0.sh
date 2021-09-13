@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=check
 export VERSION=0.12.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/libcheck/check/releases/download/0.12.0/check-0.12.0.tar.gz

@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=gslip
 export VERSION=1.0.2
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.gnu.org/gnu/gslip/gslip-1.0.2.tar.xz
@@ -20,7 +21,7 @@ post
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

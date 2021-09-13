@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=elfutils
 export VERSION=0.170
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://sourceware.org/ftp/elfutils/0.170/elfutils-0.170.tar.bz2

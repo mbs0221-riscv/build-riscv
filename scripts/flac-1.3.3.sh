@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=flac
 export VERSION=1.3.3
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://downloads.xiph.org/releases/flac/flac-1.3.3.tar.xz
@@ -11,7 +12,7 @@ export SOURCE=flac-1.3.3.tar.xz
 # Requires(post): info
 # Requires(preun): info
 # %description
-# # A helloworld program from the packagecloud.io blog!
+# A helloworld program from the packagecloud.io blog!
 # pre
 pre
 # pre

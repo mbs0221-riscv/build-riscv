@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=json-c
 export VERSION=0.15
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz

@@ -31,8 +31,9 @@ sed -i "s/Source0:        /export SOURCE=/" $target
 sed -i "s/URL:            /export URL=/" $target
 
 # CONFIGURE
-sed -i "s/%{?buildroot}/\$SYSROOT/g" $target
-sed -i "s/%{?_sourcedir}/\$SOURCES/g" $target
+sed -i "s/%buildroot/\$BUILDROOT/g" $target
+sed -i "s/%_sourcedir/\$SOURCES/g" $target
+sed -i "s/%_builddir/\$BUILD/g" $target
 
 # SPEC COMMAND
 sed -i "s/%pre/# pre\npre/" $target
@@ -50,7 +51,7 @@ sed -i "s/-j8/-j\$(nproc)/" $target
 echo epilog >> $target
 
 # REMOVE EXTRES
-sed -i "s/.*: .*\|.*\.$/# &/g" $target              # comment header
+sed -i "s/.*: .*\|.*[a-zA-Z]\.$/# &/g" $target              # comment header
 sed -i "s/^%.*$/# &/g" $target                      # comment command
 sed -i "s/.*\!$/# &/g" $target                      # comment sentences
 sed -i "s/^\/.*/# path: &/g" $target                # comment path

@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=gzip
 export VERSION=1.10
 # Release:        1%{?dist}
+# Group:          Compression
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/gzip/gzip-1.10.tar.xz
@@ -21,7 +22,7 @@ prep
 #wget http://ftp.gnu.org/gnu/gzip/gzip-1.10.tar.xz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/ \
+./configure --prefix=$BUILDROOT/usr/ \
             --host=riscv64-unknown-linux-gnu \
 # build
 build

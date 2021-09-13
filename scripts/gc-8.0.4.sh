@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=gc
 export VERSION=8.0.4
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://www.hboehm.info/gc/gc_source/gc-8.0.4.tar.gz

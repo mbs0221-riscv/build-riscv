@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=xz
 export VERSION=5.2.5
 # Release:        1%{?dist}
+# Group:          Compression
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://tukaani.org/xz/xz-5.2.5.tar.xz
@@ -21,7 +22,7 @@ prep
 #wget https://tukaani.org/xz/xz-5.2.5.tar.xz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
@@ -33,7 +34,7 @@ make install
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 # %config
 # %doc

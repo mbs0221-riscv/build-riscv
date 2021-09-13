@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=zstd
 export VERSION=1.4.8
 # Release:        1%{?dist}
+# Group:          Compression
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/facebook/zstd/releases/download/v1.4.8/zstd-1.4.8.tar.gz
@@ -21,16 +22,16 @@ prep
 #wget https://github.com/facebook/zstd/releases/download/v1.4.8/zstd-1.4.8.tar.gz
 # setup
 setup
-export CC=riscv64-unknown-linux-gnu-gcc
-export CXX=riscv64-unknown-linux-gnu-g++
 # build
 build
 export CC=riscv64-unknown-linux-gnu-gcc
 export CXX=riscv64-unknown-linux-gnu-g++
+#export CC=afl-clang-fast
+#export CFLAGS="--gcc-toolchain=$TOOLCHAIN --sysroot=$SYSROOT --target=$TARGET -march=$MARCH"
 make -j$(nproc)
 # install
 install
-make install PREFIX=$SYSROOT/usr
+make install PREFIX=$BUILDROOT/usr
 # clean
 clean
 

@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=vim
 export VERSION=8.2.2433
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://anduin.linuxfromscratch.org/LFS/vim-8.2.2433.tar.gz

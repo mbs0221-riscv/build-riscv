@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=sysklogd
 export VERSION=1.5.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://www.infodrom.org/projects/sysklogd/download/sysklogd-1.5.1.tar.gz

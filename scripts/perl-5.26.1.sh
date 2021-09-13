@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=perl
 export VERSION=5.26.1
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://www.cpan.org/src/5.0/perl-5.26.1.tar.xz

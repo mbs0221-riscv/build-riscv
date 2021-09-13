@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=less
 export VERSION=563
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://www.greenwoodsoftware.com/less/less-563.tar.gz

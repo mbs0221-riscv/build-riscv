@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=nghttp2
 export VERSION=1.44.0
 # Release:        1%{?dist}
+# Group:          Network
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://github.com/nghttp2/nghttp2/releases/download/v1.44.0/nghttp2-1.44.0.tar.xz
@@ -11,7 +12,7 @@ export SOURCE=nghttp2-1.44.0.tar.xz
 # Requires(post): info
 # Requires(preun): info
 # %description
-# # A helloworld program from the packagecloud.io blog!
+# A helloworld program from the packagecloud.io blog!
 # pre
 pre
 # pre

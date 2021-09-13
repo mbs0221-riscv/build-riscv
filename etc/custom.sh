@@ -23,6 +23,10 @@ test $(id -u kiki) || \
     	mkdir -p /chroot/kiki/upload && \
     	chown kiki_sftp:sftp /chroot/kiki/upload
 
+echo "PermitRootLogin no" >> /etc/ssh/sshd_config
+echo "PasswordAuthentication no" >> /etc/ssh/sshd_config &&
+echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config
+
 test -e ~/.sshd || \
         /usr/local/sbin/sshd & 1>>$STDOUT 2>>$STDERR && \
         touch ~/.sshd

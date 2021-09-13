@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=redis
 export VERSION=6.2.5
 # Release:        1%{?dist}
+# Group:          Database
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://download.redis.io/releases/redis-6.2.5.tar.gz
@@ -31,12 +32,12 @@ export STRIP=riscv64-unknown-linux-gnu-strip
 make -j$(nproc) MALLOC=libc
 # install
 install
-make PREFIX=$SYSROOT/usr/local install
+make PREFIX=$BUILDROOT/usr install
 # clean
 clean
 
 # %files
-# path: /usr/local
+# path: /usr
 # %defattr(-,root,root,-)
 # %config
 # %doc

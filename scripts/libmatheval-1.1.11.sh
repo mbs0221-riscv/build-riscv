@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libmatheval
 export VERSION=1.1.11
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://mirror.easyname.at/gnu/libmatheval/libmatheval-1.1.11.tar.gz

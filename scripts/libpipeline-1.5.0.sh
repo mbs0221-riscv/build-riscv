@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libpipeline
 export VERSION=1.5.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.0.tar.gz

@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=libgsf
 export VERSION=1.14.47
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://download.gnome.org/sources/libgsf/1.14/libgsf-1.14.47.tar.xz

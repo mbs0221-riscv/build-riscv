@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=Python
 export VERSION=3.9.6
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=url
@@ -28,7 +29,7 @@ export CFLAGS="$CFLAGS -I$SYSROOT/include -I$SYSROOT/include/ncurses"
 export LDFLAGS="$CFLAGS -L$SYSROOT/lib"
 export PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 #./configure --prefix=$SYSROOT/usr --host=riscv64-unknown-linux-gnu --build=riscv64 --enable-shared --disable-ipv6 --enable-loadable-sqlite-extensions --enable-optimizations ac_cv_file__dev_ptc=no  ac_cv_file__dev_ptmx=no && make -j$(nproc)
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --build=riscv64 \
             --enable-shared \

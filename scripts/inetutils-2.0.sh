@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=inetutils
 export VERSION=2.0
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=http://ftp.gnu.org/gnu/inetutils/inetutils-2.0.tar.xz

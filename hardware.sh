@@ -1,5 +1,6 @@
 #!/bin/bash
 
+CONFIG=${1:-RocketVC709Config}
 LONG_NAME=chipyard.fpga.vc709.VC709FPGATestHarness.$CONFIG
 
 export CHIPYAR=~/chipyard
@@ -8,7 +9,7 @@ export RESOURCES=$FPGA/src/main/resources
 export GEN_PATH=$FPGA/generated-src
 export OBJ_PATH=$GEN_PATH/$LONG_NAME/obj
 export TCL_DIR=$FPGA/fpga-shells/xilinx/common/tcl
-export BUILD=/nfsroot/build
+export BUILD=$(pwd)
 
 BOARD=xc7vx690t_0
 MCS=$OBJ_PATH/VC709FPGATestHarness.mcs
@@ -19,9 +20,12 @@ PRM=$OBJ_PATH/VC709FPGATestHarness.prm
 # build project
 
 cd $FPGA
-make -j12 SUB_PROJECT=vc709 CONFIG=$CONFIG mcs
+make -j$(nproc) SUB_PROJECT=vc709 CONFIG=$CONFIG mcs
 
 # boot the board from mcs
+if [ ! $1 ]; then
+	exit 0
+fi
 
 echo upload: $MCS
 echo upload: $PRM
@@ -35,9 +39,6 @@ vivado -nojournal -mode batch \
         -tclargs $BOARD
 
 ##################### SOFTWARE FLOW #####################
+cp -p $RESOURCES/vc709/uartsend/upload $BUILD
+
 cd $BUILD
-
-cp -p $RESOURCES/vc709/uartsend/upload ./
-dtc -I dts -O dtb -o $LONG_NAME.dtb $GEN_PATH/$LONG_NAME/$LONG_NAME.dts
-
-#./start-kernel.sh $LONG_NAME.dtb

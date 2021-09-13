@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=bzip2
 export VERSION=1.0.6
 # Release:        1%{?dist}
+# Group:          Compression
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://sourceforge.net/projects/bzip2/files/bzip2-1.0.6.tar.gz
@@ -25,15 +26,22 @@ sed -i "s/AR=ar/AR?=ar/" Makefile-libbz2_so
 sed -i "s/RANLIB=ranlib/RANLIB?=ranlib/" Makefile-libbz2_so
 # build
 build
-export PREFIX=$SYSROOT/usr
+export PREFIX=$BUILDROOT/usr
 export CC=riscv64-unknown-linux-gnu-gcc
 export AR=riscv64-unknown-linux-gnu-ar
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
-#make -j$(nproc) libbz2.a bzip2 bzip2recover -f Makefile-libbz2_so
-make -j$(nproc) all
+make -j$(nproc) -f Makefile-libbz2_so
+make clean
+export CC=riscv64-unknown-linux-gnu-gcc
+export AR=riscv64-unknown-linux-gnu-ar
+export RANLIB=riscv64-unknown-linux-gnu-ranlib
+make -j$(nproc)
 # install
 install
-make install PREFIX=$SYSROOT/usr
+export CC=riscv64-unknown-linux-gnu-gcc
+export AR=riscv64-unknown-linux-gnu-ar
+export RANLIB=riscv64-unknown-linux-gnu-ranlib
+make PREFIX=$BUILDROOT/usr install
 # clean
 clean
 

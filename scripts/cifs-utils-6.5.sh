@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=cifs-utils
 export VERSION=6.5
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        The cifs-utils provides a means for mounting SMB/CIFS shares on a Linux system.
 # License:        GPLv3+
 export URL=https://ftp.samba.org/pub/linux-cifs/cifs-utils/cifs-utils-6.5.tar.bz2
@@ -15,6 +16,7 @@ export SOURCE=cifs-utils-6.5.tar.bz2
 prep
 # setup
 setup
+#export ROOTSBINDIR=$SYSROOT/sbin
 ./configure --prefix=$SYSROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --disable-pam \

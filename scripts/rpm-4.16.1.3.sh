@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=rpm
 export VERSION=4.16.1.3
 # Release:        1%{?dist}
+# Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.osuosl.org/pub/rpm/releases/rpm-4.16.x/rpm-4.16.1.3.tar.bz2

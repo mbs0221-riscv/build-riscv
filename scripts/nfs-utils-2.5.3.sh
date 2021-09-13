@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=nfs-utils
 export VERSION=2.5.3
 # Release:        1%{?dist}
+# Group:          System
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://ftp.osuosl.org/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.5.3.tar.xz

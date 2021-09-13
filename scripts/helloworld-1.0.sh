@@ -4,6 +4,7 @@ source ../build-utils.sh
 export NAME=helloworld
 export VERSION=1.0
 # Release:        1%{?dist}
+# Group:          Benchmark
 # Summary:        A hello world program
 # License:        GPLv3+
 export URL=https://blog.packagecloud.io
@@ -18,10 +19,10 @@ prep
 setup
 # build
 build
-make PREFIX=/usr %{?_smp_mflags}
+make PREFIX=/usr
 # install
 install
-make PREFIX=/usr DESTDIR=$SYSROOT install
+make PREFIX=/usr DESTDIR=$BUILDROOT install
 # clean
 clean
 
