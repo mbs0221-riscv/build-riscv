@@ -21,7 +21,7 @@ setup
 # build
 build
 export CC=riscv64-unknown-linux-gnu-gcc
-./configure --prefix=$SYSROOT \
+./configure --prefix=$BUILDROOT \
             --host=riscv64-unknown-linux-gnu \
             --enable-zlib &&
 make -j$(nproc)

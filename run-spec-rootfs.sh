@@ -16,7 +16,7 @@ PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 export PKG_CONFIG_PATH
 
-export BUILDROOT=/media/ubuntu/e60f0536-2914-4a9c-b357-65dd72c24ca1
+export BUILDROOT=/media/ubuntu/sdcard
 
 export SPECFILE=$1
 

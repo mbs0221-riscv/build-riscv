@@ -19,10 +19,13 @@ pre
 post
 # pre
 prep
-#wget http://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.43.9/e2fsprogs-1.43.9.tar.gz
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH
+./configure --prefix=$BUILDROOT \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
@@ -34,7 +37,7 @@ make install
 clean
 
 # %files
-# path: /usr
+# path: /
 # %defattr(-,root,root,-)
 # %config
 # %doc
