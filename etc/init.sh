@@ -1,5 +1,16 @@
 #!/bin/sh
 
+case "$DEVICE" in
+	/dev/ttySIF0)
+		;;
+	/dev/ttySIF1)
+		;;
+	*)
+		# do not need init
+		exit 0
+		;;
+esac
+
 # Environment variables
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
@@ -109,7 +120,7 @@ fi
 # sync rpm packages
 echo "sync and install rpm packages" 1>>$STDOUT
 test -d /tmp/rpms || mkdir -p /tmp/rpms
-rsync -avzP -e 'dbclient -y -p 2222' ubuntu@$PEERNAME:~/rpmbuild/RPMS/ /tmp/rpms/ 1>>$STDOUT 2>>$STDERR
+rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/rpmbuild/RPMS/ /tmp/rpms/ 1>>$STDOUT 2>>$STDERR
 
 # sync libs
 #rsync -avzP -e 'dbclient -y -p 2222' kiki212@$PEERNAME:~/sysroot/lib/           /lib/           1>>$STDOUT 2>>$STDERR

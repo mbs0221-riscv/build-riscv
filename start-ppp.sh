@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source get-device.sh
+#source get-device.sh
+dev=$1
 
 echo =========dropbear====================
 test -e /var/run/dropbear.pid || dropbear -E -R -p 2222 &
@@ -16,8 +17,7 @@ ping -c 5 vc709
 
 if [ $? -eq 0 ]; then
 
-	ifconfig -a ppp0 txqueuelen 1500
-#	ifconfig -a ppp0 mtu 9000
+	ifconfig -a ppp0 txqueuelen 1500 mtu 1500
 
 	source setup-route.sh
 	source check-nc.sh
