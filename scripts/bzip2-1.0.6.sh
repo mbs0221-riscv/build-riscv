@@ -26,7 +26,7 @@ sed -i "s/AR=ar/AR?=ar/" Makefile-libbz2_so
 sed -i "s/RANLIB=ranlib/RANLIB?=ranlib/" Makefile-libbz2_so
 # build
 build
-export PREFIX=$SYSROOT/usr
+export PREFIX=$BUILDROOT/usr
 export CC=riscv64-unknown-linux-gnu-gcc
 export AR=riscv64-unknown-linux-gnu-ar
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
@@ -38,7 +38,10 @@ export RANLIB=riscv64-unknown-linux-gnu-ranlib
 make -j$(nproc)
 # install
 install
-make PREFIX=$SYSROOT/usr install
+export CC=riscv64-unknown-linux-gnu-gcc
+export AR=riscv64-unknown-linux-gnu-ar
+export RANLIB=riscv64-unknown-linux-gnu-ranlib
+make PREFIX=$BUILDROOT/usr install
 # clean
 clean
 

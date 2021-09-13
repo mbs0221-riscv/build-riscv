@@ -21,8 +21,13 @@ post
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
+            --with-sysroot=$SYSROOT \
+            --enable-shared \
+            --enable-static \
+            --disable-nls \
+            --disable-rpath
 # build
 build
 make -j$(nproc)
