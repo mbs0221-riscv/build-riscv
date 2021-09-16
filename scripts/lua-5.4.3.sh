@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=glib
-export VERSION=2.68.3
+export NAME=lua
+export VERSION=5.4.3
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://download.gnome.org/sources/glib/2.68/glib-2.68.3.tar.xz
-export SOURCE=glib-2.68.3.tar.xz
+export URL=https://www.lua.org/ftp/lua-5.4.3.tar.gz
+export SOURCE=lua-5.4.3.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -21,20 +21,21 @@ post
 prep
 # setup
 setup
-# pkg-config
 PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
 PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
-meson setup --prefix=$BUILDROOT/usr \
-            --cross-file cross.ini \
-            --cross-file riscv64.ini \
-            _build
+export PKG_CONFIG_PATH
+sed -i '9s/gcc/riscv64-unknown-linux-gnu-gcc/' src/Makefile
+sed -i '14s/ar/riscv64-unknown-linux-gnu-ar/' src/Makefile
+sed -i '15s/ranlib/riscv64-unknown-linux-gnu-ranlib/' src/Makefile
+sed -i '13s#/usr/local#$(PREFIX)#' Makefile
 # build
 build
-ninja -C _build
+make -j$(nproc)
 # install
 install
-ninja -C _build install
+export PREFIX=$BUILDROOT/usr
+make install
 # clean
 clean
 

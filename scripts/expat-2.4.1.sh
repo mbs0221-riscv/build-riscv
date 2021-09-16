@@ -17,7 +17,7 @@ export SOURCE=expat-2.4.1.tar.gz
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr/local \
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --without-docbook
 # build
