@@ -1,5 +1,16 @@
 #!/bin/sh
 
+case "$DEVICE" in
+	/dev/ttySIF0)
+		;;
+	/dev/ttySIF1)
+		;;
+	*)
+		# do not need init
+		exit 0
+		;;
+esac
+
 # Environment variables
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib

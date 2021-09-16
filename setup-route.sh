@@ -3,8 +3,8 @@
 echo =========Setup Routing and NAT=======
 
 #modprobe -r ip_tables
-iptables -F
-#iptables -X
+#iptables -F
+iptables -X
 #iptables -Z
 iptables -P INPUT ACCEPT
 iptables -P OUTPUT ACCEPT
