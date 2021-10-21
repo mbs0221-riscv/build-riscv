@@ -1,33 +1,41 @@
-//kprobe_example.c
-#include<linux/init.h>
-#include<linux/module.h>
-#include<linux/kernel.h>
+//kprobe_custom.c
+#include <linux/init.h>
+#include <linux/module.h>
+#include <linux/kernel.h>
 #include <linux/kprobes.h>
 
-//统计do_fork()总共执行了几次
+#define MAX_SYMBOL_LEN	64
+static char symbol[MAX_SYMBOL_LEN] = "kernel_clone";
+module_param_string(symbol, symbol, sizeof(symbol), 0644);
+
+/* For each probe you need to allocate a kprobe structure */
+static struct kprobe kp = { 
+        .symbol_name    = symbol,
+};
+
 static int total_count = 0;
 
-//前置方法，这里可以拿到方法入参和栈，每次执行do_fork() total_count++
+/* kprobe pre_handler: called just before the probed instruction is executed */
 static int handler_pre(struct kprobe *p, struct pt_regs *regs)
 {
+
+#ifdef CONFIG_RISCV
+	pr_info("<%s> p->addr = 0x%p, pc = 0x%lx, status = 0x%lx\n",
+		p->symbol_name, p->addr, regs->epc, regs->status);
+#endif
+
         total_count++;
-        //printk 打印的日志 可以通过dmesg 命令查看
-        printk(KERN_INFO "累计调用do_fork[%d]次\n",total_count);
+        printk(KERN_INFO "do_fork has been called for [%d] times\n",total_count);
         return 0;
 }
 
-//后置方法，这里可以拿到方法返回值
+/* kprobe post_handler: called after the probed instruction is executed */
 static void handler_post(struct kprobe *p, struct pt_regs *regs,
                                 unsigned long flags)
 {
+	
 }
 
-//通过kprobe这个数据结构，定义要hook的内核方法名称
-static struct kprobe kp = {
-        .symbol_name    = "do_fork",
-};
-
-//通过register_kprobe 方法更改内核对应方法的指令
 static int kprobe_init(void){
         int ret;
         kp.pre_handler = handler_pre;
@@ -42,13 +50,11 @@ static int kprobe_init(void){
         return 0;
 }
 
-//通过unregister_kprobe卸载hook
 static void kprobe_exit(void){
         unregister_kprobe(&kp);
         printk(KERN_INFO "kprobe at %p unregistered\n", kp.addr);
 }
 
-//构造内核模块
 module_init(kprobe_init);
 module_exit(kprobe_exit);
 MODULE_LICENSE("GPL");

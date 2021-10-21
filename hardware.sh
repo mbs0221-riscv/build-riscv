@@ -3,7 +3,7 @@
 CONFIG=${1:-RocketVC709Config}
 LONG_NAME=chipyard.fpga.vc709.VC709FPGATestHarness.$CONFIG
 
-export CHIPYAR=~/chipyard
+export CHIPYARD=~/chipyard
 export FPGA=$CHIPYARD/fpga
 export RESOURCES=$FPGA/src/main/resources
 export GEN_PATH=$FPGA/generated-src
@@ -42,3 +42,4 @@ vivado -nojournal -mode batch \
 cp -p $RESOURCES/vc709/uartsend/upload $BUILD
 
 cd $BUILD
+source upload-mcs.sh

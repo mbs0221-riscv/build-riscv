@@ -3,7 +3,7 @@
 CONFIG=${1:-RocketVC709Config}
 LONG_NAME=chipyard.fpga.vc709.VC709FPGATestHarness.$CONFIG
 
-export CHIPYAR=~/chipyard
+export CHIPYARD=/home/ubuntu/chipyard
 export FPGA=$CHIPYARD/fpga
 export RESOURCES=$FPGA/src/main/resources
 export GEN_PATH=$FPGA/generated-src
