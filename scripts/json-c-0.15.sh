@@ -21,7 +21,9 @@ setup
 build
 mkdir build &&
 cd    build &&
-cmake -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr \
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_C_COMPILER=riscv64-unknown-linux-gnu-gcc \
+      -DCMAKE_CXX_COMPILER=riscv64-unknown-linux-gnu-g++ \
       -DCMAKE_BUILD_TYPE=Release \
       -DBUILD_STATIC_LIBS=OFF    \
       .. &&
@@ -29,11 +31,11 @@ make
 # install
 install
 cd build
-make install
+make install DESTDIR=$BUILDROOT
 # clean
 clean
 
 # %files
-# path: /usr
+# path: /
 # %defattr(-,root,root,-)
 epilog

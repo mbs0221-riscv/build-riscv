@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libcap
-export VERSION=2.48
+export NAME=dbus
+export VERSION=1.4.1
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.48.tar.xz
-export SOURCE=libcap-2.48.tar.xz
+export URL=https://dbus.freedesktop.org/releases/dbus/dbus-1.4.1.tar.gz
+export SOURCE=dbus-1.4.1.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -21,16 +21,19 @@ post
 prep
 # setup
 setup
+PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH
+./configure --prefix=$BUILDROOT/usr \
+            --host=riscv64-unknown-linux-gnu \
+	--with-systemdsystemunitdir=$BUILDROOT/lib/systemd/system
 # build
 build
-export CC=riscv64-unknown-linux-gnu-gcc
-export CXX=riscv64-unknown-linux-gnu-g++
-export AR=riscv64-unknown-linux-gnu-ar
-export RANLIB=riscv64-unknown-linux-gnu-ranlib
 make -j$(nproc)
 # install
 install
-make install FAKEROOT=$BUILDROOT
+make install
 # clean
 clean
 

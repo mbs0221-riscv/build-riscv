@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=gcc
-export VERSION=9.2.0
+export NAME=dbus
+export VERSION=1.7.0
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://ftp.gnu.org/gnu/gcc/gcc-9.2.0/gcc-9.2.0.tar.xz
-export SOURCE=gcc-9.2.0.tar.xz
+export URL=https://dbus.freedesktop.org/releases/dbus/dbus-1.7.0.tar.gz
+export SOURCE=dbus-1.7.0.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -25,25 +25,16 @@ PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
 PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 export PKG_CONFIG_PATH
-./configure --prefix= \
+export LDFLAGS='-lrt'
+./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
-            --target=riscv64-unknown-linux-gnu \
-            --enable-languages=c,c++ \
-            --enable-checking=release \
-            --enable-ld \
-            --enable-gold \
-            --enable-lto \
-            --disable-multilib \
-#            --disable-libquadmath \
-#            --disable-libstdcxx \
-#            --disable-libquadmath-support \
-#            --disable-option-checking
+            --with-systemdsystemunitdir=$BUILDROOT/lib/systemd/system
 # build
 build
-make all -j$(nproc)
+make -j$(nproc)
 # install
 install
-make install DESTDIR=$BUILDROOT
+make install
 # clean
 clean
 

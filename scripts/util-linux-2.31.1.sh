@@ -24,7 +24,7 @@ prep
 setup -n util-linux-2.31.1
 export CFLAGS="$CFLAGS -I$SYSROOT/include -I$SYSROOT/include/ncurses -I$SYSROOT/usr/include -I$SYSROOT/usr/include/readline/"
 export LDFLAGS="$CFLAGS -L$SYSROOT/lib -L$SYSROOT/usr/lib"
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=/usr \
             --host=riscv64-unknown-linux-gnu \
             --enable-silent-rules \
             --enable-newgrp \
@@ -35,7 +35,7 @@ build
 make -j$(nproc)
 # install
 install
-make install
+make install DESTDIR=$BUILDROOT
 # clean
 clean
 

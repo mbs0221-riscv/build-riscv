@@ -56,9 +56,26 @@ static long device_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
 }
 
 // ---------------------------------------------------------------------------
-static struct file_operations f_ops = {.unlocked_ioctl = device_ioctl,
-                                       .open = device_open,
-                                       .release = device_release};
+static ssize_t device_read(struct file *fp, char __user *user_buf, size_t count, loff_t *ppos) {
+	int ret = 0;
+	return ret;
+}
+
+// ---------------------------------------------------------------------------
+static ssize_t device_write(struct file *fp, const char __user *user_buf, size_t count, loff_t *ppos)
+{
+	int ret;
+	return ret;
+}
+
+// ---------------------------------------------------------------------------
+static struct file_operations f_ops = {
+	.owner = THIS_MODULE,
+	.unlocked_ioctl = device_ioctl,
+	.open = device_open,
+	.release = device_release,
+	.read = device_read,
+};
 
 // ---------------------------------------------------------------------------
 static struct miscdevice misc_dev = {
@@ -82,6 +99,26 @@ unsigned int gcd_ref(unsigned int x, unsigned int y)
 	return x;
 }
 
+// ---------------------------------------------------------------------------
+unsigned int gcd_hardware(unsigned int x, unsigned int y) {
+	
+	// wait for peripheral to be ready
+	printk(KERN_INFO "wait for peripheral to be ready\n");
+	while ((readb(GCD_STATUS) & 0x2) == 0);
+
+	writel(x, GCD_X);
+	writel(y, GCD_Y);
+
+	// wait for peripheral to complete
+	printk(KERN_INFO "wait for peripheral to complete\n");
+	while ((readb(GCD_STATUS) & 0x1) == 0);
+	
+	uint32_t result = readl(GCD_GCD);
+
+	return result;
+}
+
+// ---------------------------------------------------------------------------
 static int gcd_init(void)
 {
 	printk(KERN_INFO "Hello world !\n");
@@ -96,24 +133,8 @@ static int gcd_init(void)
 		return 1;
 	}
 
-	// wait for peripheral to be ready
-	printk(KERN_INFO "wait for peripheral to be ready\n");
-	while ((readb(GCD_STATUS) & 0x2) == 0);
-
-	writel(x, GCD_X);
-	writel(y, GCD_Y);
-
-	// wait for peripheral to complete
-	printk(KERN_INFO "wait for peripheral to complete\n");
-	while ((readb(GCD_STATUS) & 0x1) == 0);
-
-	result = readl(GCD_GCD);
-	ref = gcd_ref(x, y); 
-
-	if (g_gcd_reg_base != NULL) {
-		iounmap(g_gcd_reg_base);
-		g_gcd_reg_base = NULL;
-	}
+	ref = gcd_ref(x, y);
+	result = gcd_hardware(x, y);
 
 	printk(KERN_INFO "Software result: %d", ref);
 	printk(KERN_INFO "Hareware result: %d", result);
@@ -139,6 +160,11 @@ static int gcd_init(void)
 
 static void gcd_exit(void)
 {
+	if (g_gcd_reg_base != NULL) {
+		iounmap(g_gcd_reg_base);
+		g_gcd_reg_base = NULL;
+	}
+
 	misc_deregister(&misc_dev);
 
 	printk(KERN_INFO "Bye Bye !\n");
