@@ -16,31 +16,33 @@ export SOURCE=bzip2-1.0.6.tar.gz
 # pre
 pre
 # pre
+post
+# pre
 prep
 # setup
 setup
-sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile-libbz2_so
-sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile-libbz2_so
-sed -i "s/CC=gcc/CC?=gcc/" Makefile-libbz2_so
-sed -i "s/AR=ar/AR?=ar/" Makefile-libbz2_so
-sed -i "s/RANLIB=ranlib/RANLIB?=ranlib/" Makefile-libbz2_so
+PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH
+sed -i '25c CC?=gcc' Makefile-libbz2_so
+sed -i '27c PREFIX?=/usr/local' Makefile-libbz2_so
+sed -i 's#\(ln -s -f \)$(PREFIX)/bin/#\1#' Makefile
+sed -i 's#$(PREFIX)/man#$(PREFIX)/share/man#g' Makefile
+sed -i '18c CC?=gcc' Makefile
+sed -i '19c AR?=ar' Makefile
+sed -i '20c RANLIB?=ranlib' Makefile
+sed -i '27c PREFIX?=/usr/local' Makefile
 # build
 build
-export PREFIX=$BUILDROOT/usr
 export CC=riscv64-unknown-linux-gnu-gcc
 export AR=riscv64-unknown-linux-gnu-ar
 export RANLIB=riscv64-unknown-linux-gnu-ranlib
-make -j$(nproc) -f Makefile-libbz2_so
-make clean
-export CC=riscv64-unknown-linux-gnu-gcc
-export AR=riscv64-unknown-linux-gnu-ar
-export RANLIB=riscv64-unknown-linux-gnu-ranlib
-make -j$(nproc)
+export CFLAGS=-fPIC
+make all -j$(nproc) -f Makefile-libbz2_so
+make libbz2.a bzip2 bzip2recover
 # install
 install
-export CC=riscv64-unknown-linux-gnu-gcc
-export AR=riscv64-unknown-linux-gnu-ar
-export RANLIB=riscv64-unknown-linux-gnu-ranlib
 make PREFIX=$BUILDROOT/usr install
 # clean
 clean

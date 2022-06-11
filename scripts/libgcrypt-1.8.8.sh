@@ -17,16 +17,14 @@ export SOURCE=libgcrypt-1.8.8.tar.bz2
 prep
 # setup
 setup
-./configure --prefix=$BUILDROOT/usr/ \
-            --host=riscv64-unknown-linux-gnu \
-            --with-sysroot=$SYSROOT \
-            --with-libgpg-error-prefix=$SYSROOT/usr
+./configure --prefix=/usr \
+            --host=riscv64-unknown-linux-gnu
 # build
 build
 make -j$(nproc)
 # install
 install
-make install
+make install DESTDIR=$BUILDROOT
 # clean
 clean
 

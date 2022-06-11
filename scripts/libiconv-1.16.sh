@@ -22,14 +22,14 @@ prep
 #wget https://mirror.easyname.at/gnu/libiconv/libiconv-1.16.tar.gz
 # setup
 setup
-./configure --prefix=$BUILDROOT/usr \
+./configure --prefix=/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
 make -j$(nproc)
 # install
 install
-make install
+make install DESTDIR=$BUILDROOT
 # clean
 clean
 

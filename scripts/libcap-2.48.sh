@@ -19,15 +19,15 @@ pre
 post
 # pre
 prep
-#wget https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.48.tar.xz
 # setup
 setup
 # build
 build
-export CC=riscv64-unknown-linux-gnu-gcc
-export CXX=riscv64-unknown-linux-gnu-g++
-export AR=riscv64-unknown-linux-gnu-ar
-export RANLIB=riscv64-unknown-linux-gnu-ranlib
+#export BUILD_CC=riscv64-unknown-linux-gnu-gcc
+#export CC=riscv64-unknown-linux-gnu-gcc
+#export CXX=riscv64-unknown-linux-gnu-g++
+#export AR=riscv64-unknown-linux-gnu-ar
+#export RANLIB=riscv64-unknown-linux-gnu-ranlib
 make -j$(nproc)
 # install
 install

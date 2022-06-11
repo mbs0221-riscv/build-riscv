@@ -21,14 +21,14 @@ post
 prep
 # setup
 setup
-./configure --prefix=$SYSROOT/usr \
+./configure --prefix=/usr \
             --host=riscv64-unknown-linux-gnu \
 # build
 build
 make -j$(nproc)
 # install
 install
-make install
+make install DESTDIR=$BUILDROOT
 # clean
 clean
 

@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=libcap
-export VERSION=2.25
+export NAME=ncurses
+export VERSION=ncurses
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.tar.xz
-export SOURCE=libcap-2.25.tar.xz
+export URL=https://invisible-island.net/datafiles/release/ncurses.tar.gz
+export SOURCE=ncurses.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -21,21 +21,23 @@ post
 prep
 # setup
 setup
+PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH
+./configure --prefix=/usr \
+            --host=riscv64-unknown-linux-gnu \
 # build
 build
-export CC=riscv64-unknown-linux-gnu-gcc
-export CXX=riscv64-unknown-linux-gnu-g++
-export AR=riscv64-unknown-linux-gnu-ar
-export RANLIB=riscv64-unknown-linux-gnu-ranlib
 make -j$(nproc)
 # install
 install
-make install FAKEROOT=$BUILDROOT
+make install DESTDIR=$BUILDROOT
 # clean
 clean
 
 # %files
-# path: /
+# path: /usr
 # %defattr(-,root,root,-)
 # %config
 # %doc

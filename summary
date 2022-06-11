@@ -3,20 +3,20 @@
 cat ~/rpmbuild/SPECS/*.spec | grep Source0 | grep -v source0 | \
 	sed 's/Source0:        //' | sort | uniq > ~/rpmbuild/SPECS/spec.list
 
-find ~/rpmbuild/RPMS/x86_64/*.rpm | \
-	sed "s/.*\///;s/-1.x86_64.rpm\|-stable.x86_64.rpm//" | \
-	sort | uniq > ~/rpmbuild/RPMS/x86_64/rpm.list
+find ~/rpmbuild/RPMS/riscv64/*.rpm | \
+	sed "s/.*\///;s/-1.riscv64.rpm\|-stable.riscv64.rpm//" | \
+	sort | uniq > ~/rpmbuild/RPMS/riscv64/rpm.list
 
 find ~/rpmbuild/SOURCES/*.tar.* | sort | uniq > ~/rpmbuild/SOURCES/sources.list
 
 echo ================has rpm packages============================
-cat ~/rpmbuild/RPMS/x86_64/rpm.list
-cat ~/rpmbuild/RPMS/x86_64/rpm.list | wc
+cat ~/rpmbuild/RPMS/riscv64/rpm.list
+cat ~/rpmbuild/RPMS/riscv64/rpm.list | wc
 echo ================has no spec files===========================
 #diff ~/rpmbuild/SPECS/spec.list ~/rpmbuild/SOURCES/sources.list
 grep -F -v -f ~/rpmbuild/SPECS/spec.list ~/rpmbuild/SOURCES/sources.list | sort | uniq
 grep -F -v -f ~/rpmbuild/SPECS/spec.list ~/rpmbuild/SOURCES/sources.list | sort | uniq | wc
 echo ================build failed================================
-#diff ~/rpmbuild/RPMS/x86_64/rpm.list ~/rpmbuild/SPECS/spec.list
-grep -F -v -f ~/rpmbuild/RPMS/x86_64/rpm.list ~/rpmbuild/SPECS/spec.list | sort | uniq
-grep -F -v -f ~/rpmbuild/RPMS/x86_64/rpm.list ~/rpmbuild/SPECS/spec.list | sort | uniq | wc
+#diff ~/rpmbuild/RPMS/riscv64/rpm.list ~/rpmbuild/SPECS/spec.list
+grep -F -v -f ~/rpmbuild/RPMS/riscv64/rpm.list ~/rpmbuild/SPECS/spec.list | sort | uniq
+grep -F -v -f ~/rpmbuild/RPMS/riscv64/rpm.list ~/rpmbuild/SPECS/spec.list | sort | uniq | wc
