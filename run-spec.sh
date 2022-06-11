@@ -23,7 +23,7 @@ cat $filename
 cd $(dirname $filename)
 
 # run generated scripts
-source $(basename $filename)
+bash $(basename $filename)
 
 # generate rpm package automatically
 if [ $? -eq 0 ]; then

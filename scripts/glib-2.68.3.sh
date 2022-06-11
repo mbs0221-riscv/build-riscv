@@ -19,19 +19,18 @@ pre
 post
 # pre
 prep
-#wget https://download.gnome.org/sources/glib/2.68/glib-2.68.3.tar.xz
 # setup
 setup
+# pkg-config
+PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+meson setup --prefix=$BUILDROOT/usr \
+            --cross-file cross.ini \
+            --cross-file riscv64.ini \
+            _build
 # build
 build
-export CC=riscv64-unknown-linux-gnu-gcc
-export CXX=riscv64-unknown-linux-gnu-g++
-meson --prefix=$SYSROOT/usr \
-      -Dxattr=false \
-      -Dinstalled_tests=true \
-      -Diconv=external \
-      -Db_lundef=false \
-      _build
 ninja -C _build
 # install
 install

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#source get-device.sh
-dev=$1
+source get-device.sh
+#dev=$1
 
 echo =========dropbear====================
 test -e /var/run/dropbear.pid || dropbear -E -R -p 2222 &

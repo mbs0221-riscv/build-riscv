@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=glib
-export VERSION=2.49.7
+export NAME=LVM
+export VERSION=2.2.03.13
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://download-fallback.gnome.org/sources/glib/2.49/glib-2.49.7.tar.xz
-export SOURCE=glib-2.49.7.tar.xz
+export URL=http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.13.tgz
+export SOURCE=LVM2.2.03.13.tgz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -20,28 +20,22 @@ post
 # pre
 prep
 # setup
-setup
+setup -n LVM2.2.03.13
 PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
 PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 export PKG_CONFIG_PATH
-export CFLAGS="-Wformat-overflow"
-echo glib_cv_stack_grows=no >> riscv64-unknown-linux.cache
-echo glib_cv_uscore=no >> riscv64-unknown-linux.cache
-
 ./configure --prefix=$BUILDROOT/usr \
-            --host=riscv64-unknown-linux-gnu \
-            --enable-iconv=no \
-            --with-libiconv=gnu \
-            --with-pcre=system \
-            --disable-libelf \
-            --cache-file=riscv64-unknown-linux.cache
+            --host=riscv64-unknown-linux-gnu
+sed -i "753s#^#//#" include/configure.h # //#define  malloc  rpl_malloc
+sed -i "765s#^#//#" include/configure.h # //#define  realloc rpl_realloc
 # build
 build
-make -j$(nproc)
+make clean
+make device-mapper -j$(nproc)
 # install
 install
-make install
+make install_device-mapper
 # clean
 clean
 

@@ -2,13 +2,13 @@
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
 export NAME=glib
-export VERSION=2.49.7
+export VERSION=2.48.2
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://download-fallback.gnome.org/sources/glib/2.49/glib-2.49.7.tar.xz
-export SOURCE=glib-2.49.7.tar.xz
+export URL=http://ftp.gnome.org/pub/gnome/sources/glib/2.48/glib-2.48.2.tar.xz
+export SOURCE=glib-2.48.2.tar.xz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -21,14 +21,16 @@ post
 prep
 # setup
 setup
-PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
-PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
-export PKG_CONFIG_PATH
-export CFLAGS="-Wformat-overflow"
+echo glib_cv_long_long_format=ll >> riscv64-unknown-linux.cache
 echo glib_cv_stack_grows=no >> riscv64-unknown-linux.cache
+echo glib_cv_have_strlcpy=no >> riscv64-unknown-linux.cache
+echo glib_cv_have_qsort_r=yes >> riscv64-unknown-linux.cache
+echo glib_cv_va_val_copy=yes >> riscv64-unknown-linux.cache
 echo glib_cv_uscore=no >> riscv64-unknown-linux.cache
-
+echo glib_cv_rtldglobal_broken=no >> riscv64-unknown-linux.cache
+echo ac_cv_func_posix_getpwuid_r=yes >> riscv64-unknown-linux.cache
+echo ac_cv_func_posix_getgrgid_r=yes >> riscv64-unknown-linux.cache
+export CFLAGS="-Wformat-overflow"
 ./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
             --enable-iconv=no \

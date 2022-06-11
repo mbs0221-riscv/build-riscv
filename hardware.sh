@@ -3,7 +3,7 @@
 CONFIG=${1:-RocketVC709Config}
 LONG_NAME=chipyard.fpga.vc709.VC709FPGATestHarness.$CONFIG
 
-export CHIPYAR=~/chipyard
+export CHIPYARD=~/chipyard
 export FPGA=$CHIPYARD/fpga
 export RESOURCES=$FPGA/src/main/resources
 export GEN_PATH=$FPGA/generated-src
@@ -22,8 +22,10 @@ PRM=$OBJ_PATH/VC709FPGATestHarness.prm
 cd $FPGA
 make -j$(nproc) SUB_PROJECT=vc709 CONFIG=$CONFIG mcs
 
+exit 0
+
 # boot the board from mcs
-if [ ! $1 ]; then
+if [ $1 -eq 0 ]; then
 	exit 0
 fi
 
@@ -39,6 +41,7 @@ vivado -nojournal -mode batch \
         -tclargs $BOARD
 
 ##################### SOFTWARE FLOW #####################
-cp -p $RESOURCES/vc709/uartsend/upload $BUILD
+#cp -p $RESOURCES/vc709/uartsend/upload $BUILD
 
-cd $BUILD
+#cd $BUILD
+#source upload-mcs.sh

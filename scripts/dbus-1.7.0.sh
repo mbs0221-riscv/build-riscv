@@ -1,14 +1,14 @@
 #!/bin/bash
 # AUTOMATIC GENERATED SCRIPTS FROM RPM SPEC FILE, DO NOT MODIFY
 source ../build-utils.sh
-export NAME=glib
-export VERSION=2.49.7
+export NAME=dbus
+export VERSION=1.7.0
 # Release:        1%{?dist}
 # Group:          Library
 # Summary:        A hello world program
 # License:        GPLv3+
-export URL=https://download-fallback.gnome.org/sources/glib/2.49/glib-2.49.7.tar.xz
-export SOURCE=glib-2.49.7.tar.xz
+export URL=https://dbus.freedesktop.org/releases/dbus/dbus-1.7.0.tar.gz
+export SOURCE=dbus-1.7.0.tar.gz
 # Requires(post): info
 # Requires(preun): info
 # %description
@@ -25,17 +25,10 @@ PKG_CONFIG_PATH=$SYSROOT/lib/pkgconfig:$PKG_CONFIG_PATH
 PKG_CONFIG_PATH=$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 PKG_CONFIG_PATH=$SYSROOT/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 export PKG_CONFIG_PATH
-export CFLAGS="-Wformat-overflow"
-echo glib_cv_stack_grows=no >> riscv64-unknown-linux.cache
-echo glib_cv_uscore=no >> riscv64-unknown-linux.cache
-
+export LDFLAGS='-lrt'
 ./configure --prefix=$BUILDROOT/usr \
             --host=riscv64-unknown-linux-gnu \
-            --enable-iconv=no \
-            --with-libiconv=gnu \
-            --with-pcre=system \
-            --disable-libelf \
-            --cache-file=riscv64-unknown-linux.cache
+            --with-systemdsystemunitdir=$BUILDROOT/lib/systemd/system
 # build
 build
 make -j$(nproc)
@@ -46,7 +39,7 @@ make install
 clean
 
 # %files
-# path: /usr
+# path: /
 # %defattr(-,root,root,-)
 # %config
 # %doc
