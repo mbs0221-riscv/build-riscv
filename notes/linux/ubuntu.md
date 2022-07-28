@@ -6,6 +6,42 @@
 $ ll /usr/share/applications/
 ```
 
+## zsh
+https://github.com/ohmyzsh/ohmyzsh
+https://github.com/zsh-users/zsh-syntax-highlighting
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo apt install zsh-syntax-highlighting
+cd ~/.oh-my-zsh/custom/plugins
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+```
+
+## vcn remote desktop
+```
+sudo apt-get install x11vnc -y
+sudo x11vnc -storepasswd /etc/x11vnc.pass
+sudo touch /etc/systemd/system/x11vnc.service
+```
+
+```
+[Unit]
+Description=Start x11vnc at startup.
+After=multi-user.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/x11vnc -auth /run/user/1000/gdm/Xauthority -forever -loop -noxdamage -repeat -rfbauth /etc/x11vnc.pass -rfbport 5900 -shared
+[Install]
+WantedBy=multi-user.target
+```
+
+```
+sudo systemctl enable x11vnc
+sudo service x11vnc start
+
+# 【报错：远程电脑上的软件似乎与此“屏幕共享”版本不兼容】
+gsettings set org.gnome.Vino require-encryption false
+```
+
 ## ssh
 ```
 $ sudo apt install openssh-server
