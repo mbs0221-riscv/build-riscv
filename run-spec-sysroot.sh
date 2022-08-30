@@ -1,1 +1,0 @@
-/nfsroot/build-riscv/run-spec.sh
