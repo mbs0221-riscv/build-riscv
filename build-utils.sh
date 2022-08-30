@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export SPECS=~/rpmbuild/SPECS
-export SOURCES=~/rpmbuild/SOURCES
-export BUILD=~/rpmbuild/BUILD
+export SPECS=~/macOS/rpmbuild/SPECS
+export SOURCES=~/macOS/rpmbuild/SOURCES
+export BUILD=~/macOS/rpmbuild/BUILD
 
 function make_spec(){
 
