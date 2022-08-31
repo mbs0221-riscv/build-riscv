@@ -1,5 +1,7 @@
 # Linux
+
 ## 修改内存占用率
+
 ```
 cat /proc/sys/vm/swappiness
 sudo sysctl vm.swappiness=20
@@ -13,25 +15,30 @@ echo 0 > /proc/sys/kernel/hung_task_timeout_secs
 ```
 
 ## ps -ef
+
 ```
 ps -ef | grep pppd | awk '{print $2}' | uniq | xargs sudo kill -9
 ```
 
 ## Huge Page
+
 HugeTable 显著减少页表项，提高TLB命中率，能够对于内存需求很大的程序有一定的加速，尤其是哪些访存没有很好的局部性的程序，比如说数据库底层的B+树索引检索等。
 
 查看是否启用透明大页，该命令适用于其它Linux系统
+
 ```
-$ $ cat /sys/kernel/mm/transparent_hugepage/enabled
+$ cat /sys/kernel/mm/transparent_hugepage/enabled
 ```
 
 Linux：taskset 查询或设置进程（线程）绑定CPU（亲和性）
+
 ```
 $ cat /proc/cpuinfo | grep process
 $ taskset -pc 11498
 $ taskset -p 11498
 $ taskset -h
 ```
+
 See https://wiki.debian.org/Hugepages for more information on how to set up hugetlbfs. The 2M page can be allocated by using the following command:
 
 ```
@@ -39,6 +46,7 @@ $ truncate -s 2097152 /hugepages/foo
 ```
 
 ## edk2
+
 ```
 ubuntu@optiplex-5060:~/tianocore$ export WORKSPACE=$PWD
 ubuntu@optiplex-5060:~/tianocore$ export PACKAGES_PATH=$PWD/edk2:$PWD/edk2-platforms:$PWD/edk2-non-osi
@@ -75,6 +83,7 @@ ubuntu@optiplex-5060:~/tianocore$ ll Build/RiscVPlatform/RELEASE_GCC5/RISCV64/
 ```
 
 ## systemd
+
 ```
 vc709:~ # systemd-analyze blame
 17min 43.982s initrd-switch-root.service
@@ -124,6 +133,7 @@ vc709:~ #
 ```
 
 ## u-boot
+
 ```
   │ │                                [*] Enable JFFS2 filesystem support                                                                    │ │  
   │ │                                [*] UBIFS silence verbose messages                                                                     │ │  
@@ -133,6 +143,7 @@ vc709:~ #
 ```
 
 ## MENUCONFIG
+
 ```
 Device Drivers-> GPIO Support ->/sys/class/gpio/… (sysfs interface)
 
@@ -158,9 +169,11 @@ Device Drivers-> GPIO Support ->/sys/class/gpio/… (sysfs interface)
 ```
 
 ## sdboot
+
 ```
 sudo dd if=/dev/sdb of=/nfsroot/sdcard.img bs=2M
 ```
+
 ```
 ubuntu@optiplex-5060:/nfsroot$ sudo gdisk /dev/sdb
 GPT fdisk (gdisk) version 1.0.5
@@ -209,7 +222,7 @@ Last sector (34-60874718, default = 60874718) or {+-}size{KMGTP}: +1048576
 Current type is 8300 (Linux filesystem)
 Hex code or GUID (L to show codes, Enter = 8300): L
 Type search string, or <Enter> to show all codes: apfs
-af0a Apple APFS                          
+af0a Apple APFS                        
 Hex code or GUID (L to show codes, Enter = 8300): af0a
 Changed type of partition to 'Apple APFS'
 
@@ -220,7 +233,7 @@ Last sector (16777250-60874718, default = 60874718) or {+-}size{KMGTP}:
 Current type is 8300 (Linux filesystem)
 Hex code or GUID (L to show codes, Enter = 8300): L  
 Type search string, or <Enter> to show all codes: hfs
-af00 Apple HFS/HFS+                      
+af00 Apple HFS/HFS+                    
 Hex code or GUID (L to show codes, Enter = 8300): af00
 Changed type of partition to 'Apple HFS/HFS+'
 
@@ -282,12 +295,14 @@ rsync -azvpP /home/ubuntu/benchmark/asdf -e 'dbclient -p 2222' root@vc709:/tmp/b
 ```
 
 ## kernel
+
 ```
 # mount sysroot
 sudo mount -o loop sysroot.img ./sysroot
 sudo sudo cp -r -p ../rootfs/* .
 sudo umount ./sysroot
 ```
+
 ```
 # copy opensbi
 cd ~/riscv-linux
@@ -296,6 +311,7 @@ cp -p ./opensbi/build/platform/generic/firmware/fw_jump.bin ./
 # modify uart
 vim drivers/tty/serial/sifive.c
 ```
+
 ```
 # strip
 ../find-dependency.sh
@@ -327,6 +343,7 @@ sudo ./start-kernel.sh chipyard.fpga.vc709.VC709FPGATestHarness.BoomVC709Config
 cd $ROOTFS
 find . | cpio -c -o -v |gzip -9 -n >../rootfs.img
 ```
+
 ```
 ## nfs
 sudo apt-get install nfs-kernel-server
@@ -360,6 +377,7 @@ total 148
 [kiki@vc709 ~]#./coremark.riscv 
 
 ```
+
 ```
 #
 ls -l $USB_DEVICE
@@ -377,25 +395,27 @@ $ usb.device_address == 14
 ```
 
 ### 压缩选项
-| alg    | kernel size (byts) | Time |
-| :---   | :---:        | :---: |
-| gzip   | 40698560 | |
-| bzip2  | 38601408 | |
-| lzma   | 26018496 | |
-| xz     | 32309952 |  |
-| lzo    | 44892864 | |
-| lz4    | 44892864 | |
-| zstd   | 32309952 |
 
+| alg   | kernel size (byts) | Time |
+| :---- | :----------------: | :--: |
+| gzip  |      40698560      |      |
+| bzip2 |      38601408      |      |
+| lzma  |      26018496      |      |
+| xz    |      32309952      |      |
+| lzo   |      44892864      |      |
+| lz4   |      44892864      |      |
+| zstd  |      32309952      |      |
 
-###
 sdcard
+
 ```
 [root@vc709 x86_64]#time rpm -i libgcrypt-1.8.8-1.x86_64.rpm
 0.05user 1.30system 11:40.92elapsed 0%CPU (0avgtext+0avgdata 0maxresident)k
 0inputs+0outputs (0major+0minor)pagefaults 0swaps
 ```
+
 tmpfs
+
 ```
 [root@vc709 x86_64]#time rpm -i gzip-1.10-1.x86_64.rpm 
 0.03user 0.54system 0:15.63elapsed 3%CPU (0avgtext+0avgdata 0maxresident)k
@@ -532,23 +552,27 @@ user	0m 0.41s
 sys	0m 14.68s
 ```
 
-
 ```
 dbclient ubuntu@optiplex-5060 -p 2222
 ```
+
 ### SSH
+
 ```
 [root@vc709 .ssh]#ssh-keygen -t ecdsa -P ""
 [root@vc709 .ssh]#scp ~/.ssh/id_rsa.pub ubuntu@10.10.72.159:/home/ubuntu/
 ubuntu@optiplex-5060:~$ cat ~/id_ecdsa.pub >> ~/.ssh/authorized_keys 
 ```
+
 ### TMPFS
+
 ```
 rsync -azvpP ~/rpmbuild/RPMS  -e 'dbclient -p 2222' root@vc709:/tmp/
 rsync -azvpP ~/benchmark/ -e 'dbclient -p 2222' root@vc709:/tmp/benchmark/
 ```
 
 ### 测试SD卡读写速度
+
 ```
 echo 3> /proc/sys/vm/drop_caches
 time dd if=/dev/mmcblk0 of=/dev/null bs=1M count=5 conv=sync
@@ -582,7 +606,8 @@ time dd bs=1M count=500 if=/dev/zero of=/mnt/aa
 
 ```
 
-### F2FS 
+### F2FS
+
 ```
 [root@vc709 ~]#iostat -k
 Linux 5.14.0-rc6+ (vc709) 	01/01/70 	_riscv64_	(4 CPU)
@@ -618,28 +643,36 @@ mmcblk0p2         3.39        50.96         0.64      21824        272
 ```
 
 #### SDHC
+
 ```
 
 ```
 
 #### SDXC
+
 ```
 
 ```
 
 ### Sifive UART Driver
+
 Then, we modify sifive uart driver
+
 ```
 cd linux/
 vim drivers/tty/serial/sifive.c
 ```
+
 Then we modify following lines
+
 ```
 #define SIFIVE_DEFAULT_BAUD_RATE                115200
 #define SIFIVE_TX_FIFO_DEPTH                    8
 #define SIFIVE_RX_FIFO_DEPTH                    8
 ```
+
 and change above lines into following
+
 ```
 #define SIFIVE_DEFAULT_BAUD_RATE                921600
 #define SIFIVE_TX_FIFO_DEPTH                    1024
@@ -647,6 +680,7 @@ and change above lines into following
 ```
 
 ### dropbear
+
 ```
 /usr/sbin/dropbear -E -R -p 2222
 test -e /root/.ssh/id_dropbear || dropbearkey -t ed25519 -f /root/.ssh/id_dropbear
@@ -654,6 +688,7 @@ test -e /root/.ssh/id_dropbear || dropbearkey -t ed25519 -f /root/.ssh/id_dropbe
 ```
 
 ### ntp-server
+
 ```
 # build ntp and tzdb rpm packages
 ~/rpmbuild/SPECS$ ./run-spec.sh ntp-4.2.8p15.spec
@@ -670,6 +705,7 @@ $ ntpdate $PEERNAME
 ```
 
 ### nfs-server
+
 ```
 # host side
 sudo apt install nfs-kernel-server nfs-common
@@ -691,6 +727,7 @@ mount -t nfs -o nolock,rsize=65536,wsize=65536,tcp $IPREMOTE:/nfsroot     $NFS_R
 ```
 
 NFS Performace
+
 ```
 [root@vc709 ~]#time dd if=/dev/zero of=$NFS_HOME/testfile.dat bs=8k count=1024
 1024+0 records in
@@ -710,6 +747,7 @@ sys	0m 1.16s
 ```
 
 SPI performance
+
 ```
 [root@vc709 ~]#time dd if=/dev/zero of=/testfile.dat bs=8k count=1024
 1024+0 records in
@@ -721,6 +759,7 @@ SPI performance
 ```
 
 ### rsync + inotify
+
 ```
 # inotify-tools
 sudo apt install inotify-tools

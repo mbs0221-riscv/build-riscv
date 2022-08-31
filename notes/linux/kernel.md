@@ -1,90 +1,116 @@
 ```
 cd ~/linux
 ```
+
 ## Kernel Config
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/Kconfig
+arch/riscv/Kconfig
 ```
+
 ## Kernel API
 
 ### Kconfig
+
 ```
-$ vim arch/riscv/Kconfig
+arch/riscv/Kconfig
 ```
+
 ### Control & Status Registers
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/csr.h
+arch/riscv/include/asm/csr.h
 ```
+
 `start_kernel()->setup_arch()->early_trap_init()->memcpy((void *)vectors, __vectors_start, __vectors_end - __vectors_start)`
+
 ```
-ubuntu@optiplex-5060:~/riscv-linux/linux/arch/riscv$ cat ./kernel/head.S
-ubuntu@optiplex-5060:~/riscv-linux/linux/arch/riscv$ cat ./kernel/setup.c
+arch/riscv/kernel/head.S
+arch/riscv/kernel/setup.c
 ```
+
 ### SBI
+
 ```
 arch/riscv/include/asm/sbi.h
 ```
 
 ### Syscall
+
 ```
-ubuntu@optiplex-5060:~/riscv-linux$ vim linux/arch/riscv/kernel/syscall_table.c 
-ubuntu@optiplex-5060:~/riscv-linux$ vim linux/arch/riscv/include/asm/unistd.h
-ubuntu@optiplex-5060:~/riscv-linux$ vim linux/arch/riscv/include/uapi/asm/unistd.h 
-ubuntu@optiplex-5060:~/riscv-linux$ vim linux/include/uapi/asm-generic/unistd.h 
+arch/riscv/kernel/syscall_table.c 
+arch/riscv/include/asm/unistd.h
+arch/riscv/include/uapi/asm/unistd.h 
+include/uapi/asm-generic/unistd.h 
 ```
 
 ### Memory Management
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/mman.h
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/mmu.h
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/mmu_context.h
+arch/riscv/include/asm/mman.h
+arch/riscv/include/asm/mmu.h
+arch/riscv/include/asm/mmu_context.h
 ```
+
 ### Page Table
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/pgtable-64.h
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/pgtable-bits.h
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/pgtable.h
+arch/riscv/include/asm/pgtable-64.h
+arch/riscv/include/asm/pgtable-bits.h
+arch/riscv/include/asm/pgtable.h
 ```
+
 ### Protection Keys
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/pkeys-defines.h
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/pkeys.h
+arch/riscv/include/asm/pkeys-defines.h
+arch/riscv/include/asm/pkeys.h
 ```
+
 ### Process
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/processor.h
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/ptrace.h
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/asm/switch_to.h
+arch/riscv/include/asm/processor.h
+arch/riscv/include/asm/ptrace.h
+arch/riscv/include/asm/switch_to.h
 ```
+
 ## User API
 
 ### hw captions
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/uapi/asm/hwcap.h
+arch/riscv/include/uapi/asm/hwcap.h
 ```
 
 ### Memory Management
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/uapi/asm/mman.h
+arch/riscv/include/uapi/asm/mman.h
 ```
 
 ### Control & Status Registers
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/include/uapi/asm/ptrace.h
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/kernel/asm-offsets.c
+arch/riscv/include/uapi/asm/ptrace.h
+arch/riscv/kernel/asm-offsets.c
 ```
 
 ### CPU ISA
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim vim arch/riscv/kernel/cpufeature.c
+vim arch/riscv/kernel/cpufeature.c
 ```
 
 ### Kernel
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/kernel/entry.S
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/kernel/process.c
+arch/riscv/kernel/entry.S
+arch/riscv/kernel/process.c
 ```
+
 add following lines
+
 ```
         /*
          * Set the branch context register to 0, so that disable BCS in interrupt handling.
@@ -96,19 +122,22 @@ add following lines
         csrw CSR_BCSCFG, x0
         csrw CSR_BCSADDR, x0
 ```
+
 ### Context Switch
+
 ```
 $ ./arch/riscv/include/asm/switch_to.h
 ubuntu@optiplex-5060:~/riscv-linux$ vim linux/include/asm-generic/switch_to.h
 ```
 
 ### Memory Management
+
 ```
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/mm/Makefile
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/mm/cacheflush.c
-ubuntu@optiplex-5060:~/linux$ vim arch/riscv/mm/pkeys.c
-ubuntu@optiplex-5060:~/linux$ vim fs/proc/task_mmu.c
-ubuntu@optiplex-5060:~/linux$ vim include/linux/mm.h
+arch/riscv/mm/Makefile
+arch/riscv/mm/cacheflush.c
+arch/riscv/mm/pkeys.c
+fs/proc/task_mmu.c
+include/linux/mm.h
 ```
 
 [进程切换分析(1)：基本框架](http://www.wowotech.net/process_management/context-switch-arch.html)

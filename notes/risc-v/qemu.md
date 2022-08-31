@@ -44,3 +44,37 @@ rsync -azvpP /home/ubuntu/rpmbuild /nfsroot/build-riscv/rootfs/home/ubuntu/
 
 make headers_install -j$(nproc) ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- INSTALL_HDR_PATH=/nfsroot/build-riscv/rootfs/usr/
 ```
+
+## openSUSE-Tumbleweed-RISC-V-GNOME
+Convert the raw image to compressed qcow2.
+```
+# qemu-img convert -f raw -O qcow2 -c openSUSE-Tumbleweed-RISC-V-GNOME-efi.riscv64.raw openSUSE-Tumbleweed-RISC-V-GNOME-efi.riscv64.qcow2
+```
+Extract /boot from the image.
+```
+# sudo virt-copy-out -a openSUSE-Tumbleweed-RISC-V-GNOME-efi.riscv64.qcow2 /boot .
+# export qcow2image=openSUSE-Tumbleweed-RISC-V-GNOME-efi.riscv64.qcow2
+# export qcow2image=openSUSE-Tumbleweed-RISC-V-GNOME-efi.riscv64-2022.07.18-Build1.3.qcow2
+```
+run on macOS
+```
+# cd /Volumes/share/ubuntu/D/openSUSE
+```
+```
+Run qemu.
+```
+# qemu-system-riscv64 -nographic -machine virt -m 4G \
+   -smp sockets=1,cores=4,threads=2 \
+   -device virtio-blk-device,drive=hd0 -drive file=${qcow2image},format=qcow2,id=hd0 \
+   -device virtio-net-device,netdev=usernet -netdev user,id=usernet,hostfwd=tcp::22222-:22 \
+   -kernel boot/u-boot.bin
+# qemu-system-riscv64 -nographic -machine virt -m 8G \
+   -drive file=/dev/disk4,format=raw,media=cdrom \ 
+   -device virtio-net-device,netdev=usernet -netdev user,id=usernet,hostfwd=tcp::22222-:22 \
+   -kernel boot/u-boot.bin
+   <!-- -device virtio-blk-device,drive=hd0 -drive file=rootfs,format=raw,id=hd0 \ -->
+```
+Log in via SSH.
+```
+# ssh localhost -p 22222   # root / linux
+```
